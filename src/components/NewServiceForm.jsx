@@ -3,6 +3,7 @@ import { DataContext } from "../context/DataContext";
 import { useParams } from "react-router-dom";
 import { getCurrentDate } from "../helpers/Helpers";
 import { v4 as uuidv4 } from "uuid";
+import { cash } from "../helpers/Helpers";
 
 export default function NewServiceForm() {
   const { addService, cars } = useContext(DataContext);
@@ -55,17 +56,17 @@ export default function NewServiceForm() {
           required
         />
         <input
-          type="text"
+          type="number"
           placeholder="mileage"
           onChange={(e) => setMileage(e.target.value)}
-          value={mileage}
+          value={mileage?.toLocaleString()}
           maxLength="6"
         />
         <input
           type="number"
           placeholder="price"
           onChange={(e) => setPrice(e.target.value)}
-          value={price}
+          value={cash(price)}
         />
         <button type="submit">Dodaj</button>
       </form>

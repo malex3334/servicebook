@@ -39,3 +39,9 @@ export function getCurrentDate() {
 
   return `${year}-${month}-${day}`;
 }
+
+// cash format
+
+export const cash = (amount) => {
+  return amount.toLocaleString("pl-pl", { minimumFractionDigits: 2 });
+};

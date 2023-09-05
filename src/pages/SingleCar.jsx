@@ -5,6 +5,7 @@ import NewServiceForm from "../components/NewServiceForm";
 import { NavLink, useParams } from "react-router-dom";
 import { utils, writeFile } from "xlsx";
 import { FaTrashAlt } from "react-icons/fa";
+import { cash } from "../helpers/Helpers";
 
 export default function SingleCar() {
   const {
@@ -87,8 +88,9 @@ export default function SingleCar() {
                     <td>{date}</td>
                     <td className="desc">{desc}</td>
                     <td>{createdAt}</td>
-                    <td>{mileage}</td>
-                    <td>{Number(price)?.toFixed(2)}</td>
+                    <td>{Number(mileage).toLocaleString()}</td>
+                    {/* <td>{mileage}</td> */}
+                    <td>{cash(Number(price))}</td>
                     <td
                       style={{
                         color: "red",
@@ -113,7 +115,7 @@ export default function SingleCar() {
             <td className="blind_row"></td>
             <td>RAZEM</td>
             <td>
-              <b>{sum?.toFixed(2)} zł</b>
+              <b>{cash(sum)} zł</b>
             </td>
           </tr>
         </tbody>

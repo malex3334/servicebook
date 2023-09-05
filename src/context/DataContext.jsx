@@ -48,9 +48,7 @@ export function DataProvider({ children }) {
       }
     };
     getData();
-
   }, [user?.uid, rerender]);
-
 
   // get cars object
   useEffect(() => {
@@ -188,15 +186,11 @@ export function DataProvider({ children }) {
       // };
     };
     getServicesData(viewedCarId);
-
   }, [viewedCarId, setviewedCarId, servicesRerender]);
-
 
   useEffect(() => {
     if (servicesIDs && servicesIDs.length > 0) {
       let result = [];
-
-      console.log("services", servicesIDs);
 
       // Execute the query
       const getServicesByID = async () => {
@@ -207,11 +201,9 @@ export function DataProvider({ children }) {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
-          console.log(docData);
           // result.push({ ...docData, uid: doc.id });
           result.push(docData);
         });
-        console.log("rsult", result);
         setFilteredServices(result);
       };
       getServicesByID();
@@ -247,8 +239,6 @@ export function DataProvider({ children }) {
   }
   // delete service
   function deleteService(serviceId, currentCarID) {
-    console.log("curr", currentCarID);
-    console.log(serviceId);
     const result = window.confirm("are you sure?");
 
     if (result) {
