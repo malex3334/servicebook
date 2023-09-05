@@ -48,7 +48,9 @@ export function DataProvider({ children }) {
       }
     };
     getData();
+
   }, [user?.uid, rerender]);
+
 
   // get cars object
   useEffect(() => {
@@ -186,7 +188,9 @@ export function DataProvider({ children }) {
       // };
     };
     getServicesData(viewedCarId);
+
   }, [viewedCarId, setviewedCarId, servicesRerender]);
+
 
   useEffect(() => {
     if (servicesIDs && servicesIDs.length > 0) {
