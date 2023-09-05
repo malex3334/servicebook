@@ -69,3 +69,10 @@ button {
   align-items: center;
   justify-content: start;
 }
+
+
+@media (max-width: 400px) {
+  html {
+    font-size: 45%;
+  }
+}

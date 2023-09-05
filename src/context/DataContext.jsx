@@ -47,7 +47,7 @@ export function DataProvider({ children }) {
       }
     };
     getData();
-  }, [user, rerender]);
+  }, [user,addCar, deleteCar]);
 
   // get cars object
   useEffect(() => {
@@ -66,7 +66,7 @@ export function DataProvider({ children }) {
       };
       getCarsByIds();
     }
-  }, [user, rerender, userCarIDs]);
+  }, [userCarIDs]);
 
   // dodaj auto
   function addCar(e, carObject) {
@@ -188,7 +188,7 @@ export function DataProvider({ children }) {
     }
 
     getServicesData(viewedCarId);
-  }, [viewedCarId, rerender, addService]);
+  }, [viewedCarId,addService,deleteService]);
 
   useEffect(() => {
     if (servicesIDs && servicesIDs.length > 0) {
