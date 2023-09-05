@@ -28,11 +28,15 @@ export default function SingleCar() {
     return (
       <>
         <NavLink to="../cars">{"<-"}back to garage</NavLink>
+        {/* car details */}
         <div style={{ marginTop: "2rem" }}>
-          <img src={currentCar?.img} alt="" className="single-car__img" />
-          <h2>
-            {currentCar?.brand} {currentCar?.model}
-          </h2>
+          <div>
+            <img src={currentCar?.img} alt="" className="single-car__img" />
+            <h2>
+              {currentCar?.brand} {currentCar?.model}
+            </h2>
+          </div>
+          <div>{/* info box */}</div>
         </div>
       </>
     );
