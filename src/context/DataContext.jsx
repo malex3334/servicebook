@@ -20,6 +20,7 @@ export const DataContext = createContext();
 
 export function DataProvider({ children }) {
   const [rerender, setRerender] = useState(false);
+  const [servicesRerender, setServicesRerender] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [filteredServices, setFilteredServices] = useState([]);
   const [cars, setCars] = useState([]);
@@ -47,7 +48,7 @@ export function DataProvider({ children }) {
       }
     };
     getData();
-  }, [user, rerender]);
+  }, [user?.uid, rerender]);
 
   // get cars object
   useEffect(() => {
@@ -66,7 +67,7 @@ export function DataProvider({ children }) {
       };
       getCarsByIds();
     }
-  }, [user, rerender, userCarIDs]);
+  }, [userCarIDs]);
 
   // dodaj auto
   function addCar(e, carObject) {
@@ -173,42 +174,44 @@ export function DataProvider({ children }) {
 
   // get and set services
   useEffect(() => {
-    function getServicesData(carId) {
+    const getServicesData = async (carId) => {
       // get services ids
-      const getServicesIDs = async () => {
-        const snap = await getDoc(doc(db, "cars", carId));
+      const snap = await getDoc(doc(db, "cars", carId));
 
-        if (snap.exists()) {
-          setServicesIDs(snap.data().services);
-        } else {
-          console.log("No such document");
-        }
-      };
-      getServicesIDs();
-    }
-
+      if (snap.exists()) {
+        setServicesIDs(snap.data().services);
+      } else {
+        console.log("No such document");
+      }
+      // };
+    };
     getServicesData(viewedCarId);
-  }, [viewedCarId, rerender, addService]);
+  }, [viewedCarId, setviewedCarId, servicesRerender]);
 
   useEffect(() => {
     if (servicesIDs && servicesIDs.length > 0) {
-      const q = query(
-        collection(db, "services"),
-        where("id", "in", servicesIDs)
-      );
+      let result = [];
+
+      console.log("services", servicesIDs);
 
       // Execute the query
       const getServicesByID = async () => {
-        let result = [];
+        const q = query(
+          collection(db, "services"),
+          where("id", "in", servicesIDs)
+        );
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
-          result.push({ ...docData, uid: doc.id });
+          console.log(docData);
+          // result.push({ ...docData, uid: doc.id });
+          result.push(docData);
         });
+        console.log("rsult", result);
         setFilteredServices(result);
       };
       getServicesByID();
-    }
+    } else setFilteredServices([]);
   }, [servicesIDs]);
   // add service
 
@@ -235,6 +238,7 @@ export function DataProvider({ children }) {
           console.error("Błąd podczas dodawania ID do tablicy cars:", error);
         });
     };
+    setServicesRerender(!servicesRerender);
     addServiceToCar();
   }
   // delete service
@@ -253,7 +257,7 @@ export function DataProvider({ children }) {
         .catch((error) => {
           console.log("błąd podczas usuwania serwisu", error);
         });
-      setRerender(!rerender);
+      // setRerender(!rerender);
 
       const deleteLinkedServicesInCarObject = async () => {
         const carsCollectionRef = collection(db, "cars");
@@ -283,6 +287,7 @@ export function DataProvider({ children }) {
             );
           });
       };
+      setServicesRerender(!servicesRerender);
       deleteLinkedServicesInCarObject();
     } else return;
   }
