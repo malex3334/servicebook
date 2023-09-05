@@ -24,7 +24,7 @@ a {
 
 h2 {
   font-size: 4rem;
-  margin: 1rem;
+  margin: 2rem 2rem 3rem 2rem;
 }
 
 h4 {
@@ -36,6 +36,12 @@ form {
   input {
     padding: 0.5em;
     height: 2.5em;
+    margin: 1rem;
+    border-radius: 3px;
+  
+  &:focus {
+    background: rgba(0, 0, 255, 0.138);
+  }
   }
   button {
     margin: auto 1rem;
@@ -71,8 +77,9 @@ button {
 }
 
 
-@media (max-width: 400px) {
-  html {
-    font-size: 45%;
-  }
+
+@media (max-width: 400px){
+html {
+  font-size: 45%;
 }
+

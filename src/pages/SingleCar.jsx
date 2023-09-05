@@ -19,7 +19,7 @@ export default function SingleCar() {
 
   useEffect(() => {
     setviewedCarId(carID);
-  }, []);
+  }, [carID]);
 
   const carData = () => {
     const currentCar = cars.find((car) => car.id === carID);
