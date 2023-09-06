@@ -6,6 +6,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { utils, writeFile } from "xlsx";
 import { FaTrashAlt } from "react-icons/fa";
 import { cash } from "../helpers/Helpers";
+import {HiArrowCircleLeft } from 'react-icons/hi'
 
 export default function SingleCar() {
   const {
@@ -27,7 +28,7 @@ export default function SingleCar() {
 
     return (
       <>
-        <NavLink to="../cars">{"<-"}back to garage</NavLink>
+        <NavLink to="../cars"><HiArrowCircleLeft   /> back to garage</NavLink>
         {/* car details */}
         <div style={{ marginTop: "2rem" }}>
           <div>

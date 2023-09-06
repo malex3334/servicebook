@@ -10,8 +10,10 @@ import { auth, app } from "../utils/firebase";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import Loading from "./Loading";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false)
   const { user } = useContext(DataContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,13 +35,14 @@ export default function Login() {
 
   // login email and password
   const emailAndPasswordLogin = (e) => {
-    e.preventDefault();
-    console.log(email, password);
-    signInWithEmailAndPassword(auth, email, password)
+      e.preventDefault();
+      setLoading(true)
+       signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+    
         // Signed in
         const user = userCredential.user;
-        navigate("/home");
+        navigate("/cars");
         console.log(user);
       })
       .catch((error) => {
@@ -55,12 +58,17 @@ export default function Login() {
 
   // end
 
+  // if (loading) {
+  //  return <Loading />
+  //} 
+
   if (!user) {
     return (
       <div className="login_container">
         <h2>Login:</h2>
         <div className="login_credentials">
           <h3>Podaj dane logowania:</h3>
+            {loading ? <Loading /> : 
           <form onSubmit={(e) => emailAndPasswordLogin(e)} action="">
             <input type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
             <input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
@@ -69,7 +77,9 @@ export default function Login() {
               <div className="button_container">Log in</div>
             </button>
           </form>
+            }
           <h3>lub użyj serwisu:</h3>
+     
           <button onClick={GoogleLogin}>
             <div className="button_container">
               <FcGoogle className="react-icon" />
