@@ -25,7 +25,7 @@ export default function MyServices() {
   if (user) {
     return (
       <div>
-        <h2>Your garage:</h2>
+        <h2>Garage</h2>
         {!newCarTab ? (
           <button
             onClick={() => setNewCarTab(!newCarTab)}
@@ -53,7 +53,10 @@ export default function MyServices() {
                 >
                   delete car
                 </button>
-                <NavLink to={`/cars/${car.id}`}>
+                <NavLink
+                  className="cardetails_container"
+                  to={`/cars/${car.id}`}
+                >
                   <CarDetails car={car} />
                 </NavLink>
               </div>

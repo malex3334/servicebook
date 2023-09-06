@@ -13,7 +13,8 @@ export default function CarDetails({ car }) {
 
   return (
     // <div className="cardetails_container">
-    <div className="cardetails_body">
+    // <div className="cardetails_body">
+    <>
       <img
         onError={(e) => handleImgError(e)}
         className="single-car__img"
@@ -35,7 +36,8 @@ export default function CarDetails({ car }) {
           Plates:<span> {car.plates}</span>
         </p>
       </div>
-    </div>
+    </>
+    // </div>
     // </div>
   );
 }
