@@ -25,7 +25,7 @@ export default function NewCarForm() {
   };
 
   return (
-    <div>
+    <div className="newcar_container">
       <form onSubmit={(e) => addCar(e, carObject)} action="">
         <input
           type="text"
@@ -45,15 +45,15 @@ export default function NewCarForm() {
           placeholder="year"
           onChange={(e) => setYear(e.target.value)}
           required
-          min='1900'
+          min="1900"
         />
         <input
           type="text"
           placeholder="mileage"
           onChange={(e) => setMileage(e.target.value)}
           value={mileage}
-          min='0'
-          max='1000000'
+          min="0"
+          max="1000000"
         />
         <input
           type="text"
@@ -66,7 +66,7 @@ export default function NewCarForm() {
           placeholder="plates"
           onChange={(e) => setPlates(e.target.value)}
           value={plates}
-          maxLength='8'
+          maxLength="8"
         />
         <button type="submit">submit</button>
       </form>

@@ -12,14 +12,9 @@ export default function MyServices() {
 
   const [newCarTab, setNewCarTab] = useState(false);
 
-  console.log(cars);
   const newCarElement = function () {
     if (newCarTab) {
-      return (
-        <div>
-          <NewCarForm />
-        </div>
-      );
+      return <NewCarForm />;
     }
   };
 
@@ -30,13 +25,17 @@ export default function MyServices() {
   if (user) {
     return (
       <div>
-        <h2>Your cars:</h2>
-        <button
-          onClick={() => setNewCarTab(!newCarTab)}
-          style={{ marginBottom: "1rem" }}
-        >
-          add car
-        </button>
+        <h2>Your garage:</h2>
+        {!newCarTab ? (
+          <button
+            onClick={() => setNewCarTab(!newCarTab)}
+            style={{ marginBottom: "1rem" }}
+          >
+            add car
+          </button>
+        ) : (
+          <button onClick={() => setNewCarTab(!newCarTab)}>close tab</button>
+        )}
         {newCarElement()}
         {cars &&
           cars?.map((car) => {

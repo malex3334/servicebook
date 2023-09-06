@@ -49,7 +49,8 @@
 
 .cardetails_container {
   margin: 1rem auto 0 auto;
-  max-width: 45rem;
+  display: flex;
+  max-width: 70rem;
   // padding: 2rem;
 
   color: $lightcolor-primary;
@@ -61,13 +62,17 @@
     font-weight: normal;
   }
 }
-
 .cardetails_body {
-  background-color: red;
+  display: flex;
   padding: 1rem;
   background: $cardetails-background;
   border-radius: $border-radius--small;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.372);
+  border: 2px solid $maincolor-primary;
+
+  .cardetails__text {
+    // background-color: $darker-primary;
+  }
 }
 
 .single-car__img {
@@ -101,6 +106,14 @@
   .blind_row {
     border: none;
   }
+}
+
+.newcar_container {
+  margin: 3rem auto;
+  width: 80%;
+  border: 2px solid $maincolor-primary;
+  padding: 1rem;
+  border-radius: $border-radius--small;
 }
 
 .about_container {
