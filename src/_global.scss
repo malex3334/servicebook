@@ -40,9 +40,11 @@ form {
     height: 2.5em;
     margin: 1rem;
     border-radius: 3px;
-
+    border: 1px solid rgba(255, 68, 0, 0.5);
+    
     &:focus {
       background: rgba(0, 0, 255, 0.138);
+      outline: 3px solid rgba(255, 68, 0, 0.5);
     }
   }
   button {
@@ -58,9 +60,12 @@ button {
   padding: 0.5em 1em;
   cursor: pointer;
   color: black;
+  transition: background .2s ease-in-out;
 
   &:hover {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+    background: $maincolor-primary;
+    color: white;
   }
 
   &:active {
