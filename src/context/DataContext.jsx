@@ -40,7 +40,7 @@ export function DataProvider({ children }) {
       if (user) {
         const snap = await getDoc(doc(db, "users", user?.uid));
         if (snap.exists()) {
-          
+          console.log('exist',snap.data().carIDs)
           if (snap.data() !== 'undefined'){
             console.log(snap.data().carIDs)
             setUserCarIDs(snap.data().carsIDs);
@@ -51,6 +51,11 @@ export function DataProvider({ children }) {
           }
         } else {
           console.log("No such document");
+          console.log(user?.uid)
+          const addUserToDataBase = async () => {
+            await setDoc(doc(db, "users", user?.uid),{});
+          };
+          addUserToDataBase()
         }
       }
       if (user ==='undefined') {
