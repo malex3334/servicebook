@@ -22,8 +22,14 @@
     color: $lightcolor-primary;
   }
 
+  .navlink {
+    &.active {
+      color:$maincolor-primary
+    }
+  }
+
   .login_btn {
-    background-color: orangered;
+    background-color:$maincolor-primary;
     color: white;
   }
 
@@ -35,6 +41,7 @@
   .user_img {
     border-radius: 50%;
     width: 2em;
+    height:2em;
     margin: 0 0.75em;
     border: 2px solid orangered;
   }
@@ -98,8 +105,31 @@
 
 .about_container {
   padding: 2rem;
-  max-width: 75%;
+  max-width:90%;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:2rem;
+
+
+
+    .photo_container {
+    background: url('https://images.unsplash.com/photo-1551522435-a13afa10f103?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    justify-self: end;
+    min-height: 20rem;
+    width: 40rem;
+
+  }
+
+  .text_container {
+
+    width:40rem;
+    text-align: start;
+    padding: 1rem;
+  }
 }
 
 .login_container {
