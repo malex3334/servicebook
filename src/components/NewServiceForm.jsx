@@ -61,10 +61,13 @@ export default function NewServiceForm() {
           onChange={(e) => setMileage(e.target.value)}
           value={mileage?.toLocaleString()}
           maxLength="6"
+          min='0'
+          max='1000000'
         />
         <input
           type="number"
           placeholder="price"
+          min='0'
           onChange={(e) => setPrice(e.target.value)}
           value={cash(price)}
         />
