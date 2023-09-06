@@ -40,26 +40,18 @@ export default function MyServices() {
         {cars &&
           cars?.map((car) => {
             return (
-              <div
-                key={car.id}
-                onClick={() => {
-                  showServices(car.id, car.services);
-                }}
-              >
-                <button
-                  onClick={() => {
-                    deleteCar(car.id, car.services);
-                  }}
-                >
-                  delete car
-                </button>
+              <>
                 <NavLink
+                  key={car.id}
+                  onClick={() => {
+                    showServices(car.id, car.services);
+                  }}
                   className="cardetails_container"
                   to={`/cars/${car.id}`}
                 >
                   <CarDetails car={car} />
                 </NavLink>
-              </div>
+              </>
             );
           })}
       </div>

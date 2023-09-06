@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { handleImgError } from "../helpers/Helpers";
-
+import { DataContext } from "../context/DataContext";
+import { FaTrashAlt } from "react-icons/fa";
 export default function CarDetails({ car }) {
+  const { deleteCar } = useContext(DataContext);
   const carimg = useRef();
   function handleImgError(e) {
     carimg.current.src =
@@ -36,6 +38,13 @@ export default function CarDetails({ car }) {
           Plates:<span> {car.plates}</span>
         </p>
       </div>
+      <button>
+        <FaTrashAlt
+          onClick={() => {
+            deleteCar(car.id, car.services);
+          }}
+        />
+      </button>
     </>
     // </div>
     // </div>

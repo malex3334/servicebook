@@ -30,8 +30,8 @@ export default function SingleCar() {
 
     return (
       <>
-        <NavLink to="../cars">
-          <HiArrowCircleLeft /> back to garage
+        <NavLink to="../cars" className="goback">
+          <HiArrowCircleLeft className="react-icon color" /> back to garage
         </NavLink>
         {/* car details */}
         <div style={{ marginTop: "2rem" }}>
