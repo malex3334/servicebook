@@ -27,9 +27,10 @@ export function DataProvider({ children }) {
   const [viewedCarId, setviewedCarId] = useState();
   const [userCarIDs, setUserCarIDs] = useState([]);
   const [servicesIDs, setServicesIDs] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // firebase
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   // Initialize services - database
   const db = getFirestore();
   // Collection ref
@@ -40,26 +41,25 @@ export function DataProvider({ children }) {
       if (user) {
         const snap = await getDoc(doc(db, "users", user?.uid));
         if (snap.exists()) {
-          console.log('exist',snap.data().carIDs)
-          if (snap.data() !== 'undefined'){
-            console.log(snap.data().carIDs)
+          console.log("exist", snap.data().carIDs);
+          if (snap.data() !== "undefined") {
+            console.log(snap.data().carIDs);
             setUserCarIDs(snap.data().carsIDs);
           } else {
-            console.log('no data for user')
-            setUserCarIDs([])
-          
+            console.log("no data for user");
+            setUserCarIDs([]);
           }
         } else {
           console.log("No such document");
-          console.log(user?.uid)
+          console.log(user?.uid);
           const addUserToDataBase = async () => {
-            await setDoc(doc(db, "users", user?.uid),{});
+            await setDoc(doc(db, "users", user?.uid), {});
           };
-          addUserToDataBase()
+          addUserToDataBase();
         }
       }
-      if (user ==='undefined') {
-        setUserCarIDs([])
+      if (user === "undefined") {
+        setUserCarIDs([]);
       }
     };
     getData();
@@ -67,6 +67,7 @@ export function DataProvider({ children }) {
 
   // get cars object
   useEffect(() => {
+    setLoading(true);
     if (userCarIDs && userCarIDs.length > 0) {
       const q = query(collection(db, "cars"), where("id", "in", userCarIDs));
 
@@ -81,7 +82,9 @@ export function DataProvider({ children }) {
         setCars(result);
       };
       getCarsByIds();
+      setLoading(false);
     }
+    setLoading(false);
   }, [userCarIDs]);
 
   // dodaj auto
@@ -204,6 +207,7 @@ export function DataProvider({ children }) {
   }, [viewedCarId, setviewedCarId, servicesRerender]);
 
   useEffect(() => {
+    setLoading(true);
     if (servicesIDs && servicesIDs.length > 0) {
       let result = [];
 
@@ -220,9 +224,13 @@ export function DataProvider({ children }) {
           result.push(docData);
         });
         setFilteredServices(result);
+        setLoading(false);
       };
       getServicesByID();
-    } else setFilteredServices([]);
+    } else {
+      setFilteredServices([]);
+      setLoading(false);
+    }
   }, [servicesIDs]);
   // add service
 
@@ -314,6 +322,8 @@ export function DataProvider({ children }) {
         addService,
         setviewedCarId,
         deleteService,
+        setUserCarIDs,
+        loading,
       }}
     >
       {children}

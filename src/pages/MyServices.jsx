@@ -4,9 +4,10 @@ import PleaseLogin from "../components/PleaseLogin";
 import { NavLink } from "react-router-dom";
 import CarDetails from "../components/CarDetails.";
 import NewCarForm from "../components/NewCarForm";
+import Loading from "../components/Loading";
 
 export default function MyServices() {
-  const { user, cars, showServices, filteredServices, deleteCar } =
+  const { user, cars, showServices, filteredServices, deleteCar, loading } =
     useContext(DataContext);
 
   const [newCarTab, setNewCarTab] = useState(false);
@@ -21,6 +22,10 @@ export default function MyServices() {
       );
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (user) {
     return (

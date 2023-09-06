@@ -6,7 +6,8 @@ import { NavLink, useParams } from "react-router-dom";
 import { utils, writeFile } from "xlsx";
 import { FaTrashAlt } from "react-icons/fa";
 import { cash } from "../helpers/Helpers";
-import {HiArrowCircleLeft } from 'react-icons/hi'
+import { HiArrowCircleLeft } from "react-icons/hi";
+import Loading from "../components/Loading";
 
 export default function SingleCar() {
   const {
@@ -16,6 +17,7 @@ export default function SingleCar() {
     deleteService,
     viewedCarID,
     setviewedCarId,
+    loading,
   } = useContext(DataContext);
   const { id: carID } = useParams();
 
@@ -28,7 +30,9 @@ export default function SingleCar() {
 
     return (
       <>
-        <NavLink to="../cars"><HiArrowCircleLeft   /> back to garage</NavLink>
+        <NavLink to="../cars">
+          <HiArrowCircleLeft /> back to garage
+        </NavLink>
         {/* car details */}
         <div style={{ marginTop: "2rem" }}>
           <div>
@@ -65,66 +69,71 @@ export default function SingleCar() {
       <div>{carData()}</div>
       <NewServiceForm />
       <h2>Services:</h2>
-      <table id="myTable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tytuł</th>
-            <th>Data</th>
-            <th>Opis</th>
-            <th>Data utworzenia</th>
-            <th>Przebieg</th>
-            <th>Cena</th>
-          </tr>
-        </thead>
-        {filteredServices &&
-          filteredServices.length > 0 &&
-          filteredServices.map(
-            ({ id, title, desc, price, date, createdAt, mileage }, index) => {
-              return (
-                <tbody key={id}>
-                  <tr
-                    style={{
-                      backgroundColor: index % 2 === 0 ? "#f2f2f2" : "inherit",
-                    }}
-                  >
-                    <td>{index + 1}.</td>
-                    <td>{title}</td>
-                    <td>{date}</td>
-                    <td className="desc">{desc}</td>
-                    <td>{createdAt}</td>
-                    <td>{Number(mileage).toLocaleString()}</td>
-                    {/* <td>{mileage}</td> */}
-                    <td>{cash(Number(price))}</td>
-                    <td
+      {loading ? (
+        <Loading />
+      ) : (
+        <table id="myTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tytuł</th>
+              <th>Data</th>
+              <th>Opis</th>
+              <th>Data utworzenia</th>
+              <th>Przebieg</th>
+              <th>Cena</th>
+            </tr>
+          </thead>
+          {filteredServices &&
+            filteredServices.length > 0 &&
+            filteredServices.map(
+              ({ id, title, desc, price, date, createdAt, mileage }, index) => {
+                return (
+                  <tbody key={id}>
+                    <tr
                       style={{
-                        color: "red",
-                        fontWeight: "bold",
-                        cursor: "pointer",
+                        backgroundColor:
+                          index % 2 === 0 ? "#f2f2f2" : "inherit",
                       }}
-                      onClick={() => deleteService(id, viewedCarID)}
                     >
-                      <FaTrashAlt style={{ fontSize: "1.5rem" }} />
-                    </td>
-                  </tr>
-                </tbody>
-              );
-            }
-          )}
-        <tbody>
-          <tr>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td>RAZEM</td>
-            <td>
-              <b>{cash(sum)} zł</b>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                      <td>{index + 1}.</td>
+                      <td>{title}</td>
+                      <td>{date}</td>
+                      <td className="desc">{desc}</td>
+                      <td>{createdAt}</td>
+                      <td>{Number(mileage).toLocaleString()}</td>
+                      {/* <td>{mileage}</td> */}
+                      <td>{cash(Number(price))}</td>
+                      <td
+                        style={{
+                          color: "red",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => deleteService(id, viewedCarID)}
+                      >
+                        <FaTrashAlt style={{ fontSize: "1.5rem" }} />
+                      </td>
+                    </tr>
+                  </tbody>
+                );
+              }
+            )}
+          <tbody>
+            <tr>
+              <td className="blind_row"></td>
+              <td className="blind_row"></td>
+              <td className="blind_row"></td>
+              <td className="blind_row"></td>
+              <td className="blind_row"></td>
+              <td>RAZEM</td>
+              <td>
+                <b>{cash(sum)} zł</b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      )}
       <button style={{ marginTop: "1rem" }} onClick={exportToXLS}>
         Pobierz jako plik Excel
       </button>
