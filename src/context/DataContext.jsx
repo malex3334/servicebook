@@ -39,12 +39,22 @@ export function DataProvider({ children }) {
     const getData = async () => {
       if (user) {
         const snap = await getDoc(doc(db, "users", user?.uid));
-
         if (snap.exists()) {
-          setUserCarIDs(snap.data().carsIDs);
+          
+          if (snap.data() !== 'undefined'){
+            console.log(snap.data().carIDs)
+            setUserCarIDs(snap.data().carsIDs);
+          } else {
+            console.log('no data for user')
+            setUserCarIDs([])
+          
+          }
         } else {
           console.log("No such document");
         }
+      }
+      if (user ==='undefined') {
+        setUserCarIDs([])
       }
     };
     getData();

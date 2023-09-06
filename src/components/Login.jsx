@@ -13,11 +13,13 @@ import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
   const { user } = useContext(DataContext);
-  const [email, setEmail] = useState("testing@test.pl");
-  const [password, setPassword] = useState("testing");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false)
 
   const navigate = useNavigate();
 
+  
   // sign in with google
   const googleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
@@ -43,6 +45,10 @@ export default function Login() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setError(errorMessage)
+        setTimeout(() => {
+          setError(null)
+        }, 3000);
         console.log(errorCode, errorMessage);
       });
   };
@@ -56,8 +62,9 @@ export default function Login() {
         <div className="login_credentials">
           <h3>Podaj dane logowania:</h3>
           <form onSubmit={(e) => emailAndPasswordLogin(e)} action="">
-            <input type="email" placeholder="email" />
-            <input type="password" placeholder="password" />
+            <input type="email" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
+            <input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+            <span style={{color:'red'}}>{error && 'wrong user or password'}</span>
             <button style={{ marginTop: "2rem" }} type="submit">
               <div className="button_container">Log in</div>
             </button>
