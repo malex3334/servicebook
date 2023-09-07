@@ -24,9 +24,21 @@ export default function NewCarForm() {
     plates,
   };
 
+  const onSubmit = (e, object) => {
+    e.preventDefault();
+    console.log(object);
+    if (object.img == undefined) {
+      object.img =
+        "https://media.istockphoto.com/id/120205938/photo/new-car-presentation.jpg?s=612x612&w=0&k=20&c=d8Uy1_rREo_gSwXv2XCdpPf5wK_6UbwWQ5DBAuTYt0g=";
+    }
+
+    addCar(e, object);
+  };
+
   return (
     <div className="newcar_container">
-      <form onSubmit={(e) => addCar(e, carObject)} action="">
+      {/* <form onSubmit={(e) => addCar(e, carObject)} action=""> */}
+      <form onSubmit={(e) => onSubmit(e, carObject)} action="">
         <input
           type="text"
           onChange={(e) => setBrand(e.target.value)}
