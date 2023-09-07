@@ -8,6 +8,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { cash } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import Loading from "../components/Loading";
+import {MdConstruction} from 'react-icons/md'
 
 export default function SingleCar() {
   const {
@@ -68,18 +69,20 @@ export default function SingleCar() {
     <div className="singlecar_container">
       <div>{carData()}</div>
       <NewServiceForm />
-      <h2>Services:</h2>
+      <h2><MdConstruction className="react-icon" />
+      Services
+      </h2>
       {loading ? (
         <Loading />
       ) : (
         <table id="myTable">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>lp</th>
               <th>Tytuł</th>
               <th>Data</th>
               <th>Opis</th>
-              <th>Data utworzenia</th>
+              <th>Data dodania</th>
               <th>Przebieg</th>
               <th>Cena</th>
             </tr>
@@ -126,8 +129,8 @@ export default function SingleCar() {
               <td className="blind_row"></td>
               <td className="blind_row"></td>
               <td className="blind_row"></td>
-              <td>RAZEM</td>
-              <td>
+              <td className="line">RAZEM</td>
+              <td className="line">
                 <b>{cash(sum)} zł</b>
               </td>
             </tr>

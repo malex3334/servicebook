@@ -82,29 +82,41 @@
 .singlecar_container {
   .goback {
     margin: 1rem;
-    color: $maincolor-primary;
+    // color: $maincolor-primary;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   table {
-    margin: 0 auto;
+    margin: 2rem auto;
     width: 90%;
     text-align: start;
-    border-collapse: collapse;
+    // border-collapse: collapse;
   }
 
   th,
   td {
-    border: 1px solid black;
+    // border: 1px solid black;
     padding: 8px;
     text-align: left;
+    white-space: nowrap;
     // white-space: nowrap;
   }
+  // table header
 
   th {
-    background-color: #cecece;
+    padding: 1rem;
+    background-color: #404040;
+    color:white;
+  }
+
+  tr:hover {
+    background:$maincolor-light !important;
+    color: white;
+    fill: white;
+    stroke: white;
   }
 
   .desc {
@@ -113,6 +125,9 @@
 
   .blind_row {
     border: none;
+  }
+  .line {
+    border-top: 3px solid black;
   }
 }
 
