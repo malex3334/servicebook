@@ -52,7 +52,7 @@ export default function Login() {
   if (!user) {
     return (
       <div className="login_container">
-        <h2>Register:</h2>
+        <h2>Join</h2>
         <div className="login_credentials">
           <h3>Podaj dane nowego konta:</h3>
           <form onSubmit={(e) => onSubmit(e)} action="">

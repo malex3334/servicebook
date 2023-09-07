@@ -5,6 +5,9 @@ html {
   font-size: 61.5%;
   font-family: "Lato", sans-serif;
   letter-spacing: 1.1px;
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: linear-gradient(to right, #FFFFFF, #ece9e69a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
   // font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -94,5 +97,9 @@ button {
 @media (max-width: 400px) {
   html {
     font-size: 45%;
+  }
+
+  .photo_container, .text_container {
+    justify-self: center;
   }
 }

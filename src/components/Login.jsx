@@ -5,12 +5,12 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
 import { auth, app } from "../utils/firebase";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Loading from "./Loading";
+import Register from "./Register";
 
 export default function Login() {
   const [loading, setLoading] = useState(false)
@@ -64,6 +64,7 @@ export default function Login() {
 
   if (!user) {
     return (
+      <>
       <div className="login_container">
         <h2>Login:</h2>
         <div className="login_credentials">
@@ -88,6 +89,10 @@ export default function Login() {
           </button>
         </div>
       </div>
+      <div className="login_container">
+        {/* <Register /> */}
+      </div>
+      </>
     );
   } else return navigate("/cars");
 }
