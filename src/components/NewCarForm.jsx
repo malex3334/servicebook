@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { v4 as uuidv4 } from "uuid";
+import { noImg } from "../helpers/Helpers.jsx";
 
 export default function NewCarForm() {
   const [brand, setBrand] = useState();
@@ -28,8 +29,7 @@ export default function NewCarForm() {
     e.preventDefault();
     console.log(object);
     if (object.img == undefined) {
-      object.img =
-        "https://media.istockphoto.com/id/120205938/photo/new-car-presentation.jpg?s=612x612&w=0&k=20&c=d8Uy1_rREo_gSwXv2XCdpPf5wK_6UbwWQ5DBAuTYt0g=";
+      object.img = noImg;
     }
 
     addCar(e, object);

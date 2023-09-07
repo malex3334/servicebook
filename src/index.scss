@@ -6,7 +6,7 @@
   flex-direction: row;
   // justify-content: space-around;
   justify-content: end;
-  gap:6rem;
+  gap: 6rem;
   align-items: center;
   padding: 2rem;
   background: $darker-primary;
@@ -76,8 +76,7 @@
 }
 
 .buttons {
-  .btn{
-
+  .btn {
     margin: 1rem 0 1rem 0;
   }
 }
@@ -116,11 +115,13 @@
   th {
     padding: 1rem;
     background-color: #404040;
-    color:white;
+    color: white;
+    letter-spacing: 3px;
+    font-weight: normal;
   }
 
   tr:hover {
-    background:$maincolor-light !important;
+    background: $maincolor-light !important;
     color: white;
     fill: white;
     stroke: white;
@@ -153,7 +154,7 @@
   margin: 5rem auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 
   .photo_container {

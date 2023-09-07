@@ -2,15 +2,15 @@ import React, { useContext, useRef } from "react";
 import { handleImgError } from "../helpers/Helpers";
 import { DataContext } from "../context/DataContext";
 import { FaTrashAlt } from "react-icons/fa";
+import { noImg } from "../helpers/Helpers";
+
 export default function CarDetails({ car }) {
   const { deleteCar } = useContext(DataContext);
   const carimg = useRef();
   function handleImgError(e) {
-    carimg.current.src =
-      "https://media.istockphoto.com/id/120205938/photo/new-car-presentation.jpg?s=612x612&w=0&k=20&c=d8Uy1_rREo_gSwXv2XCdpPf5wK_6UbwWQ5DBAuTYt0g=";
+    carimg.current.src = noImg;
 
-    car.img =
-      "https://media.istockphoto.com/id/120205938/photo/new-car-presentation.jpg?s=612x612&w=0&k=20&c=d8Uy1_rREo_gSwXv2XCdpPf5wK_6UbwWQ5DBAuTYt0g=";
+    car.img = noImg;
   }
 
   return (
