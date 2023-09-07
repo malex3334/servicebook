@@ -6,7 +6,6 @@ import { auth } from "../utils/firebase";
 
 export default function Navigation() {
   const { user, logIn, isLogged, setUserCarIDs, setCars } = useContext(DataContext);
-  console.log(user?.displayName);
   return (
     <div>
       <ul className="nav-list">

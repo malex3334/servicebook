@@ -2,9 +2,10 @@ import React, { useContext, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import PleaseLogin from "../components/PleaseLogin";
 import { NavLink } from "react-router-dom";
-import CarDetails from "../components/CarDetails.";
+import CarDetails from "../components/CarDetails";
 import NewCarForm from "../components/NewCarForm";
 import Loading from "../components/Loading";
+import {FaTrashAlt} from 'react-icons/fa'
 
 export default function MyServices() {
   const { user, cars, showServices, filteredServices, deleteCar, loading } =
@@ -40,7 +41,7 @@ export default function MyServices() {
         {cars &&
           cars?.map((car) => {
             return (
-              <>
+              <div style={{display:'flex', margin:'3rem auto', width:'80rem' }}>
                 <NavLink
                   key={car.id}
                   onClick={() => {
@@ -48,10 +49,15 @@ export default function MyServices() {
                   }}
                   className="cardetails_container"
                   to={`/cars/${car.id}`}
-                >
+                  >
                   <CarDetails car={car} />
                 </NavLink>
-              </>
+                  <button onClick={() => {
+            deleteCar(car.id, car.services);
+          }}> <FaTrashAlt
+         
+        /></button>
+              </div>
             );
           })}
       </div>
