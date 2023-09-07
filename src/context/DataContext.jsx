@@ -68,6 +68,7 @@ export function DataProvider({ children }) {
   // get cars object
   useEffect(() => {
     setLoading(true);
+
     if (userCarIDs && userCarIDs.length > 0) {
       const q = query(collection(db, "cars"), where("id", "in", userCarIDs));
 
@@ -207,6 +208,7 @@ export function DataProvider({ children }) {
   }, [viewedCarId, setviewedCarId, servicesRerender]);
 
   useEffect(() => {
+     setFilteredServices([]);
     setLoading(true);
     if (servicesIDs && servicesIDs.length > 0) {
       let result = [];
@@ -324,6 +326,7 @@ export function DataProvider({ children }) {
         deleteService,
         setUserCarIDs,
         loading,
+        setCars
       }}
     >
       {children}

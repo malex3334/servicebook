@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { auth } from "../utils/firebase";
 
 export default function Navigation() {
-  const { user, logIn, isLogged, setUserCarIDs } = useContext(DataContext);
+  const { user, logIn, isLogged, setUserCarIDs, setCars } = useContext(DataContext);
   console.log(user?.displayName);
   return (
     <div>
@@ -48,6 +48,7 @@ export default function Navigation() {
                 onClick={() => {
                   auth.signOut();
                   setUserCarIDs([]);
+                  setCars([])
                 }}
               >
                 Logout
