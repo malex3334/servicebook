@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import CarDetails from "../components/CarDetails";
 import NewCarForm from "../components/NewCarForm";
 import Loading from "../components/Loading";
-import {FaTrashAlt} from 'react-icons/fa'
+import {FaEdit,FaTrashAlt} from 'react-icons/fa'
 
 export default function MyServices() {
   const { user, cars, showServices, filteredServices, deleteCar, loading } =
@@ -52,11 +52,15 @@ export default function MyServices() {
                   >
                   <CarDetails car={car} />
                 </NavLink>
-                  <button onClick={() => {
-            deleteCar(car.id, car.services);
-          }}> <FaTrashAlt
-         
-        /></button>
+                <div className="buttons">
+
+                  <button className="btn danger" onClick={() => {
+                    deleteCar(car.id, car.services);
+                  }}> <FaTrashAlt
+                  
+                  /></button>
+                  <button className="btn"><FaEdit /></button>
+                  </div>
               </div>
             );
           })}
