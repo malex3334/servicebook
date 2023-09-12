@@ -28,6 +28,7 @@ export function DataProvider({ children }) {
   const [userCarIDs, setUserCarIDs] = useState([]);
   const [servicesIDs, setServicesIDs] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [language, setLanguage] = useState(navigator.language.slice(0, -3));
 
   // firebase
   const [user] = useAuthState(auth);
@@ -208,7 +209,7 @@ export function DataProvider({ children }) {
   }, [viewedCarId, setviewedCarId, servicesRerender]);
 
   useEffect(() => {
-     setFilteredServices([]);
+    setFilteredServices([]);
     setLoading(true);
     if (servicesIDs && servicesIDs.length > 0) {
       let result = [];
@@ -326,7 +327,9 @@ export function DataProvider({ children }) {
         deleteService,
         setUserCarIDs,
         loading,
-        setCars
+        setCars,
+        language,
+        setLanguage,
       }}
     >
       {children}

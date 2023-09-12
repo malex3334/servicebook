@@ -5,11 +5,19 @@ import { NavLink } from "react-router-dom";
 import CarDetails from "../components/CarDetails";
 import NewCarForm from "../components/NewCarForm";
 import Loading from "../components/Loading";
-import {FaEdit,FaTrashAlt} from 'react-icons/fa'
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { contentObj } from "../language";
 
 export default function MyServices() {
-  const { user, cars, showServices, filteredServices, deleteCar, loading } =
-    useContext(DataContext);
+  const {
+    user,
+    cars,
+    showServices,
+    filteredServices,
+    deleteCar,
+    loading,
+    language,
+  } = useContext(DataContext);
 
   const [newCarTab, setNewCarTab] = useState(false);
 
@@ -26,22 +34,26 @@ export default function MyServices() {
   if (user) {
     return (
       <div>
-        <h2>Garage</h2>
+        <h2>{contentObj?.[language].myCars.title}</h2>
         {!newCarTab ? (
           <button
             onClick={() => setNewCarTab(!newCarTab)}
             style={{ marginBottom: "1rem" }}
           >
-            add car
+            {contentObj?.[language].myCars.addButton}
           </button>
         ) : (
-          <button onClick={() => setNewCarTab(!newCarTab)}>close tab</button>
+          <button onClick={() => setNewCarTab(!newCarTab)}>
+            {contentObj?.[language].myCars.closeButton}
+          </button>
         )}
         {newCarElement()}
         {cars &&
           cars?.map((car) => {
             return (
-              <div style={{display:'flex', margin:'3rem auto', width:'80rem' }}>
+              <div
+                style={{ display: "flex", margin: "3rem auto", width: "80rem" }}
+              >
                 <NavLink
                   key={car.id}
                   onClick={() => {
@@ -49,18 +61,23 @@ export default function MyServices() {
                   }}
                   className="cardetails_container"
                   to={`/cars/${car.id}`}
-                  >
+                >
                   <CarDetails car={car} />
                 </NavLink>
                 <div className="buttons">
-
-                  <button className="btn danger" onClick={() => {
-                    deleteCar(car.id, car.services);
-                  }}> <FaTrashAlt
-                  
-                  /></button>
-                  <button className="btn"><FaEdit /></button>
-                  </div>
+                  <button
+                    className="btn danger"
+                    onClick={() => {
+                      deleteCar(car.id, car.services);
+                    }}
+                  >
+                    {" "}
+                    <FaTrashAlt />
+                  </button>
+                  <button className="btn">
+                    <FaEdit />
+                  </button>
+                </div>
               </div>
             );
           })}

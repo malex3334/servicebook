@@ -5,9 +5,13 @@ html {
   font-size: 61.5%;
   font-family: "Lato", sans-serif;
   letter-spacing: 1.1px;
-  background: #ECE9E6;  /* fallback for old browsers */
-  background: linear-gradient(to right, #FFFFFF, #ece9e69a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
+  background: #ece9e6; /* fallback for old browsers */
+  background: linear-gradient(
+    to right,
+    #ffffff,
+    #ece9e69a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   // font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -79,6 +83,14 @@ button {
   }
 }
 
+select,
+option {
+  outline: none;
+  font-size: 1.25rem;
+  padding: 0.5em 0.75em;
+  border-radius: 3px;
+}
+
 .react-icon {
   font-size: 3rem;
   margin: 0 0.25em;
@@ -89,7 +101,6 @@ button {
   align-items: center;
   justify-content: start;
 }
-
 
 .danger {
   color: red;
@@ -103,9 +114,8 @@ button {
     font-size: 45%;
   }
 
-  .photo_container, .text_container {
+  .photo_container,
+  .text_container {
     justify-self: center;
   }
 }
-
-

@@ -1,9 +1,9 @@
 import React, { useContext, useRef } from "react";
-import { handleImgError } from "../helpers/Helpers";
 import { DataContext } from "../context/DataContext";
-import { FaTrashAlt } from "react-icons/fa";
+import { contentObj } from "../language";
+
 export default function CarDetails({ car }) {
-  const { deleteCar } = useContext(DataContext);
+  const { deleteCar, language } = useContext(DataContext);
   const carimg = useRef();
   function handleImgError(e) {
     carimg.current.src =
@@ -14,8 +14,6 @@ export default function CarDetails({ car }) {
   }
 
   return (
-    // <div className="cardetails_container">
-    // <div className="cardetails_body">
     <>
       <img
         onError={(e) => handleImgError(e)}
@@ -29,13 +27,13 @@ export default function CarDetails({ car }) {
           {car.brand} {car.model}
         </h4>
         <p>
-          Current mileage:<span> {car.mileage} km</span>
+          {contentObj?.[language].myCars.mileage}:<span> {car.mileage} km</span>
         </p>
         <p>
-          Year:<span> {car.year}</span>
+          {contentObj?.[language].myCars.year}:<span> {car.year}</span>
         </p>
         <p>
-          Plates:<span> {car.plates}</span>
+          {contentObj?.[language].myCars.plates}:<span> {car.plates}</span>
         </p>
       </div>
       {/* <button>
@@ -46,7 +44,6 @@ export default function CarDetails({ car }) {
         />
       </button> */}
     </>
-    // </div>
     // </div>
   );
 }

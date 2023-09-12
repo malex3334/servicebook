@@ -11,9 +11,10 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { uuidv4 } from "@firebase/util";
 import { ClimbingBoxLoader } from "react-spinners";
+import { contentObj } from "../language";
 
 export default function Login() {
-  const { user } = useContext(DataContext);
+  const { user, language } = useContext(DataContext);
   const [email, setEmail] = useState("test@test.pl");
   const [password, setPassword] = useState("testingpass");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,49 +53,51 @@ export default function Login() {
   if (!user) {
     return (
       <div className="login_container">
-        <h2>Join</h2>
+        <h2>{contentObj?.[language].register.title}</h2>
         <div className="login_credentials">
-          <h3>Podaj dane nowego konta:</h3>
+          <h3>{contentObj?.[language].register.loginCredentials}:</h3>
           <form onSubmit={(e) => onSubmit(e)} action="">
             <input
               type="email"
-              placeholder="email"
+              placeholder={contentObj?.[language].register.email}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
-              placeholder="password"
+              placeholder={contentObj?.[language].register.password}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <input
               type="password"
-              placeholder="confirm password"
+              placeholder={contentObj?.[language].register.confirm}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <input
               type="name"
-              placeholder="name"
+              placeholder={contentObj?.[language].register.name}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <input
               type="text"
-              placeholder="avatar link"
+              placeholder={contentObj?.[language].register.avatar}
               value={avatarLink}
               onChange={(e) => setAvatarLink(e.target.value)}
             />
             <button style={{ marginTop: "2rem" }} type="submit">
-              <div className="button_container">Sign in</div>
+              <div className="button_container">
+                {contentObj?.[language].register.sign}
+              </div>
             </button>
           </form>
-          <h3>lub użyj serwisu:</h3>
+          <h3>{contentObj?.[language].register.useGoogle}</h3>
           <button onClick={GoogleLogin}>
             <div className="button_container">
               <FcGoogle className="react-icon" />
-              Sign in with Google
+              {contentObj?.[language].register.signInGoogle}
             </div>
           </button>
         </div>

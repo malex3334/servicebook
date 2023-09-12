@@ -1,8 +1,15 @@
 import React from "react";
+import { contentObj } from "../language";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 
 export default function PleaseLogin() {
-  return <div>
-    <h2>Please Log in</h2>
-    <p>You need to log in to add and see your cars</p>
-  </div>;
+  const { language } = useContext(DataContext);
+
+  return (
+    <div>
+      <h2>{contentObj?.[language].loginPage.title}</h2>
+      <p>{contentObj?.[language].loginPage.paragraph}</p>
+    </div>
+  );
 }

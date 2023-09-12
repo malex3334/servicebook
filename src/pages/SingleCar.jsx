@@ -8,7 +8,8 @@ import { FaTrashAlt } from "react-icons/fa";
 import { cash } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import Loading from "../components/Loading";
-import {MdConstruction} from 'react-icons/md'
+import { MdConstruction } from "react-icons/md";
+import { contentObj } from "../language";
 
 export default function SingleCar() {
   const {
@@ -19,6 +20,7 @@ export default function SingleCar() {
     viewedCarID,
     setviewedCarId,
     loading,
+    language,
   } = useContext(DataContext);
   const { id: carID } = useParams();
 
@@ -32,7 +34,8 @@ export default function SingleCar() {
     return (
       <>
         <NavLink to="../cars" className="goback">
-          <HiArrowCircleLeft className="react-icon color" /> back to garage
+          <HiArrowCircleLeft className="react-icon color" />{" "}
+          {contentObj?.[language].backToGarage}
         </NavLink>
         {/* car details */}
         <div style={{ marginTop: "2rem" }}>
@@ -69,8 +72,9 @@ export default function SingleCar() {
     <div className="singlecar_container">
       <div>{carData()}</div>
       <NewServiceForm />
-      <h2><MdConstruction className="react-icon" />
-      Services
+      <h2>
+        <MdConstruction className="react-icon" />
+        Services
       </h2>
       {loading ? (
         <Loading />
