@@ -312,6 +312,19 @@ export function DataProvider({ children }) {
     } else return;
   }
 
+  const editCarData = (e, newData) => {
+    console.log("############", newData.id);
+    const carsRef = doc(db, "cars", newData.id);
+    setDoc(carsRef, newData)
+      .then(() => {
+        console.log("zaktualizowano auto");
+      })
+      .catch((error) => {
+        console.log("błąd podczas aktualizacji autoa", error);
+      });
+    setRerender(!rerender);
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -330,6 +343,7 @@ export function DataProvider({ children }) {
         setCars,
         language,
         setLanguage,
+        editCarData,
       }}
     >
       {children}

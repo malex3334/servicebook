@@ -20,10 +20,17 @@ export default function MyServices() {
   } = useContext(DataContext);
 
   const [newCarTab, setNewCarTab] = useState(false);
+  const [editedCar, setEditedCar] = useState();
+
+  const onCarEdit = (car) => {
+    setNewCarTab(true);
+    setEditedCar(car);
+    // console.log(car);
+  };
 
   const newCarElement = function () {
     if (newCarTab) {
-      return <NewCarForm />;
+      return <NewCarForm editedCar={editedCar} />;
     }
   };
 
@@ -43,7 +50,12 @@ export default function MyServices() {
             {contentObj?.[language].myCars.addButton}
           </button>
         ) : (
-          <button onClick={() => setNewCarTab(!newCarTab)}>
+          <button
+            onClick={() => {
+              setNewCarTab(!newCarTab);
+              setEditedCar(null);
+            }}
+          >
             {contentObj?.[language].myCars.closeButton}
           </button>
         )}
@@ -74,7 +86,7 @@ export default function MyServices() {
                     {" "}
                     <FaTrashAlt />
                   </button>
-                  <button className="btn">
+                  <button onClick={() => onCarEdit(car)} className="btn">
                     <FaEdit />
                   </button>
                 </div>

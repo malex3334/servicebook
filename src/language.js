@@ -21,8 +21,10 @@ export const contentObj = {
       submit: "Dodaj",
       currentMileage: "Aktualny przebieg",
       submit: "dodaj",
+      update: "zaktualizuj",
     },
     services: {
+      heading: "Serwisy",
       title: "nazwa",
       date: "data",
       desc: "opis",
@@ -82,8 +84,10 @@ export const contentObj = {
       submit: "add",
       currentMileage: "current mileage",
       submit: "submit",
+      update: "update",
     },
     services: {
+      heading: "services",
       title: "title",
       date: "date",
       desc: "description",

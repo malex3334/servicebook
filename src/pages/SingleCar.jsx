@@ -74,7 +74,7 @@ export default function SingleCar() {
       <NewServiceForm />
       <h2>
         <MdConstruction className="react-icon" />
-        Services
+        {contentObj?.[language].services.heading}
       </h2>
       {loading ? (
         <Loading />

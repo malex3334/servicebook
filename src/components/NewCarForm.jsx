@@ -3,20 +3,19 @@ import { DataContext } from "../context/DataContext";
 import { v4 as uuidv4 } from "uuid";
 import { noImg } from "../helpers/Helpers.jsx";
 import { contentObj } from "../language";
+import { useEffect } from "react";
 
-export default function NewCarForm() {
+export default function NewCarForm({ editedCar, edit }) {
   const [brand, setBrand] = useState();
   const [model, setModel] = useState();
   const [year, setYear] = useState();
   const [mileage, setMileage] = useState();
   const [img, setImg] = useState();
   const [plates, setPlates] = useState();
-  const { addCar, language } = useContext(DataContext);
-
-  console.log(contentObj, language);
+  const [services, setServices] = useState();
+  const { addCar, language, editCarData } = useContext(DataContext);
 
   const carObject = {
-    // id:
     id: uuidv4(),
     brand,
     model,
@@ -27,21 +26,52 @@ export default function NewCarForm() {
     year,
     plates,
   };
+  const editedCarObject = {
+    id: editedCar?.id,
+    brand,
+    model,
+    img,
+    createdAt: "data",
+    services: editedCar?.services,
+    mileage,
+    year,
+    plates,
+  };
 
   const onSubmit = (e, object) => {
     e.preventDefault();
-    console.log(object);
+
     if (object.img == undefined) {
       object.img = noImg;
     }
 
-    addCar(e, object);
+    if (editedCar != null) {
+      console.log("edit", object);
+      editCarData(e, editedCarObject);
+    } else addCar(e, object);
   };
+
+  useEffect(() => {
+    console.log(editedCar);
+    if (editedCar != null) {
+      setBrand(editedCar.brand);
+      setModel(editedCar.model);
+      setImg(editedCar.img);
+      setMileage(editedCar.mileage);
+      setYear(editedCar.year);
+      setPlates(editedCar.plates);
+    }
+  }, [editedCar]);
 
   return (
     <div className="newcar_container">
       {/* <form onSubmit={(e) => addCar(e, carObject)} action=""> */}
-      <form onSubmit={(e) => onSubmit(e, carObject)} action="">
+      <form
+        onSubmit={(e) => {
+          onSubmit(e, carObject);
+        }}
+        action=""
+      >
         <input
           type="text"
           onChange={(e) => setBrand(e.target.value)}
@@ -61,6 +91,7 @@ export default function NewCarForm() {
           onChange={(e) => setYear(e.target.value)}
           required
           min="1900"
+          value={year}
         />
         <input
           type="text"
@@ -83,7 +114,10 @@ export default function NewCarForm() {
           value={plates}
           maxLength="8"
         />
-        <button type="submit">{contentObj?.[language].myCars.submit}</button>
+
+        <button type="submit">
+          {editedCar == null ? contentObj?.[language].myCars.submit : "update"}
+        </button>
       </form>
     </div>
   );
