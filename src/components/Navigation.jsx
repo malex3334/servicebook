@@ -17,8 +17,6 @@ export default function Navigation() {
     setLanguage,
   } = useContext(DataContext);
 
-  console.log(language);
-
   return (
     <div>
       <ul className="nav-list">

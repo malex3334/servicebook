@@ -59,7 +59,6 @@ export default function NewCarForm({ editedCar }) {
   };
 
   useEffect(() => {
-    console.log(editedCar);
     if (editedCar != null) {
       setBrand(editedCar.brand);
       setModel(editedCar.model);
