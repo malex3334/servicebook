@@ -5,7 +5,7 @@ import { noImg } from "../helpers/Helpers.jsx";
 import { contentObj } from "../language";
 import { useEffect } from "react";
 
-export default function NewCarForm({ editedCar, edit }) {
+export default function NewCarForm({ editedCar }) {
   const [brand, setBrand] = useState();
   const [model, setModel] = useState();
   const [year, setYear] = useState();
@@ -46,9 +46,16 @@ export default function NewCarForm({ editedCar, edit }) {
     }
 
     if (editedCar != null) {
-      console.log("edit", object);
       editCarData(e, editedCarObject);
-    } else addCar(e, object);
+    } else {
+      addCar(e, object);
+      setBrand("");
+      setModel("");
+      setImg("");
+      setMileage("");
+      setYear("");
+      setPlates("");
+    }
   };
 
   useEffect(() => {
@@ -65,7 +72,6 @@ export default function NewCarForm({ editedCar, edit }) {
 
   return (
     <div className="newcar_container">
-      {/* <form onSubmit={(e) => addCar(e, carObject)} action=""> */}
       <form
         onSubmit={(e) => {
           onSubmit(e, carObject);
@@ -116,7 +122,9 @@ export default function NewCarForm({ editedCar, edit }) {
         />
 
         <button type="submit">
-          {editedCar == null ? contentObj?.[language].myCars.submit : "update"}
+          {editedCar == null
+            ? contentObj?.[language].myCars.submit
+            : contentObj?.[language].myCars.update}
         </button>
       </form>
     </div>

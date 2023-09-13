@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, app } from "../utils/firebase";
@@ -10,7 +9,6 @@ import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Loading from "./Loading";
-import Register from "./Register";
 import { contentObj } from "../language";
 
 export default function Login() {

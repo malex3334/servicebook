@@ -4,7 +4,6 @@ import { dummyUser } from "../data/dummyCars";
 import { NavLink } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { contentObj } from "../language";
-import { collectionGroup } from "firebase/firestore";
 import { MdLanguage } from "react-icons/md";
 
 export default function Navigation() {
@@ -78,7 +77,6 @@ export default function Navigation() {
                 ></img>
               </span>
             ) : null}
-            {/* <button onClick={() => logIn(null)}>Logout</button> */}
             {!user && (
               <NavLink className="navlink" to="/login">
                 <button className="login_btn">

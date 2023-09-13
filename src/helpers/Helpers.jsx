@@ -1,8 +1,4 @@
-export function filterArrayOfObjects(
-  filteredArrayOfObjects,
-  filterBy,
-  objectParameter
-) {
+export function filterArrayOfObjects(filteredArrayOfObjects, filterBy) {
   return filteredArrayOfObjects.filter((obiekt) =>
     filterBy.objectParameter.includes(obiekt.id)
   );
@@ -14,8 +10,6 @@ export function filterCars(cars, user) {
 }
 
 export function getServices(services, cars, carID) {
-  // return services.filter((obiekt) => car?.services?.includes(obiekt.id));
-
   const specificCar = cars.find((car) => car.id === carID);
   const filterResult = services.filter((obiekt) =>
     specificCar.services.includes(obiekt.id)
@@ -23,12 +17,6 @@ export function getServices(services, cars, carID) {
 
   return filterResult;
 }
-
-// // img error handle
-// export function handleImgError(object) {
-//   object.img =
-//     "https://media.istockphoto.com/id/120205938/photo/new-car-presentation.jpg?s=612x612&w=0&k=20&c=d8Uy1_rREo_gSwXv2XCdpPf5wK_6UbwWQ5DBAuTYt0g=";
-// }
 
 // aktualna data
 export function getCurrentDate() {

@@ -3,7 +3,7 @@ import { DataContext } from "../context/DataContext";
 import { contentObj } from "../language";
 
 export default function CarDetails({ car }) {
-  const { deleteCar, language } = useContext(DataContext);
+  const { language } = useContext(DataContext);
   const carimg = useRef();
   function handleImgError(e) {
     carimg.current.src =
@@ -33,17 +33,10 @@ export default function CarDetails({ car }) {
           {contentObj?.[language].myCars.year}:<span> {car.year}</span>
         </p>
         <p>
-          {contentObj?.[language].myCars.plates}:<span> {car.plates}</span>
+          {contentObj?.[language].myCars.plates}:
+          <span style={{ textTransform: "uppercase" }}> {car.plates}</span>
         </p>
       </div>
-      {/* <button>
-        <FaTrashAlt
-          onClick={() => {
-            deleteCar(car.id, car.services);
-          }}
-        />
-      </button> */}
     </>
-    // </div>
   );
 }

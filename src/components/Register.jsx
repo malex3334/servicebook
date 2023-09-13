@@ -1,16 +1,10 @@
 import React, { useContext, useState } from "react";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { uuidv4 } from "@firebase/util";
-import { ClimbingBoxLoader } from "react-spinners";
 import { contentObj } from "../language";
 
 export default function Login() {

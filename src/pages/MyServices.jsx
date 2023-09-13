@@ -9,15 +9,8 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { contentObj } from "../language";
 
 export default function MyServices() {
-  const {
-    user,
-    cars,
-    showServices,
-    filteredServices,
-    deleteCar,
-    loading,
-    language,
-  } = useContext(DataContext);
+  const { user, cars, showServices, deleteCar, loading, language } =
+    useContext(DataContext);
 
   const [newCarTab, setNewCarTab] = useState(false);
   const [editedCar, setEditedCar] = useState();
@@ -25,7 +18,6 @@ export default function MyServices() {
   const onCarEdit = (car) => {
     setNewCarTab(true);
     setEditedCar(car);
-    // console.log(car);
   };
 
   const newCarElement = function () {
