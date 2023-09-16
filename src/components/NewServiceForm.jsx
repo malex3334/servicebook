@@ -19,6 +19,14 @@ export default function NewServiceForm({ editedService }) {
 
   const [editFlag, setEditFlag] = useState(false);
 
+  const clearInputs = () => {
+    setTitle("");
+    setDate("");
+    setDescription("");
+    setMileage("");
+    setPrice("");
+  };
+
   console.log(editedService);
   const [date, setDate] = useState(getCurrentDate());
   const serviceObject = {
@@ -43,26 +51,20 @@ export default function NewServiceForm({ editedService }) {
   const onEditCancel = () => {
     setEditFlag(false);
     editedService = null;
-    setTitle("");
-    setDate("");
-    setDescription("");
-    setMileage("");
-    setPrice("");
+    clearInputs();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (editedService != null) {
-      // post edit function
       editedServiceData(e, editedServiceObject);
+      editedService = null;
+      setEditFlag(false);
+      clearInputs();
     } else {
       addService(serviceObject, id);
-      setTitle("");
-      setDate("");
-      setDescription("");
-      setMileage("");
-      setPrice("");
+      clearInputs();
     }
   };
 
@@ -129,11 +131,9 @@ export default function NewServiceForm({ editedService }) {
           step="10"
         />
         <button type="submit">
-          {editedService == null
-            ? contentObj?.[language].services.addButton
-            : "aktualizuj"}
+          {!editFlag ? contentObj?.[language].services.addButton : "aktualizuj"}
         </button>
-        {editFlag == true && (
+        {editFlag === true && (
           <button
             type="button"
             onClick={() => {
