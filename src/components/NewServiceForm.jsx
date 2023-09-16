@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { useParams } from "react-router-dom";
 import { getCurrentDate } from "../helpers/Helpers";
@@ -6,8 +6,9 @@ import { v4 as uuidv4 } from "uuid";
 import { cash } from "../helpers/Helpers";
 import { contentObj } from "../language";
 
-export default function NewServiceForm() {
-  const { addService, cars, language } = useContext(DataContext);
+export default function NewServiceForm({ editedService }) {
+  const { addService, cars, language, editedServiceData } =
+    useContext(DataContext);
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,6 +16,8 @@ export default function NewServiceForm() {
   const [mileage, setMileage] = useState(
     cars && cars.filter((car) => car.id === id)[0]?.mileage
   );
+
+  console.log(editedService);
   const [date, setDate] = useState(getCurrentDate());
   const serviceObject = {
     id: uuidv4(),
@@ -25,14 +28,48 @@ export default function NewServiceForm() {
     mileage: mileage,
     price: price,
   };
+  const editedServiceObject = {
+    id: editedService?.id,
+    title: title,
+    date: date,
+    desc: description,
+    createdAt: getCurrentDate(),
+    mileage: mileage,
+    price: price,
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (editedService != null) {
+      // post edit function
+      editedServiceData(e, editedServiceObject);
+    } else {
+      addService(serviceObject, id);
+      setTitle("");
+      setDate("");
+      setDescription("");
+      setMileage("");
+      setPrice("");
+    }
+  };
+
+  useEffect(() => {
+    if (editedService != null) {
+      setTitle(editedService.title);
+      setDate(editedService.date);
+      setDescription(editedService.desc);
+      setMileage(editedService.mileage);
+      setPrice(editedService.price);
+    }
+  }, [editedService]);
 
   return (
     <div>
       <form
         action=""
         onSubmit={(e) => {
-          e.preventDefault(e);
-          addService(serviceObject, id);
+          onSubmit(e, serviceObject);
         }}
       >
         <input

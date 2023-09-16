@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import PleaseLogin from "../components/PleaseLogin";
 import NewServiceForm from "../components/NewServiceForm";
@@ -12,6 +12,8 @@ import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
 
 export default function SingleCar() {
+  const [editedService, setEditedService] = useState();
+
   const {
     filteredServices,
     isLogged,
@@ -23,6 +25,10 @@ export default function SingleCar() {
     language,
   } = useContext(DataContext);
   const { id: carID } = useParams();
+
+  const onServiceEdit = (service) => {
+    setEditedService(service);
+  };
 
   useEffect(() => {
     setviewedCarId(carID);
@@ -71,7 +77,7 @@ export default function SingleCar() {
   return (
     <div className="singlecar_container">
       <div>{carData()}</div>
-      <NewServiceForm />
+      <NewServiceForm editedService={editedService} />
       <h2>
         <MdConstruction className="react-icon" />
         {contentObj?.[language].services.heading}
@@ -94,10 +100,15 @@ export default function SingleCar() {
           {filteredServices &&
             filteredServices.length > 0 &&
             filteredServices.map(
-              ({ id, title, desc, price, date, createdAt, mileage }, index) => {
+              (
+                { id, title, desc, price, date, createdAt, mileage },
+                index,
+                service
+              ) => {
                 return (
                   <tbody key={id}>
                     <tr
+                      onClick={() => onServiceEdit(service[index])}
                       style={{
                         backgroundColor:
                           index % 2 === 0 ? "#f2f2f2" : "inherit",
@@ -109,7 +120,6 @@ export default function SingleCar() {
                       <td className="desc">{desc}</td>
                       <td>{createdAt}</td>
                       <td>{Number(mileage).toLocaleString()}</td>
-                      {/* <td>{mileage}</td> */}
                       <td>{cash(Number(price))}</td>
                       <td
                         style={{

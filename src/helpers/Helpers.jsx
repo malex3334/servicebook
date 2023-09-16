@@ -31,7 +31,7 @@ export function getCurrentDate() {
 // cash format
 
 export const cash = (amount) => {
-  return amount.toLocaleString("pl-pl", { minimumFractionDigits: 2 });
+  return amount?.toLocaleString("pl-pl", { minimumFractionDigits: 2 });
 };
 
 //

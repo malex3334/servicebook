@@ -313,7 +313,6 @@ export function DataProvider({ children }) {
   }
 
   const editCarData = (e, newData) => {
-    console.log("############", newData.id);
     const carsRef = doc(db, "cars", newData.id);
     setDoc(carsRef, newData)
       .then(() => {
@@ -323,6 +322,21 @@ export function DataProvider({ children }) {
         console.log("błąd podczas aktualizacji autoa", error);
       });
     setRerender(!rerender);
+  };
+
+  const editedServiceData = (e, newData) => {
+    console.log("#####", newData);
+
+    const serviceRef = doc(db, "services", newData.id);
+    setDoc(serviceRef, newData)
+      .then(() => {
+        console.log("zaktualizowano serwis");
+      })
+      .catch((error) => {
+        console.log("błąd podczas aktualizacji serwisu", error);
+      });
+
+    setServicesRerender(!servicesRerender);
   };
 
   return (
@@ -344,6 +358,7 @@ export function DataProvider({ children }) {
         language,
         setLanguage,
         editCarData,
+        editedServiceData,
       }}
     >
       {children}
