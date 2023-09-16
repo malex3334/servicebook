@@ -42,7 +42,7 @@ export default function Navigation() {
             <option value="en">EN</option>
           </select>
         </li>
-        <NavLink className="navlink" to="/start">
+        <NavLink className="navlink" to="/">
           Start
         </NavLink>
         <NavLink className="navlink" to="/about">

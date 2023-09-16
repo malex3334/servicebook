@@ -17,6 +17,8 @@ export default function NewServiceForm({ editedService }) {
     cars && cars.filter((car) => car.id === id)[0]?.mileage
   );
 
+  const [editFlag, setEditFlag] = useState(false);
+
   console.log(editedService);
   const [date, setDate] = useState(getCurrentDate());
   const serviceObject = {
@@ -38,6 +40,16 @@ export default function NewServiceForm({ editedService }) {
     price: price,
   };
 
+  const onEditCancel = () => {
+    setEditFlag(false);
+    editedService = null;
+    setTitle("");
+    setDate("");
+    setDescription("");
+    setMileage("");
+    setPrice("");
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -55,7 +67,12 @@ export default function NewServiceForm({ editedService }) {
   };
 
   useEffect(() => {
+    // if (editedService == null) {
+    //   setEditFlag(true);
+    // }
+
     if (editedService != null) {
+      setEditFlag(true);
       setTitle(editedService.title);
       setDate(editedService.date);
       setDescription(editedService.desc);
@@ -112,8 +129,20 @@ export default function NewServiceForm({ editedService }) {
           step="10"
         />
         <button type="submit">
-          {contentObj?.[language].services.addButton}
+          {editedService == null
+            ? contentObj?.[language].services.addButton
+            : "aktualizuj"}
         </button>
+        {editFlag == true && (
+          <button
+            type="button"
+            onClick={() => {
+              onEditCancel();
+            }}
+          >
+            anuluj
+          </button>
+        )}
       </form>
     </div>
   );
