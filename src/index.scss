@@ -1,7 +1,18 @@
 @import "_global.scss";
 @import "_variables.scss";
 
+.nav_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: $darker-primary;
+}
+
 .nav-list {
+  position: relative;
+  width: auto;
   display: flex;
   flex-direction: row;
   // justify-content: space-around;
@@ -9,7 +20,7 @@
   gap: 6rem;
   align-items: center;
   padding: 2rem;
-  background: $darker-primary;
+  // background: $darker-primary;
   border-radius: 0 0 0.5rem 0.5rem;
   color: $lightcolor-primary;
 
@@ -255,4 +266,23 @@
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
   }
+}
+
+.logo {
+  z-index: 99;
+  // position: absolut  e;
+  top: 0rem;
+  left: 10rem;
+  font-size: 8rem;
+  // background-color: $maincolor-primary;
+  background-color: white;
+  color: $maincolor-primary;
+  border-radius: 50%;
+  // color: white;
+  padding: 0.9rem;
+  border: 0.75rem solid $maincolor-primary;
+
+  // color: $darker-primary;
+  margin-left: 4rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
 }

@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { contentObj } from "../language";
 import { MdLanguage } from "react-icons/md";
+import LogoComponent from "./LogoComponent";
 
 export default function Navigation() {
   const {
@@ -18,7 +19,8 @@ export default function Navigation() {
   } = useContext(DataContext);
 
   return (
-    <div>
+    <div className="nav_container">
+      <LogoComponent />
       <ul className="nav-list">
         <li
           style={{
@@ -42,7 +44,7 @@ export default function Navigation() {
             <option value="en">EN</option>
           </select>
         </li>
-        <NavLink className="navlink" to="/">
+        <NavLink className="navlink" to="/" end>
           Start
         </NavLink>
         <NavLink className="navlink" to="/about">
