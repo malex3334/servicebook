@@ -6,7 +6,7 @@ import About from "./pages/About";
 import SingleCar from "./pages/SingleCar";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
-import Register from "./components/Register"
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="start" element={<Start />} />
+        <Route path="/" element={<Start />} />
         <Route path="about" element={<About />} />
         <Route path="cars" element={<MyServices />} />
         <Route path="cars/:id" element={<SingleCar />} />

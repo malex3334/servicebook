@@ -240,14 +240,19 @@
   .start_icon {
     z-index: 99;
     position: absolute;
-    top: -7rem;
-    right: -6rem;
-    font-size: 18rem;
-    background-color: $maincolor-primary;
+    top: -4rem;
+    right: -4rem;
+    font-size: 12rem;
+    // background-color: $maincolor-primary;
+    background-color: white;
+    color: $maincolor-primary;
     border-radius: 50%;
-    color: white;
+    // color: white;
     padding: 2rem;
+    border: 0.75rem solid $maincolor-primary;
 
     // color: $darker-primary;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
   }
 }
