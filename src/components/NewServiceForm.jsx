@@ -120,7 +120,6 @@ export default function NewServiceForm({ editedService }) {
           maxLength="6"
           min="0"
           max="1000000"
-          step="10"
         />
         <input
           type="number"
@@ -128,7 +127,6 @@ export default function NewServiceForm({ editedService }) {
           min="0"
           onChange={(e) => setPrice(e.target.value)}
           value={cash(price)}
-          step="10"
         />
         <button type="submit">
           {!editFlag ? contentObj?.[language].services.addButton : "aktualizuj"}

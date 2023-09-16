@@ -200,10 +200,27 @@
     border-radius: 3px;
   }
 
+  .label_container {
+    margin: 0.5em auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+  }
+
   h3 {
     font-size: 2.25rem;
     margin: 0;
     align-self: flex-start;
+  }
+
+  label {
+    font-size: 1.5rem;
+    align-self: baseline;
+    margin: 0;
+  }
+
+  input {
+    margin: 0;
   }
 }
 

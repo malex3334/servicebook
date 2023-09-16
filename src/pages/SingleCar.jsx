@@ -110,6 +110,7 @@ export default function SingleCar() {
                     <tr
                       onClick={() => onServiceEdit(service[index])}
                       style={{
+                        cursor: "pointer",
                         backgroundColor:
                           index % 2 === 0 ? "#f2f2f2" : "inherit",
                       }}

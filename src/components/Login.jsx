@@ -71,18 +71,28 @@ export default function Login() {
               <Loading />
             ) : (
               <form onSubmit={(e) => emailAndPasswordLogin(e)} action="">
-                <input
-                  type="email"
-                  placeholder={contentObj?.[language].loginPage.email}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder={contentObj?.[language].loginPage.password}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                <div className="label_container">
+                  <label htmlFor="login">
+                    {contentObj?.[language].loginPage.email}
+                  </label>
+                  <input
+                    type="email"
+                    placeholder={contentObj?.[language].loginPage.email}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="label_container">
+                  <label htmlFor="password">
+                    {contentObj?.[language].loginPage.password}
+                  </label>
+                  <input
+                    type="password"
+                    placeholder={contentObj?.[language].loginPage.password}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
                 <span style={{ color: "red" }}>
                   {error && `${contentObj?.[language].loginPage.wrongUser}`}
                 </span>
