@@ -2,6 +2,7 @@
 @import "_variables.scss";
 
 .nav_container {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -10,8 +11,27 @@
   background: $darker-primary;
 }
 
+.logo {
+  z-index: 99;
+  // position: absolute;
+  top: 0rem;
+  left: 10rem;
+  font-size: 8rem;
+  // background-color: $maincolor-primary;
+  background-color: white;
+  color: $maincolor-primary;
+  border-radius: 50%;
+  // color: white;
+  padding: 0.9rem;
+  border: 0.75rem solid $maincolor-primary;
+
+  // color: $darker-primary;
+  margin-left: 4rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
+}
+
 .nav-list {
-  position: relative;
+  // position: relative;
   width: auto;
   display: flex;
   flex-direction: row;
@@ -283,23 +303,4 @@
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
   }
-}
-
-.logo {
-  z-index: 99;
-  // position: absolut  e;
-  top: 0rem;
-  left: 10rem;
-  font-size: 8rem;
-  // background-color: $maincolor-primary;
-  background-color: white;
-  color: $maincolor-primary;
-  border-radius: 50%;
-  // color: white;
-  padding: 0.9rem;
-  border: 0.75rem solid $maincolor-primary;
-
-  // color: $darker-primary;
-  margin-left: 4rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
 }

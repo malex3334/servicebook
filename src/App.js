@@ -9,12 +9,23 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { useContext } from "react";
 import { DataContext } from "./context/DataContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { user } = useContext(DataContext);
 
   return (
     <div className="App">
+      <div>
+        <Toaster
+          position="bottom-center"
+          reverseOrder={false}
+          toastOptions={{
+            style: { background: "black", color: "white" },
+          }}
+        />
+      </div>
+
       <Navigation />
       <Routes>
         <Route path="login" element={<Login />} />

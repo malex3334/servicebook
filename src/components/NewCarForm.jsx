@@ -15,6 +15,15 @@ export default function NewCarForm({ editedCar }) {
   const [services, setServices] = useState();
   const { addCar, language, editCarData } = useContext(DataContext);
 
+  const clearInputs = () => {
+    setBrand("");
+    setModel("");
+    setImg("");
+    setMileage("");
+    setYear("");
+    setPlates("");
+  };
+
   const carObject = {
     id: uuidv4(),
     brand,
@@ -47,14 +56,10 @@ export default function NewCarForm({ editedCar }) {
 
     if (editedCar != null) {
       editCarData(e, editedCarObject);
+      // clearInputs()
     } else {
       addCar(e, object);
-      setBrand("");
-      setModel("");
-      setImg("");
-      setMileage("");
-      setYear("");
-      setPlates("");
+      clearInputs();
     }
   };
 

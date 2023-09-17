@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../utils/firebase";
-
+import { toast } from "react-hot-toast";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   getFirestore,
@@ -94,7 +94,14 @@ export function DataProvider({ children }) {
     e.preventDefault();
     // dodaj auto do bazy aut
     const addCarToCollection = async () => {
-      await setDoc(doc(db, "cars", carObject.id), carObject);
+      await setDoc(doc(db, "cars", carObject.id), carObject)
+        .then(() => {
+          toast.success("Dodano auto");
+        })
+        .catch((error) => {
+          toast.error("błąd podczas dodawania auta");
+          console.log(error);
+        });
     };
     addCarToCollection();
 
@@ -131,10 +138,12 @@ export function DataProvider({ children }) {
             deleteDoc(doc.ref)
               .then(() => {
                 console.log("Document deleted successfully");
+                toast.success("Usunięto auto");
                 setRerender(!rerender);
               })
               .catch((error) => {
                 console.error("Error deleting document: ", error);
+                toast.success("Błąd podczas usuwania auta");
               });
           });
         })
@@ -240,7 +249,13 @@ export function DataProvider({ children }) {
   function addService(serviceObject, carId) {
     // dodaj serwis do bazy danych
     const addServiceObject = async () => {
-      await setDoc(doc(db, "services", serviceObject.id), serviceObject);
+      await setDoc(doc(db, "services", serviceObject.id), serviceObject)
+        .then(() => {
+          toast.success("dodano serwis");
+        })
+        .catch((error) => {
+          toast.error("błąd podczas dodawania serwisu");
+        });
     };
     addServiceObject();
 
@@ -265,6 +280,14 @@ export function DataProvider({ children }) {
   }
   // delete service
   function deleteService(serviceId, currentCarID) {
+    // toast((t) => (
+    //   <span>
+    //     Are you sure?
+    //     <button onClick={() => toast.dismiss(t.id)}>Yes</button>
+    //     <button onClick={() => toast.dismiss(t.id)}>No</button>
+    //   </span>
+    // ));
+
     const result = window.confirm("are you sure?");
 
     if (result) {
@@ -273,9 +296,11 @@ export function DataProvider({ children }) {
       deleteDoc(sercivesDocRef)
         .then(() => {
           console.log("usunięto serwis");
+          toast.success("usunięto serwis");
         })
         .catch((error) => {
           console.log("błąd podczas usuwania serwisu", error);
+          toast.error("błąd podczas usuwania serwisu");
         });
       // setRerender(!rerender);
 
@@ -317,9 +342,11 @@ export function DataProvider({ children }) {
     setDoc(carsRef, newData)
       .then(() => {
         console.log("zaktualizowano auto");
+        toast.success("Zaktualizowano serwis");
       })
       .catch((error) => {
         console.log("błąd podczas aktualizacji autoa", error);
+        toast.error("błąd podczas aktualizacji");
       });
     setRerender(!rerender);
   };
@@ -331,9 +358,11 @@ export function DataProvider({ children }) {
     setDoc(serviceRef, newData)
       .then(() => {
         console.log("zaktualizowano serwis");
+        toast.success("Zaktualizowano serwis");
       })
       .catch((error) => {
         console.log("błąd podczas aktualizacji serwisu", error);
+        toast.error("błąd podczas aktualizacji");
       });
 
     setServicesRerender(!servicesRerender);
