@@ -57,7 +57,7 @@ export default function NewServiceForm({ editedService }) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (editedService != null) {
+    if (editFlag === true) {
       editedServiceData(e, editedServiceObject);
       editedService = null;
       setEditFlag(false);
@@ -67,7 +67,6 @@ export default function NewServiceForm({ editedService }) {
       clearInputs();
     }
   };
-
   useEffect(() => {
     // if (editedService == null) {
     //   setEditFlag(true);

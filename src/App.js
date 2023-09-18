@@ -1,6 +1,6 @@
 import "./App.css";
 import Navigation from "./components/Navigation";
-import MyServices from "./pages/MyServices";
+import MyGarage from "./pages/MyGarage";
 import Start from "./pages/Start";
 import About from "./pages/About";
 import SingleCar from "./pages/SingleCar";
@@ -32,7 +32,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="/" element={<Start />} />
         <Route path="about" element={<About />} />
-        <Route path="cars" element={<MyServices />} />
+        <Route path="cars" element={<MyGarage />} />
         {/* todo: zweryfikować czy user może wyświelić auto o danym id! */}
         {user ? (
           <Route path="cars/:id" element={<SingleCar />} />

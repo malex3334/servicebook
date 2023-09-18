@@ -8,7 +8,7 @@ import Loading from "../components/Loading";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { contentObj } from "../language";
 
-export default function MyServices() {
+export default function MyGarage() {
   const { user, cars, showServices, deleteCar, loading, language } =
     useContext(DataContext);
 
