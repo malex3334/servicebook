@@ -179,7 +179,7 @@
 }
 
 .about_container {
-  // min-height: 90vh;
+  // min-height: 76vh;
   padding: 2rem;
   max-width: 90%;
   margin: 5rem auto;
@@ -313,8 +313,11 @@
   color: lightgrey;
   padding: 1rem;
   font-weight: 300;
-  letter-spacing: 1.5;
   font-style: italic;
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin-top: 3rem;
+}
+
+.container {
+  min-height: 88vh;
 }

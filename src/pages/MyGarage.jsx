@@ -32,7 +32,7 @@ export default function MyGarage() {
 
   if (user) {
     return (
-      <div>
+      <div className="mygarage_container container">
         <h2>{contentObj?.[language].myCars.title}</h2>
         {!newCarTab ? (
           <button

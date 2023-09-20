@@ -7,7 +7,7 @@ export default function PleaseLogin() {
   const { language } = useContext(DataContext);
 
   return (
-    <div>
+    <div className="container">
       <h2>{contentObj?.[language].loginPage.title}</h2>
       <p>{contentObj?.[language].loginPage.paragraph}</p>
     </div>

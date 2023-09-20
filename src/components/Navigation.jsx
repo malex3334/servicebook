@@ -62,20 +62,22 @@ export default function Navigation() {
               {contentObj?.[language].myCars.title}
             </NavLink>
             {user ? (
-              <span className="user_container">
-                {contentObj?.[language].welcome},{" "}
-                {user.displayName != null ? user.displayName : "Anonymous"}
-                {/*to do: default user photo or icon */}
-                <img
-                  alt="user avatar"
-                  className="user_img"
-                  src={
-                    user?.photoURL
-                      ? user?.photoURL
-                      : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
-                  }
-                ></img>
-              </span>
+              <NavLink className="navlink" to="/user">
+                <span className="user_container">
+                  {contentObj?.[language].welcome},{" "}
+                  {user.displayName != null ? user.displayName : "Anonymous"}
+                  {/*to do: default user photo or icon */}
+                  <img
+                    alt="user avatar"
+                    className="user_img"
+                    src={
+                      user?.photoURL
+                        ? user?.photoURL
+                        : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
+                    }
+                  ></img>
+                </span>
+              </NavLink>
             ) : null}
             {!user && (
               <NavLink className="navlink" to="/login">

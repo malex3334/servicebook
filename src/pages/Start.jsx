@@ -5,7 +5,7 @@ export default function Start() {
   return (
     <div>
       {/* <h2>Start</h2> */}
-      <div className="start_container">
+      <div className="start_container container">
         <MdConstruction className="start_icon" />
         <div className="start_body">
           <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. </h3>

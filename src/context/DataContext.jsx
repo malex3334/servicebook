@@ -29,6 +29,7 @@ export function DataProvider({ children }) {
   const [servicesIDs, setServicesIDs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState(navigator.language.slice(0, -3));
+  const [userData, setUserData] = useState();
 
   // firebase
   const [user] = useAuthState(auth);
@@ -36,15 +37,17 @@ export function DataProvider({ children }) {
   const db = getFirestore();
   // Collection ref
 
+  console.log(user);
+
   // get user data
   useEffect(() => {
     const getData = async () => {
       if (user) {
         const snap = await getDoc(doc(db, "users", user?.uid));
         if (snap.exists()) {
-          console.log("exist", snap.data().carIDs);
+          setUserData(snap.data());
+
           if (snap.data() !== "undefined") {
-            console.log(snap.data().carIDs);
             setUserCarIDs(snap.data().carsIDs);
           } else {
             console.log("no data for user");
@@ -52,9 +55,12 @@ export function DataProvider({ children }) {
           }
         } else {
           console.log("No such document");
-          console.log(user?.uid);
           const addUserToDataBase = async () => {
-            await setDoc(doc(db, "users", user?.uid), {});
+            await setDoc(doc(db, "users", user?.uid), {
+              name: user.displayName,
+              email: user?.email,
+              photoURL: user?.photoURL,
+            });
           };
           addUserToDataBase();
         }
@@ -352,8 +358,6 @@ export function DataProvider({ children }) {
   };
 
   const editedServiceData = (e, newData) => {
-    console.log("#####", newData);
-
     const serviceRef = doc(db, "services", newData.id);
     setDoc(serviceRef, newData)
       .then(() => {
@@ -388,6 +392,7 @@ export function DataProvider({ children }) {
         setLanguage,
         editCarData,
         editedServiceData,
+        userData,
       }}
     >
       {children}

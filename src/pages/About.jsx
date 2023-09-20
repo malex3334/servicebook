@@ -7,7 +7,7 @@ export default function About() {
   const { language } = useContext(DataContext);
 
   return (
-    <div className="about_container">
+    <div className="about_container container">
       <div className="photo_container"></div>
 
       <div className="text_container">

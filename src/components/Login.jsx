@@ -63,7 +63,7 @@ export default function Login() {
   if (!user) {
     return (
       <>
-        <div className="login_container">
+        <div className="login_container container">
           <h2>{contentObj?.[language].loginPage.title}:</h2>
           <div className="login_credentials">
             <h3>{contentObj?.[language].loginPage.loginCredentials}:</h3>
