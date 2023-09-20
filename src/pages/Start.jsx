@@ -17,7 +17,7 @@ export default function Start() {
         {!user ? (
           <NavLink to="/login">
             <button className="hero_btn" style={{ margin: "2rem 0" }}>
-              sprawdź!
+              Sprawdź!
             </button>
           </NavLink>
         ) : null}

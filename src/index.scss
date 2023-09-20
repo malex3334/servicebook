@@ -207,6 +207,11 @@
     width: 40rem;
     text-align: start;
     padding: 1rem;
+    line-height: 1.3;
+
+    h3 {
+      font-size: 2.2rem;
+    }
   }
 }
 
@@ -315,6 +320,7 @@
 
   .list {
     // list-style: disc;
+    margin-left: 2rem;
 
     &::before {
       content: "•";
