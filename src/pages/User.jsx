@@ -2,6 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
+import { noAvatar } from "../helpers/Helpers";
 
 export default function User() {
   const { userData } = useContext(DataContext);
@@ -16,11 +17,7 @@ export default function User() {
         <div className="userdata_body">
           <img
             className="user_avatar"
-            src={
-              photoURL
-                ? photoURL
-                : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
-            }
+            src={photoURL ? photoURL : noAvatar}
             alt="user avatar"
           />
           <h3>{name ? name : "Annonymous"}</h3>
