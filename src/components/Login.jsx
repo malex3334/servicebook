@@ -80,6 +80,7 @@ export default function Login() {
                     placeholder={contentObj?.[language].loginPage.email}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="label_container">
@@ -91,6 +92,7 @@ export default function Login() {
                     placeholder={contentObj?.[language].loginPage.password}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
                 <span style={{ color: "red" }}>

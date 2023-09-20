@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { dummyUser } from "../data/dummyCars";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { contentObj } from "../language";
 import { MdLanguage } from "react-icons/md";
 import LogoComponent from "./LogoComponent";
 
 export default function Navigation() {
+  const navigate = useNavigate();
   const {
     user,
     logIn,
@@ -92,6 +93,7 @@ export default function Navigation() {
                   auth.signOut();
                   setUserCarIDs([]);
                   setCars([]);
+                  navigate("/");
                 }}
               >
                 {contentObj?.[language].logout}

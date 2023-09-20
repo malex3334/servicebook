@@ -321,3 +321,33 @@
 .container {
   min-height: 88vh;
 }
+
+.userdata_container {
+  margin: 5rem;
+
+  .userdata_body {
+    margin: 0 auto;
+    width: 40rem;
+    // background-color: red;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      margin-bottom: 2rem;
+      width: 20rem;
+      border: 3px solid $maincolor-primary;
+      border-radius: $border-radius--small;
+    }
+
+    .data_container {
+      align-self: flex-start;
+
+      span {
+        font-size: 0.9em;
+      }
+    }
+  }
+}
