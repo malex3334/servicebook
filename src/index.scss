@@ -328,18 +328,29 @@
   .userdata_body {
     margin: 0 auto;
     width: 40rem;
+    min-height: 50rem;
     // background-color: red;
     padding: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    background-color: $lightcolor-primary;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.071);
+    min-height: 75%;
 
     img {
+      background-color: #404040;
       margin-bottom: 2rem;
       width: 20rem;
+      min-height: 20rem;
       border: 3px solid $maincolor-primary;
       border-radius: $border-radius--small;
+      transition: transform 0.35s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
 
     .data_container {

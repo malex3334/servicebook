@@ -75,7 +75,7 @@ export default function SingleCar() {
   }
 
   return (
-    <div className="singlecar_container">
+    <div className="singlecar_container container">
       <div>{carData()}</div>
       <NewServiceForm editedService={editedService} />
       <h2>

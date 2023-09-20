@@ -11,6 +11,7 @@ export default function Navigation() {
   const navigate = useNavigate();
   const {
     user,
+    userData,
     logIn,
     isLogged,
     setUserCarIDs,
@@ -66,7 +67,7 @@ export default function Navigation() {
               <NavLink className="navlink" to="/user">
                 <span className="user_container">
                   {contentObj?.[language].welcome},{" "}
-                  {user.displayName != null ? user.displayName : "Anonymous"}
+                  {userData?.name != null ? userData?.name : "Anonymous"}
                   {/*to do: default user photo or icon */}
                   <img
                     alt="user avatar"

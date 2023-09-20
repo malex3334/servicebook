@@ -14,15 +14,23 @@ export default function User() {
     return (
       <div className="userdata_container container">
         <div className="userdata_body">
-          <img src={photoURL && photoURL} alt="" />
-          <h3>{name}</h3>
+          <img
+            className="user_avatar"
+            src={
+              photoURL
+                ? photoURL
+                : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
+            }
+            alt="user avatar"
+          />
+          <h3>{name ? name : "Annonymous"}</h3>
           <div className="data_container">
             <span>email: </span>
-            <span>{email && email}</span>
+            <span>{email ? email : "no email"}</span>
           </div>
           <div className="data_container">
             <span>cars: </span>
-            <span>{carsIDs?.length}</span>
+            <span>{carsIDs ? carsIDs.length : "no cars yet"}</span>
           </div>
         </div>
       </div>
