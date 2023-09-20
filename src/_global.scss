@@ -83,6 +83,16 @@ button {
   }
 }
 
+.hero_button {
+  background: $maincolor-primary;
+  color: white;
+
+  &:hover {
+    background: white;
+    color: $maincolor-primary;
+  }
+}
+
 select,
 option {
   outline: none;

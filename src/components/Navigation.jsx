@@ -83,7 +83,7 @@ export default function Navigation() {
             ) : null}
             {!user && (
               <NavLink className="navlink" to="/login">
-                <button className="login_btn">
+                <button className="hero_btn">
                   {contentObj?.[language].login}
                 </button>
               </NavLink>
