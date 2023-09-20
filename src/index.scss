@@ -304,3 +304,17 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
   }
 }
+
+.footer_container {
+  width: 100%;
+  // position: fixed;
+  bottom: 0;
+  background: $darker-primary;
+  color: lightgrey;
+  padding: 1rem;
+  font-weight: 300;
+  letter-spacing: 1.5;
+  font-style: italic;
+  font-size: 2rem;
+  margin-top: 3rem;
+}

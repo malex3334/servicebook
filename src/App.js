@@ -10,6 +10,7 @@ import Register from "./components/Register";
 import { useContext } from "react";
 import { DataContext } from "./context/DataContext";
 import { Toaster } from "react-hot-toast";
+import Footer from "./components/Footer";
 
 function App() {
   const { user } = useContext(DataContext);
@@ -40,6 +41,7 @@ function App() {
           <Route path="login" element={<Login />} />
         )}
       </Routes>
+      <Footer />
     </div>
   );
 }
