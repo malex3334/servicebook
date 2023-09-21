@@ -281,8 +281,8 @@ export function DataProvider({ children }) {
           console.error("Błąd podczas dodawania ID do tablicy cars:", error);
         });
     };
-    setServicesRerender(!servicesRerender);
     addServiceToCar();
+    setServicesRerender(!servicesRerender);
   }
   // delete service
   function deleteService(serviceId, currentCarID) {

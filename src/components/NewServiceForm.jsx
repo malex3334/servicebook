@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { cash } from "../helpers/Helpers";
 import { contentObj } from "../language";
 
-export default function NewServiceForm({ editedService }) {
+export default function NewServiceForm({ editedService, setEditedService }) {
   const { addService, cars, language, editedServiceData } =
     useContext(DataContext);
   const { id } = useParams();
@@ -27,19 +27,10 @@ export default function NewServiceForm({ editedService }) {
     setPrice("");
   };
 
-  console.log(editedService);
   const [date, setDate] = useState(getCurrentDate());
+
   const serviceObject = {
     id: uuidv4(),
-    title: title,
-    date: date,
-    desc: description,
-    createdAt: getCurrentDate(),
-    mileage: mileage,
-    price: price,
-  };
-  const editedServiceObject = {
-    id: editedService?.id,
     title: title,
     date: date,
     desc: description,
@@ -50,6 +41,7 @@ export default function NewServiceForm({ editedService }) {
 
   const onEditCancel = () => {
     setEditFlag(false);
+    setEditedService(null);
     editedService = null;
     clearInputs();
   };
@@ -59,6 +51,7 @@ export default function NewServiceForm({ editedService }) {
 
     if (editFlag === true) {
       editedServiceData(e, editedServiceObject);
+      setEditedService(null);
       editedService = null;
       setEditFlag(false);
       clearInputs();
@@ -81,6 +74,16 @@ export default function NewServiceForm({ editedService }) {
       setPrice(editedService.price);
     }
   }, [editedService]);
+
+  const editedServiceObject = {
+    id: editedService?.id,
+    title: title,
+    date: date,
+    desc: description,
+    createdAt: getCurrentDate(),
+    mileage: mileage,
+    price: price,
+  };
 
   return (
     <div>

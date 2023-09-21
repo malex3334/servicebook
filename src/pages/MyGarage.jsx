@@ -28,69 +28,73 @@ export default function MyGarage() {
 
   if (loading) {
     return <Loading />;
-  }
-
-  if (user) {
-    return (
-      <div className="mygarage_container container">
-        <h2>{contentObj?.[language].myCars.title}</h2>
-        {!newCarTab ? (
-          <button
-            onClick={() => setNewCarTab(!newCarTab)}
-            style={{ marginBottom: "1rem" }}
-          >
-            {contentObj?.[language].myCars.addButton}
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              setNewCarTab(!newCarTab);
-              setEditedCar(null);
-            }}
-          >
-            {contentObj?.[language].myCars.closeButton}
-          </button>
-        )}
-        {newCarElement()}
-        {cars &&
-          cars?.map((car) => {
-            return (
-              <div
-                style={{ display: "flex", margin: "3rem auto", width: "80rem" }}
-              >
-                <NavLink
-                  key={car.id}
-                  onClick={() => {
-                    showServices(car.id, car.services);
+  } else {
+    if (user) {
+      return (
+        <div className="mygarage_container container">
+          <h2>{contentObj?.[language].myCars.title}</h2>
+          {!newCarTab ? (
+            <button
+              onClick={() => setNewCarTab(!newCarTab)}
+              style={{ marginBottom: "1rem" }}
+            >
+              {contentObj?.[language].myCars.addButton}
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setNewCarTab(!newCarTab);
+                setEditedCar(null);
+              }}
+            >
+              {contentObj?.[language].myCars.closeButton}
+            </button>
+          )}
+          {newCarElement()}
+          {cars &&
+            cars?.map((car) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    margin: "3rem auto",
+                    width: "80rem",
                   }}
-                  className="cardetails_container"
-                  to={`/cars/${car.id}`}
                 >
-                  <CarDetails car={car} />
-                </NavLink>
-                <div className="buttons">
-                  <button
-                    className="btn danger"
+                  <NavLink
+                    key={car.id}
                     onClick={() => {
-                      deleteCar(car.id, car.services);
+                      showServices(car.id, car.services);
                     }}
+                    className="cardetails_container"
+                    to={`/cars/${car.id}`}
                   >
-                    {" "}
-                    <FaTrashAlt />
-                  </button>
-                  <button onClick={() => onCarEdit(car)} className="btn">
-                    <FaEdit />
-                  </button>
+                    <CarDetails car={car} />
+                  </NavLink>
+                  <div className="buttons">
+                    <button
+                      className="btn danger"
+                      onClick={() => {
+                        deleteCar(car.id, car.services);
+                      }}
+                    >
+                      {" "}
+                      <FaTrashAlt />
+                    </button>
+                    <button onClick={() => onCarEdit(car)} className="btn">
+                      <FaEdit />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-      </div>
-    );
-  } else
-    return (
-      <div>
-        <PleaseLogin />
-      </div>
-    );
+              );
+            })}
+        </div>
+      );
+    } else
+      return (
+        <div>
+          <PleaseLogin />
+        </div>
+      );
+  }
 }
