@@ -61,10 +61,6 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     }
   };
   useEffect(() => {
-    // if (editedService == null) {
-    //   setEditFlag(true);
-    // }
-
     if (editedService != null) {
       setEditFlag(true);
       setTitle(editedService.title);

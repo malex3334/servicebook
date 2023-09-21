@@ -3,14 +3,19 @@ import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { noAvatar } from "../helpers/Helpers";
+import Loading from "../components/Loading";
 
 export default function User() {
-  const { userData } = useContext(DataContext);
+  const { userData, loading } = useContext(DataContext);
   const navigate = useNavigate();
   console.log(userData);
 
   if (userData) {
     const { name, photoURL, email, carsIDs } = userData;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     return (
       <div className="userdata_container container">

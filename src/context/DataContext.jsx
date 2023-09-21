@@ -37,8 +37,6 @@ export function DataProvider({ children }) {
   const db = getFirestore();
   // Collection ref
 
-  console.log(user);
-
   // get user data
   useEffect(() => {
     const getData = async () => {
@@ -57,12 +55,13 @@ export function DataProvider({ children }) {
           console.log("No such document");
           const addUserToDataBase = async () => {
             await setDoc(doc(db, "users", user?.uid), {
-              name: user.displayName,
+              name: user?.displayName,
               email: user?.email,
               photoURL: user?.photoURL,
             });
           };
           addUserToDataBase();
+          getData();
         }
       }
       if (user === "undefined") {
@@ -71,6 +70,39 @@ export function DataProvider({ children }) {
     };
     getData();
   }, [user?.uid, rerender]);
+
+  const editCarData = (e, newData) => {
+    setLoading(true);
+    const carsRef = doc(db, "cars", newData.id);
+    setDoc(carsRef, newData)
+      .then(() => {
+        console.log("zaktualizowano auto");
+        toast.success("Zaktualizowano auto");
+      })
+      .catch((error) => {
+        console.log("błąd podczas aktualizacji auta", error);
+        toast.error("błąd podczas aktualizacji");
+      });
+    setRerender(!rerender);
+    setLoading(false);
+  };
+
+  const editedServiceData = (e, newData) => {
+    setLoading(true);
+    const serviceRef = doc(db, "services", newData.id);
+    setDoc(serviceRef, newData)
+      .then(() => {
+        console.log("zaktualizowano serwis");
+        toast.success("Zaktualizowano serwis");
+      })
+      .catch((error) => {
+        console.log("błąd podczas aktualizacji serwisu", error);
+        toast.error("błąd podczas aktualizacji");
+      });
+
+    setServicesRerender(!servicesRerender);
+    setLoading(false);
+  };
 
   // get cars object
   useEffect(() => {
@@ -214,7 +246,7 @@ export function DataProvider({ children }) {
       const snap = await getDoc(doc(db, "cars", carId));
 
       if (snap.exists()) {
-        setServicesIDs(snap.data().services);
+        setServicesIDs(snap.data()?.services);
       } else {
         console.log("No such document");
       }
@@ -342,39 +374,6 @@ export function DataProvider({ children }) {
       deleteLinkedServicesInCarObject();
     } else return;
   }
-
-  const editCarData = (e, newData) => {
-    setLoading(true);
-    const carsRef = doc(db, "cars", newData.id);
-    setDoc(carsRef, newData)
-      .then(() => {
-        console.log("zaktualizowano auto");
-        toast.success("Zaktualizowano serwis");
-      })
-      .catch((error) => {
-        console.log("błąd podczas aktualizacji autoa", error);
-        toast.error("błąd podczas aktualizacji");
-      });
-    setRerender(!rerender);
-    setLoading(false);
-  };
-
-  const editedServiceData = (e, newData) => {
-    setLoading(true);
-    const serviceRef = doc(db, "services", newData.id);
-    setDoc(serviceRef, newData)
-      .then(() => {
-        console.log("zaktualizowano serwis");
-        toast.success("Zaktualizowano serwis");
-      })
-      .catch((error) => {
-        console.log("błąd podczas aktualizacji serwisu", error);
-        toast.error("błąd podczas aktualizacji");
-      });
-
-    setServicesRerender(!servicesRerender);
-    setLoading(false);
-  };
 
   return (
     <DataContext.Provider
