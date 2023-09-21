@@ -65,7 +65,7 @@ export default function MyGarage() {
                     style={{
                       display: "flex",
                       margin: "3rem auto",
-                      width: "80rem",
+                      // width: "80rem",
                     }}
                   >
                     <NavLink

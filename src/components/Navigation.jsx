@@ -143,7 +143,15 @@ export default function Navigation() {
                   {contentObj?.[language].logout}
                 </button>
               ) : (
-                <MdLogout className="nav-icon" />
+                <MdLogout
+                  className="nav-icon"
+                  onClick={() => {
+                    auth.signOut();
+                    setUserCarIDs([]);
+                    setCars([]);
+                    navigate("/");
+                  }}
+                />
               ))}
           </>
         )}

@@ -436,7 +436,7 @@
 
 @media (max-width: 700px) {
   html {
-    font-size: 50%;
+    font-size: 52%;
   }
 
   .nav-list {
@@ -447,5 +447,12 @@
     .user_img {
       margin: 0;
     }
+  }
+
+  .cardetails_container {
+    width: 80vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
