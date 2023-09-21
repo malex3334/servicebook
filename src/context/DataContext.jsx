@@ -344,6 +344,7 @@ export function DataProvider({ children }) {
   }
 
   const editCarData = (e, newData) => {
+    setLoading(true);
     const carsRef = doc(db, "cars", newData.id);
     setDoc(carsRef, newData)
       .then(() => {
@@ -355,9 +356,11 @@ export function DataProvider({ children }) {
         toast.error("błąd podczas aktualizacji");
       });
     setRerender(!rerender);
+    setLoading(false);
   };
 
   const editedServiceData = (e, newData) => {
+    setLoading(true);
     const serviceRef = doc(db, "services", newData.id);
     setDoc(serviceRef, newData)
       .then(() => {
@@ -370,6 +373,7 @@ export function DataProvider({ children }) {
       });
 
     setServicesRerender(!servicesRerender);
+    setLoading(false);
   };
 
   return (
