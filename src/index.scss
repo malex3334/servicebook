@@ -394,7 +394,7 @@
 }
 
 .userdata_container {
-  margin: 5rem;
+  margin: 5rem auto;
 
   .userdata_body {
     margin: 0 auto;
@@ -436,7 +436,7 @@
 
 @media (max-width: 700px) {
   html {
-    font-size: 52%;
+    font-size: 55%;
   }
 
   .nav-list {
@@ -454,5 +454,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .about_container {
+    .photo_container {
+      justify-self: center;
+    }
+  }
+
+  .start_container {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100vw;
+
+    .start_body {
+      padding: 5rem;
+    }
+  }
+
+  .user_container {
+    margin: 0;
+
+    .userdata_body {
+      width: 90vw;
+      margin: 0 auto;
+    }
   }
 }
