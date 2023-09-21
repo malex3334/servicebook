@@ -434,6 +434,12 @@
   }
 }
 
+.table_container {
+  margin: 0 auto;
+  width: 90%;
+  overflow: auto;
+}
+
 @media (max-width: 700px) {
   html {
     font-size: 55%;
@@ -441,11 +447,19 @@
 
   .nav-list {
     width: 100%;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-between;
+    // align-items: baseline;
+    align-items: flex-start;
+    gap: 1rem;
 
     .user_img {
       margin: 0;
+      height: 3.1rem;
+      width: 3.1rem;
+    }
+
+    .nav-icon {
+      font-size: 3.5rem;
     }
   }
 
@@ -465,10 +479,19 @@
   .start_container {
     margin-left: 0;
     margin-right: 0;
-    width: 100vw;
+    width: 95vw;
+
+    // &::after {
+    //   border: none;
+    // }
 
     .start_body {
       padding: 5rem;
+    }
+
+    .start_icon {
+      // display: none;
+      right: 2rem;
     }
   }
 

@@ -9,7 +9,7 @@ import LogoComponent from "./LogoComponent";
 import { useEffect, useState } from "react";
 import { RiLogoutBoxRLine, RiHomeLine } from "react-icons/ri";
 import { PiGarageBold, PiInfo } from "react-icons/pi";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdLogin } from "react-icons/md";
 
 export default function Navigation() {
   const navigate = useNavigate();
@@ -28,11 +28,11 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Ustaw szerokość, która uważasz za graniczną między urządzeniami mobilnymi a desktopowymi
+      setIsMobile(window.innerWidth <= 700);
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Wywołaj to od razu, aby ustawić początkową wartość
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -52,12 +52,14 @@ export default function Navigation() {
             gap: ".5em",
           }}
         >
-          <label htmlFor="">
-            <MdLanguage
-              style={{ fontSize: "1.2em" }}
-              className="language_icon"
-            />
-          </label>
+          {!isMobile ? (
+            <label htmlFor="">
+              <MdLanguage
+                style={{ fontSize: "1.2em" }}
+                className="language_icon"
+              />
+            </label>
+          ) : null}
           <select
             onChange={(e) => setLanguage(e.target.value)}
             name="language"
@@ -77,39 +79,21 @@ export default function Navigation() {
             <PiInfo className="nav-icon" />
           )}
         </NavLink>
-        {isLogged ? (
+        <>
           <NavLink className="navlink" to="/cars">
-            <button onClick={() => logIn(dummyUser)}>
-              {contentObj?.[language].login}
-            </button>
+            {!isMobile ? (
+              contentObj?.[language].myCars.title
+            ) : (
+              <PiGarageBold className="nav-icon" />
+            )}
           </NavLink>
-        ) : (
-          <>
-            <NavLink className="navlink" to="/cars">
+          {user ? (
+            <NavLink className="navlink" to="/user">
               {!isMobile ? (
-                contentObj?.[language].myCars.title
-              ) : (
-                <PiGarageBold className="nav-icon" />
-              )}
-            </NavLink>
-            {user ? (
-              <NavLink className="navlink" to="/user">
-                {!isMobile ? (
-                  <span className="user_container">
-                    {contentObj?.[language].welcome},{" "}
-                    {userData?.name != null ? userData?.name : "Anonymous"}
-                    {/*to do: default user photo or icon */}
-                    <img
-                      alt="user avatar"
-                      className="user_img"
-                      src={
-                        user?.photoURL
-                          ? user?.photoURL
-                          : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
-                      }
-                    ></img>
-                  </span>
-                ) : (
+                <span className="user_container">
+                  {contentObj?.[language].welcome},{" "}
+                  {userData?.name != null ? userData?.name : "Anonymous"}
+                  {/*to do: default user photo or icon */}
                   <img
                     alt="user avatar"
                     className="user_img"
@@ -119,42 +103,57 @@ export default function Navigation() {
                         : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
                     }
                   ></img>
-                )}
-              </NavLink>
-            ) : null}
-            {!user && (
-              <NavLink className="navlink" to="/login">
+                </span>
+              ) : (
+                <img
+                  alt="user avatar"
+                  className="user_img"
+                  src={
+                    user?.photoURL
+                      ? user?.photoURL
+                      : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
+                  }
+                ></img>
+              )}
+            </NavLink>
+          ) : null}
+          {!user && (
+            <NavLink className="navlink" to="/login">
+              {!isMobile ? (
                 <button className="hero_btn">
                   {contentObj?.[language].login}
                 </button>
-              </NavLink>
-            )}
-
-            {user &&
-              (!isMobile ? (
-                <button
-                  onClick={() => {
-                    auth.signOut();
-                    setUserCarIDs([]);
-                    setCars([]);
-                    navigate("/");
-                  }}
-                >
-                  {contentObj?.[language].logout}
-                </button>
               ) : (
-                <MdLogout
-                  className="nav-icon"
-                  onClick={() => {
-                    auth.signOut();
-                    setUserCarIDs([]);
-                    setCars([]);
-                    navigate("/");
-                  }}
-                />
-              ))}
-          </>
-        )}
+                <MdLogin className="nav-icon" />
+              )}
+            </NavLink>
+          )}
+
+          {user &&
+            (!isMobile ? (
+              <button
+                onClick={() => {
+                  auth.signOut();
+                  setUserCarIDs([]);
+                  setCars([]);
+                  navigate("/");
+                }}
+              >
+                {contentObj?.[language].logout}
+              </button>
+            ) : (
+              <MdLogout
+                style={{ cursor: "pointer" }}
+                className="nav-icon"
+                onClick={() => {
+                  auth.signOut();
+                  setUserCarIDs([]);
+                  setCars([]);
+                  navigate("/");
+                }}
+              />
+            ))}
+        </>
       </ul>
     </div>
   );

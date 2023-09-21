@@ -91,72 +91,74 @@ export default function SingleCar() {
         {loading ? (
           <Loading />
         ) : (
-          <table id="myTable">
-            <thead>
-              <tr>
-                <th>lp</th>
-                <th>Tytuł</th>
-                <th>Data</th>
-                <th>Opis</th>
-                <th>Data dodania</th>
-                <th>Przebieg</th>
-                <th>Cena</th>
-              </tr>
-            </thead>
-            {filteredServices &&
-              filteredServices.length > 0 &&
-              filteredServices.map(
-                (
-                  { id, title, desc, price, date, createdAt, mileage },
-                  index,
-                  service
-                ) => {
-                  return (
-                    <tbody key={id}>
-                      <tr
-                        onClick={() => onServiceEdit(service[index])}
-                        style={{
-                          cursor: "pointer",
-                          backgroundColor:
-                            index % 2 === 0 ? "#f2f2f2" : "inherit",
-                        }}
-                      >
-                        <td>{index + 1}.</td>
-                        <td>{title}</td>
-                        <td>{date}</td>
-                        <td className="desc">{desc}</td>
-                        <td>{createdAt}</td>
-                        <td>{Number(mileage).toLocaleString()}</td>
-                        <td>{cash(Number(price))}</td>
-                        <td
+          <div className="table_container">
+            <table id="myTable">
+              <thead>
+                <tr>
+                  <th>lp</th>
+                  <th>Tytuł</th>
+                  <th>Data</th>
+                  <th>Opis</th>
+                  <th>Data dodania</th>
+                  <th>Przebieg</th>
+                  <th>Cena</th>
+                </tr>
+              </thead>
+              {filteredServices &&
+                filteredServices.length > 0 &&
+                filteredServices.map(
+                  (
+                    { id, title, desc, price, date, createdAt, mileage },
+                    index,
+                    service
+                  ) => {
+                    return (
+                      <tbody key={id}>
+                        <tr
+                          onClick={() => onServiceEdit(service[index])}
                           style={{
-                            color: "red",
-                            fontWeight: "bold",
                             cursor: "pointer",
+                            backgroundColor:
+                              index % 2 === 0 ? "#f2f2f2" : "inherit",
                           }}
-                          onClick={() => deleteService(id, viewedCarID)}
                         >
-                          <FaTrashAlt style={{ fontSize: "1.5rem" }} />
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
-                }
-              )}
-            <tbody>
-              <tr>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="line">RAZEM</td>
-                <td className="line">
-                  <b>{cash(sum)} zł</b>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                          <td>{index + 1}.</td>
+                          <td>{title}</td>
+                          <td>{date}</td>
+                          <td className="desc">{desc}</td>
+                          <td>{createdAt}</td>
+                          <td>{Number(mileage).toLocaleString()}</td>
+                          <td>{cash(Number(price))}</td>
+                          <td
+                            style={{
+                              color: "red",
+                              fontWeight: "bold",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => deleteService(id, viewedCarID)}
+                          >
+                            <FaTrashAlt style={{ fontSize: "1.5rem" }} />
+                          </td>
+                        </tr>
+                      </tbody>
+                    );
+                  }
+                )}
+              <tbody>
+                <tr>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="line">RAZEM</td>
+                  <td className="line">
+                    <b>{cash(sum)} zł</b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         )}
         <button style={{ marginTop: "1rem" }} onClick={exportToXLS}>
           Pobierz jako plik Excel
