@@ -6,6 +6,10 @@ import { auth } from "../utils/firebase";
 import { contentObj } from "../language";
 import { MdLanguage } from "react-icons/md";
 import LogoComponent from "./LogoComponent";
+import { useEffect, useState } from "react";
+import { RiLogoutBoxRLine, RiHomeLine } from "react-icons/ri";
+import { PiGarageBold, PiInfo } from "react-icons/pi";
+import { MdLogout } from "react-icons/md";
 
 export default function Navigation() {
   const navigate = useNavigate();
@@ -20,9 +24,26 @@ export default function Navigation() {
     setLanguage,
   } = useContext(DataContext);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Ustaw szerokość, która uważasz za graniczną między urządzeniami mobilnymi a desktopowymi
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Wywołaj to od razu, aby ustawić początkową wartość
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  console.log(isMobile);
+
   return (
     <div className="nav_container">
-      <LogoComponent />
+      {!isMobile ? <LogoComponent /> : null}
       <ul className="nav-list">
         <li
           style={{
@@ -47,10 +68,14 @@ export default function Navigation() {
           </select>
         </li>
         <NavLink className="navlink" to="/" end>
-          Start
+          {!isMobile ? "Start" : <RiHomeLine className="nav-icon" />}
         </NavLink>
         <NavLink className="navlink" to="/about">
-          {contentObj?.[language].about.title}
+          {!isMobile ? (
+            contentObj?.[language].about.title
+          ) : (
+            <PiInfo className="nav-icon" />
+          )}
         </NavLink>
         {isLogged ? (
           <NavLink className="navlink" to="/cars">
@@ -61,14 +86,30 @@ export default function Navigation() {
         ) : (
           <>
             <NavLink className="navlink" to="/cars">
-              {contentObj?.[language].myCars.title}
+              {!isMobile ? (
+                contentObj?.[language].myCars.title
+              ) : (
+                <PiGarageBold className="nav-icon" />
+              )}
             </NavLink>
             {user ? (
               <NavLink className="navlink" to="/user">
-                <span className="user_container">
-                  {contentObj?.[language].welcome},{" "}
-                  {userData?.name != null ? userData?.name : "Anonymous"}
-                  {/*to do: default user photo or icon */}
+                {!isMobile ? (
+                  <span className="user_container">
+                    {contentObj?.[language].welcome},{" "}
+                    {userData?.name != null ? userData?.name : "Anonymous"}
+                    {/*to do: default user photo or icon */}
+                    <img
+                      alt="user avatar"
+                      className="user_img"
+                      src={
+                        user?.photoURL
+                          ? user?.photoURL
+                          : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
+                      }
+                    ></img>
+                  </span>
+                ) : (
                   <img
                     alt="user avatar"
                     className="user_img"
@@ -78,7 +119,7 @@ export default function Navigation() {
                         : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
                     }
                   ></img>
-                </span>
+                )}
               </NavLink>
             ) : null}
             {!user && (
@@ -88,18 +129,22 @@ export default function Navigation() {
                 </button>
               </NavLink>
             )}
-            {user && (
-              <button
-                onClick={() => {
-                  auth.signOut();
-                  setUserCarIDs([]);
-                  setCars([]);
-                  navigate("/");
-                }}
-              >
-                {contentObj?.[language].logout}
-              </button>
-            )}
+
+            {user &&
+              (!isMobile ? (
+                <button
+                  onClick={() => {
+                    auth.signOut();
+                    setUserCarIDs([]);
+                    setCars([]);
+                    navigate("/");
+                  }}
+                >
+                  {contentObj?.[language].logout}
+                </button>
+              ) : (
+                <MdLogout className="nav-icon" />
+              ))}
           </>
         )}
       </ul>
