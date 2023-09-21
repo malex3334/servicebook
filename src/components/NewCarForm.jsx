@@ -5,7 +5,7 @@ import { noImg } from "../helpers/Helpers.jsx";
 import { contentObj } from "../language";
 import { useEffect } from "react";
 
-export default function NewCarForm({ editedCar }) {
+export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
   const [brand, setBrand] = useState();
   const [model, setModel] = useState();
   const [year, setYear] = useState();
@@ -50,6 +50,8 @@ export default function NewCarForm({ editedCar }) {
   const onSubmit = (e, object) => {
     e.preventDefault();
 
+    setNewCarTab(false);
+
     if (object.img == undefined) {
       object.img = noImg;
     }
@@ -61,6 +63,8 @@ export default function NewCarForm({ editedCar }) {
       addCar(e, object);
       clearInputs();
     }
+    clearInputs();
+    setEditedCar(null);
   };
 
   useEffect(() => {

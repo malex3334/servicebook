@@ -125,7 +125,7 @@ export function DataProvider({ children }) {
       setLoading(false);
     }
     setLoading(false);
-  }, [userCarIDs]);
+  }, [userCarIDs, rerender]);
 
   // dodaj auto
   function addCar(e, carObject) {

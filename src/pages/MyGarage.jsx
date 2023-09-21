@@ -22,7 +22,13 @@ export default function MyGarage() {
 
   const newCarElement = function () {
     if (newCarTab) {
-      return <NewCarForm editedCar={editedCar} />;
+      return (
+        <NewCarForm
+          editedCar={editedCar}
+          setEditedCar={setEditedCar}
+          setNewCarTab={setNewCarTab}
+        />
+      );
     }
   };
 
