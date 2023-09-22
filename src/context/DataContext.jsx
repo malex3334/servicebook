@@ -101,7 +101,7 @@ export function DataProvider({ children }) {
       }
     };
     getData();
-  }, [user?.uid, rerender]);
+  }, [user?.uid, rerender, user?.photoURL, user?.name]);
 
   const editCarData = (e, newData) => {
     setLoading(true);

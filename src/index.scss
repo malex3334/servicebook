@@ -148,10 +148,6 @@
   flex-direction: column;
   gap: 1rem;
   margin-left: 1rem;
-
-  .btn {
-    // margin: 1rem 0 1rem 0;
-  }
 }
 
 .single-car__img {
@@ -414,7 +410,7 @@
       background-color: #404040;
       margin-bottom: 2rem;
       width: 20rem;
-      min-height: 20rem;
+      min-height: 10rem;
       border: 3px solid $maincolor-primary;
       border-radius: $border-radius--small;
       transition: transform 0.35s ease-in-out;
@@ -455,6 +451,7 @@
     padding: 0;
     background: none;
     box-shadow: none;
+    margin: auto 1rem;
 
     &:hover {
       box-shadow: none;
