@@ -123,6 +123,9 @@ option {
 //   color: $maincolor-primary;
 // }
 
+.bold {
+  font-weight: bold;
+}
 @media (max-width: 400px) {
   html {
     font-size: 45%;

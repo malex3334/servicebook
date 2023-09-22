@@ -38,6 +38,7 @@ export function DataProvider({ children }) {
   // Collection ref
 
   const editUserData = (userID, newUserData, editedParam) => {
+    setLoading(true);
     const userRef = collection(db, "users");
     const userDocRef = doc(userRef, userID);
 
@@ -64,6 +65,7 @@ export function DataProvider({ children }) {
       editedParam
     );
 
+    setLoading(false);
     setRerender(!rerender);
   };
 

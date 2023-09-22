@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { noAvatar } from "../helpers/Helpers";
@@ -18,25 +18,29 @@ export default function User() {
     editUserData(userID, editedData, editedParam);
   };
 
+  useEffect(() => {}, [userData?.name, userData?.photoURL, editedImg, setEdit]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   if (userData) {
     const { name, photoURL, email, carsIDs, id } = userData;
-
-    if (loading) {
-      return <Loading />;
-    }
 
     return (
       <div className="userdata_container container">
         <div className="userdata_body">
+          <h2>Twoje dane</h2>
           {edit ? (
             <div className="name_container">
+              <label htmlFor="">avatar:</label>
               <input
                 className="name_input"
                 value={editedImg}
                 onChange={(e) => {
                   setEditedImg(e.target.value);
                 }}
-                placeholder="name"
+                placeholder="img"
               />
               <div className="buttons">
                 <button type="submit" className="nobutton">
@@ -66,6 +70,7 @@ export default function User() {
           />
           {edit ? (
             <div className="name_container">
+              <label htmlFor="">name</label>
               <input
                 className="name_input"
                 value={editedName}
@@ -80,7 +85,6 @@ export default function User() {
                     onClick={(e) => {
                       setEdit(false);
                       onHandleSubmit(id, editedName, "name");
-                      console.log(e);
                     }}
                     className="icon success"
                   />
@@ -89,6 +93,7 @@ export default function User() {
                   <FaXmark
                     onClick={(e) => {
                       setEdit(false);
+                      setEditedName(name);
                     }}
                     className="icon danger"
                   />
@@ -109,14 +114,17 @@ export default function User() {
             </div>
           )}
           <div className="data_container">
-            <span>email: </span>
+            <span className="bold">email: </span>
             <span>{email ? email : "no email"}</span>
           </div>
           <div className="data_container">
-            <span>cars: </span>
+            <span className="bold">cars: </span>
             <span>{carsIDs ? carsIDs.length : "no cars yet"}</span>
           </div>
         </div>
+        {/* <div>
+          <button>usuń konto</button>
+        </div> */}
       </div>
     );
   } else {

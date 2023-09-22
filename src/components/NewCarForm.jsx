@@ -108,7 +108,7 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
           value={year}
         />
         <input
-          type="text"
+          type="number"
           placeholder={contentObj?.[language].myCars.mileage}
           onChange={(e) => setMileage(e.target.value)}
           value={mileage}
