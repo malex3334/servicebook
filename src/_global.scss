@@ -44,23 +44,23 @@ h4 {
   margin: 1rem;
 }
 
-form {
-  input {
-    padding: 0.5em;
-    height: 2.5em;
-    margin: 1rem;
-    border-radius: 3px;
-    border: 1px solid rgba(255, 68, 0, 0.5);
+// form {
+input {
+  padding: 0.5em;
+  height: 2.5em;
+  margin: 1rem;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 68, 0, 0.5);
 
-    &:focus {
-      // background: rgba(0, 0, 255, 0.138);
-      outline: 3px solid rgba(255, 68, 0, 0.5);
-    }
-  }
-  button {
-    margin: auto 1rem;
+  &:focus {
+    // background: rgba(0, 0, 255, 0.138);
+    outline: 3px solid rgba(255, 68, 0, 0.5);
   }
 }
+button {
+  margin: auto 1rem;
+}
+// }
 
 button {
   background: white;
@@ -114,6 +114,10 @@ option {
 
 .danger {
   color: red;
+}
+
+.success {
+  color: $color-success;
 }
 // .color {
 //   color: $maincolor-primary;

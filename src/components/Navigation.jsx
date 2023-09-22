@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../context/DataContext";
-import { dummyUser } from "../data/dummyCars";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { contentObj } from "../language";
@@ -98,8 +98,8 @@ export default function Navigation() {
                     alt="user avatar"
                     className="user_img"
                     src={
-                      user?.photoURL
-                        ? user?.photoURL
+                      userData?.photoURL
+                        ? userData?.photoURL
                         : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
                     }
                   ></img>
@@ -109,8 +109,8 @@ export default function Navigation() {
                   alt="user avatar"
                   className="user_img"
                   src={
-                    user?.photoURL
-                      ? user?.photoURL
+                    userData?.photoURL
+                      ? userData?.photoURL
                       : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
                   }
                 ></img>

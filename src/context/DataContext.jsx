@@ -37,7 +37,38 @@ export function DataProvider({ children }) {
   const db = getFirestore();
   // Collection ref
 
+  const editUserData = (userID, newUserData, editedParam) => {
+    const userRef = collection(db, "users");
+    const userDocRef = doc(userRef, userID);
+
+    updateDoc(userDocRef, { [editedParam]: newUserData })
+      .then(() => {
+        console.log(
+          "User został zaktualizowany",
+          editedParam,
+          ":",
+          newUserData
+        );
+        toast.success("Zaktualizowano dane użytkownika ", editedParam);
+      })
+      .catch((error) => {
+        console.log("Błąd podczas aktualizacji danych ", error);
+        toast.error("Błąd podczas aktualizacji danych");
+      });
+
+    console.log(
+      "hello from context: user id",
+      userID,
+      newUserData,
+      "in data:",
+      editedParam
+    );
+
+    setRerender(!rerender);
+  };
+
   // get user data
+
   useEffect(() => {
     const getData = async () => {
       if (user) {
@@ -58,6 +89,7 @@ export function DataProvider({ children }) {
               name: user?.displayName,
               email: user?.email,
               photoURL: user?.photoURL,
+              id: user?.uid,
             });
           };
           addUserToDataBase();
@@ -396,6 +428,7 @@ export function DataProvider({ children }) {
         editCarData,
         editedServiceData,
         userData,
+        editUserData,
       }}
     >
       {children}
