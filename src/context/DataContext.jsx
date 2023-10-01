@@ -2,8 +2,10 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "../utils/firebase";
 import { toast } from "react-hot-toast";
 import { useAuthState } from "react-firebase-hooks/auth";
+
 import {
   getFirestore,
+  onSnapshot,
   collection,
   getDoc,
   query,
@@ -72,38 +74,47 @@ export function DataProvider({ children }) {
   // get user data
 
   useEffect(() => {
-    const getData = async () => {
+    const getData = () => {
       if (user) {
-        const snap = await getDoc(doc(db, "users", user?.uid));
-        if (snap.exists()) {
-          setUserData(snap.data());
+        const userDocRef = doc(db, "users", user?.uid);
 
-          if (snap.data() !== "undefined") {
-            setUserCarIDs(snap.data().carsIDs);
+        const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            setUserData(userData);
+
+            if (userData !== "undefined") {
+              setUserCarIDs(userData.carsIDs);
+            } else {
+              console.log("no data for user");
+              setUserCarIDs([]);
+            }
           } else {
-            console.log("no data for user");
-            setUserCarIDs([]);
+            console.log("No such document");
+            const addUserToDataBase = async () => {
+              await setDoc(doc(db, "users", user?.uid), {
+                name: user?.displayName,
+                email: user?.email,
+                photoURL: user?.photoURL,
+                id: user?.uid,
+              });
+            };
+            addUserToDataBase();
           }
-        } else {
-          console.log("No such document");
-          const addUserToDataBase = async () => {
-            await setDoc(doc(db, "users", user?.uid), {
-              name: user?.displayName,
-              email: user?.email,
-              photoURL: user?.photoURL,
-              id: user?.uid,
-            });
-          };
-          addUserToDataBase();
-          getData();
-        }
+        });
+
+        return () => {
+          // Wyrejestrowanie subskrypcji po zakończeniu komponentu
+          unsubscribe();
+        };
       }
+
       if (user === "undefined") {
         setUserCarIDs([]);
       }
     };
     getData();
-  }, [user?.uid, rerender, user?.photoURL, user?.name]);
+  }, [user?.uid, user?.displayName, user?.email, user?.photoURL]);
 
   const editCarData = (e, newData) => {
     setLoading(true);
@@ -139,26 +150,53 @@ export function DataProvider({ children }) {
   };
 
   // get cars object
+  // useEffect(() => {
+  //   setLoading(true);
+
+  //   if (userCarIDs && userCarIDs.length > 0) {
+  //     const q = query(collection(db, "cars"), where("id", "in", userCarIDs));
+
+  //     // Execute the query
+  //     const getCarsByIds = async () => {
+  //       let result = [];
+  //       const querySnapshot = await getDocs(q);
+  //       querySnapshot.forEach((doc) => {
+  //         const docData = doc.data();
+  //         result.push({ ...docData, uid: doc.id });
+  //       });
+  //       setCars(result);
+  //     };
+  //     getCarsByIds();
+  //     setLoading(false);
+  //   }
+  //   setLoading(false);
+  // }, [userCarIDs, rerender]);
+
   useEffect(() => {
     setLoading(true);
 
     if (userCarIDs && userCarIDs.length > 0) {
-      const q = query(collection(db, "cars"), where("id", "in", userCarIDs));
+      const carsCollectionRef = collection(db, "cars");
+      const carsQuery = query(carsCollectionRef, where("id", "in", userCarIDs));
 
-      // Execute the query
-      const getCarsByIds = async () => {
+      const unsubscribe = onSnapshot(carsQuery, (querySnapshot) => {
         let result = [];
-        const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
           result.push({ ...docData, uid: doc.id });
         });
         setCars(result);
+        setLoading(false);
+      });
+
+      return () => {
+        // Unsubscribe when the component unmounts
+        unsubscribe();
       };
-      getCarsByIds();
+    } else {
+      setCars([]);
       setLoading(false);
     }
-    setLoading(false);
   }, [userCarIDs, rerender]);
 
   // dodaj auto
@@ -289,32 +327,65 @@ export function DataProvider({ children }) {
     getServicesData(viewedCarId);
   }, [viewedCarId, setviewedCarId, servicesRerender]);
 
+  // useEffect(() => {
+  //   setFilteredServices([]);
+  //   setLoading(true);
+  //   if (servicesIDs && servicesIDs.length > 0) {
+  //     let result = [];
+
+  //     // Execute the query
+  //     const getServicesByID = async () => {
+  //       const q = query(
+  //         collection(db, "services"),
+  //         where("id", "in", servicesIDs)
+  //       );
+  //       const querySnapshot = await getDocs(q);
+  //       querySnapshot.forEach((doc) => {
+  //         const docData = doc.data();
+  //         // result.push({ ...docData, uid: doc.id });
+  //         result.push(docData);
+  //       });
+  //       setFilteredServices(result);
+  //       setLoading(false);
+  //     };
+  //     getServicesByID();
+  //   } else {
+  //     setFilteredServices([]);
+  //     setLoading(false);
+  //   }
+  // }, [servicesIDs]);
   useEffect(() => {
     setFilteredServices([]);
     setLoading(true);
-    if (servicesIDs && servicesIDs.length > 0) {
-      let result = [];
 
-      // Execute the query
-      const getServicesByID = async () => {
-        const q = query(
-          collection(db, "services"),
-          where("id", "in", servicesIDs)
-        );
-        const querySnapshot = await getDocs(q);
+    let unsubscribe;
+
+    if (servicesIDs && servicesIDs.length > 0) {
+      const servicesCollectionRef = collection(db, "services");
+      const q = query(servicesCollectionRef, where("id", "in", servicesIDs));
+
+      unsubscribe = onSnapshot(q, (querySnapshot) => {
+        let result = [];
+
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
-          // result.push({ ...docData, uid: doc.id });
           result.push(docData);
         });
+
         setFilteredServices(result);
         setLoading(false);
-      };
-      getServicesByID();
+      });
     } else {
       setFilteredServices([]);
       setLoading(false);
     }
+
+    return () => {
+      // Unsubscribe when the component unmounts or when `servicesIDs` changes.
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
   }, [servicesIDs]);
   // add service
 

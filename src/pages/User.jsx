@@ -18,6 +18,7 @@ export default function User() {
     editUserData(userID, editedData, editedParam);
   };
 
+  console.log(userData?.name);
   useEffect(() => {}, [userData?.name, userData?.photoURL, editedImg, setEdit]);
 
   if (loading) {
