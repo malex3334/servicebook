@@ -312,48 +312,24 @@ export function DataProvider({ children }) {
   }
 
   // get and set services
+
   useEffect(() => {
     const getServicesData = async (carId) => {
-      // get services ids
-      const snap = await getDoc(doc(db, "cars", carId));
-
-      if (snap.exists()) {
-        setServicesIDs(snap.data()?.services);
-      } else {
-        console.log("No such document");
-      }
-      // };
+      const docRef = doc(db, "cars", carId);
+      const unsubscribe = onSnapshot(docRef, (snap) => {
+        if (snap.exists()) {
+          setServicesIDs(snap.data()?.services);
+        } else {
+          console.log("No such document");
+        }
+      });
     };
+
     getServicesData(viewedCarId);
-  }, [viewedCarId, setviewedCarId, servicesRerender]);
 
-  // useEffect(() => {
-  //   setFilteredServices([]);
-  //   setLoading(true);
-  //   if (servicesIDs && servicesIDs.length > 0) {
-  //     let result = [];
+    // No need to return an unsubscribe function since we are using onSnapshot
+  }, [viewedCarId, servicesRerender]);
 
-  //     // Execute the query
-  //     const getServicesByID = async () => {
-  //       const q = query(
-  //         collection(db, "services"),
-  //         where("id", "in", servicesIDs)
-  //       );
-  //       const querySnapshot = await getDocs(q);
-  //       querySnapshot.forEach((doc) => {
-  //         const docData = doc.data();
-  //         // result.push({ ...docData, uid: doc.id });
-  //         result.push(docData);
-  //       });
-  //       setFilteredServices(result);
-  //       setLoading(false);
-  //     };
-  //     getServicesByID();
-  //   } else {
-  //     setFilteredServices([]);
-  //     setLoading(false);
-  //   }
-  // }, [servicesIDs]);
   useEffect(() => {
     setFilteredServices([]);
     setLoading(true);

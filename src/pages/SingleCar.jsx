@@ -10,6 +10,7 @@ import { HiArrowCircleLeft } from "react-icons/hi";
 import Loading from "../components/Loading";
 import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
+import ServicesTable from "../components/ServicesTable";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
@@ -113,34 +114,53 @@ export default function SingleCar() {
                     service
                   ) => {
                     return (
-                      <tbody key={id}>
-                        <tr
-                          onClick={() => onServiceEdit(service[index])}
-                          style={{
-                            cursor: "pointer",
-                            backgroundColor:
-                              index % 2 === 0 ? "#f2f2f2" : "inherit",
+                      <>
+                        <ServicesTable
+                          index={index}
+                          service={{
+                            id,
+                            title,
+                            desc,
+                            price,
+                            date,
+                            createdAt,
+                            mileage,
                           }}
-                        >
-                          <td>{index + 1}.</td>
-                          <td>{title}</td>
-                          <td>{date}</td>
-                          <td className="desc">{desc}</td>
-                          <td>{createdAt}</td>
-                          <td>{Number(mileage).toLocaleString()}</td>
-                          <td>{cash(Number(price))}</td>
-                          <td
+                          deleteService={deleteService}
+                          onServiceEdit={onServiceEdit}
+                        />
+                        {/* <tbody key={id}>
+                          <tr
+                            onClick={() => onServiceEdit(service[index])}
                             style={{
-                              color: "red",
-                              fontWeight: "bold",
                               cursor: "pointer",
+                              backgroundColor:
+                                index % 2 === 0 ? "#f2f2f2" : "inherit",
                             }}
-                            onClick={() => deleteService(id, viewedCarID)}
                           >
-                            <FaTrashAlt style={{ fontSize: "1.5rem" }} />
-                          </td>
-                        </tr>
-                      </tbody>
+                            <td>{index + 1}.</td>
+                            <td>{title}</td>
+                            <td>{date}</td>
+                            <td className="desc">{desc}</td>
+                            <td>{createdAt}</td>
+                            <td>{Number(mileage).toLocaleString()}</td>
+                            <td>{cash(Number(price))}</td>
+                            <td
+                              style={{
+                                color: "red",
+                                fontWeight: "bold",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                deleteService(id, viewedCarID);
+                                console.log(id);
+                              }}
+                            >
+                              <FaTrashAlt style={{ fontSize: "1.5rem" }} />
+                            </td>
+                          </tr>
+                        </tbody> */}
+                      </>
                     );
                   }
                 )}
