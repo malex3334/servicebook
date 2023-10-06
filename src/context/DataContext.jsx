@@ -21,8 +21,6 @@ import {
 export const DataContext = createContext();
 
 export function DataProvider({ children }) {
-  const [rerender, setRerender] = useState(false);
-  const [servicesRerender, setServicesRerender] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [filteredServices, setFilteredServices] = useState([]);
   const [cars, setCars] = useState([]);
@@ -68,7 +66,6 @@ export function DataProvider({ children }) {
     );
 
     setLoading(false);
-    setRerender(!rerender);
   };
 
   // get user data
@@ -104,7 +101,6 @@ export function DataProvider({ children }) {
         });
 
         return () => {
-          // Wyrejestrowanie subskrypcji po zakończeniu komponentu
           unsubscribe();
         };
       }
@@ -128,7 +124,6 @@ export function DataProvider({ children }) {
         console.log("błąd podczas aktualizacji auta", error);
         toast.error("błąd podczas aktualizacji");
       });
-    setRerender(!rerender);
     setLoading(false);
   };
 
@@ -145,32 +140,8 @@ export function DataProvider({ children }) {
         toast.error("błąd podczas aktualizacji");
       });
 
-    setServicesRerender(!servicesRerender);
     setLoading(false);
   };
-
-  // get cars object
-  // useEffect(() => {
-  //   setLoading(true);
-
-  //   if (userCarIDs && userCarIDs.length > 0) {
-  //     const q = query(collection(db, "cars"), where("id", "in", userCarIDs));
-
-  //     // Execute the query
-  //     const getCarsByIds = async () => {
-  //       let result = [];
-  //       const querySnapshot = await getDocs(q);
-  //       querySnapshot.forEach((doc) => {
-  //         const docData = doc.data();
-  //         result.push({ ...docData, uid: doc.id });
-  //       });
-  //       setCars(result);
-  //     };
-  //     getCarsByIds();
-  //     setLoading(false);
-  //   }
-  //   setLoading(false);
-  // }, [userCarIDs, rerender]);
 
   useEffect(() => {
     setLoading(true);
@@ -190,14 +161,13 @@ export function DataProvider({ children }) {
       });
 
       return () => {
-        // Unsubscribe when the component unmounts
         unsubscribe();
       };
     } else {
       setCars([]);
       setLoading(false);
     }
-  }, [userCarIDs, rerender]);
+  }, [userCarIDs]);
 
   // dodaj auto
   function addCar(e, carObject) {
@@ -231,7 +201,6 @@ export function DataProvider({ children }) {
         });
     };
     addCarToUser();
-    setRerender(!rerender);
   }
   // usuń auto
   function deleteCar(id, services) {
@@ -249,7 +218,6 @@ export function DataProvider({ children }) {
               .then(() => {
                 console.log("Document deleted successfully");
                 toast.success("Usunięto auto");
-                setRerender(!rerender);
               })
               .catch((error) => {
                 console.error("Error deleting document: ", error);
@@ -266,7 +234,6 @@ export function DataProvider({ children }) {
         const usersRef = collection(db, "users");
         const userDocRef = doc(usersRef, user?.uid);
         const newData = userCarIDs.filter((item) => item !== id);
-        // Znajdź użytkownika o ID '666'
         updateDoc(userDocRef, {
           carsIDs: newData,
         })
@@ -296,7 +263,6 @@ export function DataProvider({ children }) {
               deleteDoc(doc.ref)
                 .then(() => {
                   console.log("Document services deleted successfully");
-                  setRerender(!rerender);
                 })
                 .catch((error) => {
                   console.error("Error deleting document: ", error);
@@ -328,7 +294,7 @@ export function DataProvider({ children }) {
     getServicesData(viewedCarId);
 
     // No need to return an unsubscribe function since we are using onSnapshot
-  }, [viewedCarId, servicesRerender]);
+  }, [viewedCarId]);
 
   useEffect(() => {
     setFilteredServices([]);
@@ -357,12 +323,12 @@ export function DataProvider({ children }) {
     }
 
     return () => {
-      // Unsubscribe when the component unmounts or when `servicesIDs` changes.
       if (unsubscribe) {
         unsubscribe();
       }
     };
   }, [servicesIDs]);
+
   // add service
 
   function addService(serviceObject, carId) {
@@ -378,7 +344,6 @@ export function DataProvider({ children }) {
     };
     addServiceObject();
 
-    setRerender(!rerender);
     // add service to the car
     const addServiceToCar = () => {
       const usersRef = collection(db, "cars");
@@ -395,7 +360,6 @@ export function DataProvider({ children }) {
         });
     };
     addServiceToCar();
-    setServicesRerender(!servicesRerender);
   }
   // delete service
   function deleteService(serviceId, currentCarID) {
@@ -421,7 +385,6 @@ export function DataProvider({ children }) {
           console.log("błąd podczas usuwania serwisu", error);
           toast.error("błąd podczas usuwania serwisu");
         });
-      // setRerender(!rerender);
 
       const deleteLinkedServicesInCarObject = async () => {
         const carsCollectionRef = collection(db, "cars");
@@ -451,7 +414,6 @@ export function DataProvider({ children }) {
             );
           });
       };
-      setServicesRerender(!servicesRerender);
       deleteLinkedServicesInCarObject();
     } else return;
   }

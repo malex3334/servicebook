@@ -1,17 +1,20 @@
 import React from "react";
 import { cash } from "../helpers/Helpers";
 import { FaTrashAlt } from "react-icons/fa";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
 
 export default function ServicesTable(
   { index, service, deleteService, onServiceEdit },
   { key, id, viewedCarID }
 ) {
+  const { loading } = useContext(DataContext);
+  console.log(service.id);
   return (
-    <tbody key={id}>
+    <tbody>
       <tr
         onClick={() => {
           onServiceEdit(service);
-          console.log(service);
         }}
         style={{
           cursor: "pointer",

@@ -114,53 +114,21 @@ export default function SingleCar() {
                     service
                   ) => {
                     return (
-                      <>
-                        <ServicesTable
-                          index={index}
-                          service={{
-                            id,
-                            title,
-                            desc,
-                            price,
-                            date,
-                            createdAt,
-                            mileage,
-                          }}
-                          deleteService={deleteService}
-                          onServiceEdit={onServiceEdit}
-                        />
-                        {/* <tbody key={id}>
-                          <tr
-                            onClick={() => onServiceEdit(service[index])}
-                            style={{
-                              cursor: "pointer",
-                              backgroundColor:
-                                index % 2 === 0 ? "#f2f2f2" : "inherit",
-                            }}
-                          >
-                            <td>{index + 1}.</td>
-                            <td>{title}</td>
-                            <td>{date}</td>
-                            <td className="desc">{desc}</td>
-                            <td>{createdAt}</td>
-                            <td>{Number(mileage).toLocaleString()}</td>
-                            <td>{cash(Number(price))}</td>
-                            <td
-                              style={{
-                                color: "red",
-                                fontWeight: "bold",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => {
-                                deleteService(id, viewedCarID);
-                                console.log(id);
-                              }}
-                            >
-                              <FaTrashAlt style={{ fontSize: "1.5rem" }} />
-                            </td>
-                          </tr>
-                        </tbody> */}
-                      </>
+                      <ServicesTable
+                        key={id}
+                        index={index}
+                        service={{
+                          id,
+                          title,
+                          desc,
+                          price,
+                          date,
+                          createdAt,
+                          mileage,
+                        }}
+                        deleteService={deleteService}
+                        onServiceEdit={onServiceEdit}
+                      />
                     );
                   }
                 )}

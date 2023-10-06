@@ -39,8 +39,6 @@ export default function Navigation() {
     };
   }, []);
 
-  console.log(isMobile);
-
   return (
     <div className="nav_container">
       {!isMobile ? <LogoComponent /> : null}
