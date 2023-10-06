@@ -62,6 +62,7 @@ export default function MyGarage() {
               cars?.map((car) => {
                 return (
                   <div
+                    key={car.id}
                     style={{
                       display: "flex",
                       margin: "3rem auto",
