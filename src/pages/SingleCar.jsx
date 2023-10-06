@@ -4,7 +4,6 @@ import PleaseLogin from "../components/PleaseLogin";
 import NewServiceForm from "../components/NewServiceForm";
 import { NavLink, useParams } from "react-router-dom";
 import { utils, writeFile } from "xlsx";
-import { FaTrashAlt } from "react-icons/fa";
 import { cash } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import Loading from "../components/Loading";
@@ -34,6 +33,19 @@ export default function SingleCar() {
   useEffect(() => {
     setviewedCarId(carID);
   }, [carID]);
+
+  const [currentCar, setCurrentCar] = useState(
+    cars?.find((car) => car.id === carID)
+  );
+
+  function exportToXLS() {
+    const table = document.getElementById("myTable");
+    const workbook = utils.table_to_book(table);
+    writeFile(
+      workbook,
+      `${currentCar?.brand} ${currentCar?.model} - mycarservice.xls`
+    );
+  }
 
   const carData = () => {
     const currentCar = cars.find((car) => car.id === carID);
@@ -67,12 +79,6 @@ export default function SingleCar() {
 
   if (isLogged) {
     return <PleaseLogin />;
-  }
-
-  function exportToXLS() {
-    const table = document.getElementById("myTable");
-    const workbook = utils.table_to_book(table);
-    writeFile(workbook, "table.xls");
   }
 
   if (loading) {
@@ -148,7 +154,7 @@ export default function SingleCar() {
             </table>
           </div>
         )}
-        <button style={{ marginTop: "1rem" }} onClick={exportToXLS}>
+        <button style={{ marginTop: "1rem" }} onClick={() => exportToXLS()}>
           Pobierz jako plik Excel
         </button>
       </div>

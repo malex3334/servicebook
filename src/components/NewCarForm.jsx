@@ -92,12 +92,14 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
           value={brand}
           placeholder={contentObj?.[language].myCars.brand}
           required
+          maxLength={12}
         />
         <input
           type="text"
           placeholder={contentObj?.[language].myCars.model}
           onChange={(e) => setModel(e.target.value)}
           value={model}
+          maxLength={15}
         />
         <input
           type="year"
@@ -106,6 +108,7 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
           required
           min="1900"
           value={year}
+          maxLength={4}
         />
         <input
           type="number"
@@ -114,6 +117,7 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
           value={mileage}
           min="0"
           max="1000000"
+          maxLength={6}
         />
         <input
           type="text"

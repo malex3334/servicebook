@@ -95,6 +95,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
           onChange={(e) => setTitle(e.target.value)}
           value={title}
           required
+          maxLength={40}
         />
         <input
           type="date"
@@ -109,6 +110,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
           required
+          maxLength={120}
         />
         <input
           type="number"

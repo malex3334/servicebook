@@ -180,6 +180,7 @@
     text-align: left;
     white-space: nowrap;
     // white-space: nowrap;
+    // text-wrap: wrap;
   }
   // table header
 
@@ -200,6 +201,7 @@
 
   .desc {
     font-size: 1.75rem;
+    text-wrap: wrap;
   }
 
   .blind_row {
