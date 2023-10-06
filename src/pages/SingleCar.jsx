@@ -51,22 +51,35 @@ export default function SingleCar() {
     const currentCar = cars.find((car) => car.id === carID);
 
     return (
-      <>
+      <div>
         <NavLink to="../cars" className="goback">
           <HiArrowCircleLeft className="react-icon color" />{" "}
           {contentObj?.[language].backToGarage}
         </NavLink>
         {/* car details */}
-        <div style={{ marginTop: "2rem" }}>
+        <div
+          className="singlecar_background_container"
+          style={{ marginTop: "2rem" }}
+        >
+          <div
+            style={{
+              background: `url(${currentCar?.img})`,
+            }}
+            className="singlecar_background"
+          ></div>
           <div>
-            <img src={currentCar?.img} alt="" className="single-car__img" />
-            <h2>
-              {currentCar?.brand} {currentCar?.model}
-            </h2>
+            <img
+              src={currentCar?.img}
+              alt=""
+              className="single-car__img services"
+            />
           </div>
           <div>{/* info box */}</div>
         </div>
-      </>
+        <h2>
+          {currentCar?.brand} {currentCar?.model}
+        </h2>
+      </div>
     );
   };
 
