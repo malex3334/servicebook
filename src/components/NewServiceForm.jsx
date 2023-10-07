@@ -13,6 +13,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("maintenance");
   const [mileage, setMileage] = useState(
     cars && cars.filter((car) => car.id === id)[0]?.mileage
   );
@@ -25,6 +26,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     setDescription("");
     setMileage("");
     setPrice("");
+    setCategory("");
   };
 
   const [date, setDate] = useState(getCurrentDate());
@@ -37,6 +39,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     createdAt: getCurrentDate(),
     mileage: mileage,
     price: price,
+    category: category,
   };
 
   const onEditCancel = () => {
@@ -68,6 +71,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
       setDescription(editedService.desc);
       setMileage(editedService.mileage);
       setPrice(editedService.price);
+      setCategory(editedService?.category);
     }
   }, [editedService]);
 
@@ -79,7 +83,10 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     createdAt: getCurrentDate(),
     mileage: mileage,
     price: price,
+    category: category,
   };
+
+  console.log(category);
 
   return (
     <div>
@@ -112,6 +119,16 @@ export default function NewServiceForm({ editedService, setEditedService }) {
           required
           maxLength={120}
         />
+        <select
+          onChange={(e) => setCategory(e.target.value)}
+          name="category"
+          id="category"
+        >
+          <option value="maintenance">maintenance</option>
+          <option value="fix">fix</option>
+          <option value="aesthetics">aesthetics</option>
+        </select>
+
         <input
           type="number"
           placeholder={contentObj?.[language].services.mileage}

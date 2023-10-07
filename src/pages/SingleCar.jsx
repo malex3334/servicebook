@@ -119,6 +119,7 @@ export default function SingleCar() {
                   <th>Tytuł</th>
                   <th>Data</th>
                   <th>Opis</th>
+                  <th>Kategoria</th>
                   <th>Data dodania</th>
                   <th>Przebieg</th>
                   <th>Cena</th>
@@ -128,7 +129,16 @@ export default function SingleCar() {
                 filteredServices.length > 0 &&
                 filteredServices.map(
                   (
-                    { id, title, desc, price, date, createdAt, mileage },
+                    {
+                      id,
+                      title,
+                      desc,
+                      price,
+                      date,
+                      createdAt,
+                      mileage,
+                      category,
+                    },
                     index,
                     service
                   ) => {
@@ -144,6 +154,7 @@ export default function SingleCar() {
                           date,
                           createdAt,
                           mileage,
+                          category,
                         }}
                         deleteService={deleteService}
                         onServiceEdit={onServiceEdit}

@@ -9,7 +9,7 @@ export default function ServicesTable(
   { key, id, viewedCarID }
 ) {
   const { loading } = useContext(DataContext);
-  console.log(service.id);
+  console.log(service);
   return (
     <tbody>
       <tr
@@ -25,6 +25,7 @@ export default function ServicesTable(
         <td>{service?.title}</td>
         <td>{service?.date}</td>
         <td className="desc">{service?.desc}</td>
+        <td className="desc">{service?.category}</td>
         <td>{service?.createdAt}</td>
         <td>{Number(service?.mileage).toLocaleString()}</td>
         <td>{cash(Number(service?.price))}</td>

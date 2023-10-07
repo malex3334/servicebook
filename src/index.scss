@@ -240,6 +240,14 @@
     stroke: white;
   }
 
+  select {
+    font-size: inherit;
+    border: 1px solid rgba(255, 68, 0, 0.5);
+    padding: 0.5em;
+    height: 2.5em;
+    margin: 1rem;
+  }
+
   .desc {
     font-size: 1.75rem;
     text-wrap: wrap;
