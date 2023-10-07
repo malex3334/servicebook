@@ -72,6 +72,9 @@ export default function NewServiceForm({ editedService, setEditedService }) {
       setMileage(editedService.mileage);
       setPrice(editedService.price);
       setCategory(editedService?.category);
+      if (editedService?.category === undefined) {
+        setCategory("maintenance");
+      }
     }
   }, [editedService]);
 

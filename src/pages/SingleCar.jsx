@@ -10,9 +10,13 @@ import Loading from "../components/Loading";
 import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
 import ServicesTable from "../components/ServicesTable";
+import ServicesHeaders from "../components/ServicesHeaders";
+import { FaChevronCircleRight } from "react-icons/fa";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
+  const [sorting, setSorting] = useState("date");
+  const [count, setCount] = useState(0);
 
   const {
     filteredServices,
@@ -46,6 +50,43 @@ export default function SingleCar() {
       `${currentCar?.brand} ${currentCar?.model} - mycarservice.xls`
     );
   }
+
+  const sortBy = (data, sortedHeader) => {
+    // change to numbers
+    const toNumber = data.map((element) => ({
+      ...element,
+      price: Number(element.price),
+      mileage: Number(element.mileage),
+    }));
+
+    // compare numbers
+    if (sortedHeader === "price" || sortedHeader === "mileage") {
+      if (count % 2) {
+        const sorted = toNumber?.sort(
+          (a, b) => a[sortedHeader] - b[sortedHeader]
+        );
+        return sorted;
+      } else {
+        const sorted = toNumber?.sort(
+          (a, b) => b[sortedHeader] - a[sortedHeader]
+        );
+        return sorted;
+      }
+    } else {
+      // compare strings
+      if (count % 2) {
+        const sorted = toNumber?.sort((a, b) =>
+          a[sortedHeader]?.localeCompare(b[sortedHeader])
+        );
+        return sorted;
+      } else {
+        const sorted = toNumber?.sort((a, b) =>
+          b[sortedHeader]?.localeCompare(a[sortedHeader])
+        );
+        return sorted;
+      }
+    }
+  };
 
   const carData = () => {
     const currentCar = cars.find((car) => car.id === carID);
@@ -116,18 +157,89 @@ export default function SingleCar() {
               <thead>
                 <tr>
                   <th>lp</th>
-                  <th>Tytuł</th>
-                  <th>Data</th>
-                  <th>Opis</th>
-                  <th>Kategoria</th>
-                  <th>Data dodania</th>
-                  <th>Przebieg</th>
-                  <th>Cena</th>
+                  <ServicesHeaders
+                    header="Tytuł"
+                    id="title"
+                    setSorting={setSorting}
+                    setCount={setCount}
+                    count={count}
+                  />
+                  <ServicesHeaders
+                    header="Data"
+                    id="date"
+                    setSorting={setSorting}
+                    setCount={setCount}
+                    count={count}
+                  />
+                  <ServicesHeaders
+                    header="Opis"
+                    id="desc"
+                    setSorting={setSorting}
+                    setCount={setCount}
+                    count={count}
+                  />
+                  <ServicesHeaders
+                    header="Kategoria"
+                    id="category"
+                    setSorting={setSorting}
+                    setCount={setCount}
+                    count={count}
+                  />
+                  <ServicesHeaders
+                    header="Data dodania"
+                    id="createdAt"
+                    setSorting={setSorting}
+                    setCount={setCount}
+                    count={count}
+                  />
+                  <ServicesHeaders
+                    header="Przebieg"
+                    id="mileage"
+                    setSorting={setSorting}
+                    setCount={setCount}
+                    count={count}
+                  />
+                  <ServicesHeaders
+                    header="Cena"
+                    id="price"
+                    setSorting={setSorting}
+                    setCount={setCount}
+                    count={count}
+                  />
+
+                  {/* <th
+                    id="title"
+                    onClick={(e) => {
+                      setSorting(e.target.id);
+                      setCount((prev) => prev + 1);
+                    }}
+                  >
+                    Tytuł
+                  </th>
+
+                  <th id="date" onClick={(e) => setSorting(e.target.id)}>
+                    Data
+                  </th>
+                  <th id="desc" onClick={(e) => setSorting(e.target.id)}>
+                    Opis
+                  </th>
+                  <th id="category" onClick={(e) => setSorting(e.target.id)}>
+                    Kategoria
+                  </th>
+                  <th id="createdAt" onClick={(e) => setSorting(e.target.id)}>
+                    Data dodania
+                  </th>
+                  <th id="mileage" onClick={(e) => setSorting(e.target.id)}>
+                    Przebieg
+                  </th>
+                  <th id="price" onClick={(e) => setSorting(e.target.id)}>
+                    Cena
+                  </th> */}
                 </tr>
               </thead>
               {filteredServices &&
                 filteredServices.length > 0 &&
-                filteredServices.map(
+                sortBy(filteredServices, sorting).map(
                   (
                     {
                       id,
@@ -164,6 +276,7 @@ export default function SingleCar() {
                 )}
               <tbody>
                 <tr>
+                  <td className="blind_row"></td>
                   <td className="blind_row"></td>
                   <td className="blind_row"></td>
                   <td className="blind_row"></td>
