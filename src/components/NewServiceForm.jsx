@@ -89,8 +89,6 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     category: category,
   };
 
-  console.log(category);
-
   return (
     <div>
       <form

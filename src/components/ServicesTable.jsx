@@ -9,7 +9,6 @@ export default function ServicesTable(
   { key, id, viewedCarID }
 ) {
   const { loading } = useContext(DataContext);
-  console.log(service);
   return (
     <tbody>
       <tr
