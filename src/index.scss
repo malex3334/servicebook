@@ -250,7 +250,11 @@
 
   .desc {
     font-size: 1.75rem;
+    min-width: 25rem;
     text-wrap: wrap;
+  }
+  .title {
+    min-width: 20rem;
   }
 
   .blind_row {
@@ -534,6 +538,25 @@
   margin: 0 auto;
   width: 90%;
   overflow: auto;
+
+  .filters_container {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+
+    .single_filter {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+
+      input {
+        height: auto;
+      }
+    }
+  }
 }
 
 @media (max-width: 900px) {

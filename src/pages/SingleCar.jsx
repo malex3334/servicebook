@@ -11,12 +11,14 @@ import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
 import ServicesTable from "../components/ServicesTable";
 import ServicesHeaders from "../components/ServicesHeaders";
-import { FaChevronCircleRight } from "react-icons/fa";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
   const [sorting, setSorting] = useState("date");
   const [count, setCount] = useState(0);
+  const [fix, setFix] = useState(true);
+  const [aesthetics, setAesthetics] = useState(true);
+  const [maintenance, setMaintenance] = useState(true);
 
   const {
     filteredServices,
@@ -153,6 +155,32 @@ export default function SingleCar() {
           <Loading />
         ) : (
           <div className="table_container">
+            <div className="filters_container">
+              <div className="single_filter">
+                <input
+                  type="checkbox"
+                  checked={fix}
+                  onChange={() => setFix(!fix)}
+                />
+                <label htmlFor="">fix</label>
+              </div>
+              <div className="single_filter">
+                <input
+                  type="checkbox"
+                  checked={aesthetics}
+                  onChange={() => setAesthetics(!aesthetics)}
+                />
+                <label htmlFor="">aesthetics</label>
+              </div>
+              <div className="single_filter">
+                <input
+                  type="checkbox"
+                  checked={maintenance}
+                  onChange={() => setMaintenance(!maintenance)}
+                />
+                <label htmlFor="">maintenance</label>
+              </div>
+            </div>
             <table id="myTable">
               <thead>
                 <tr>
@@ -206,35 +234,6 @@ export default function SingleCar() {
                     setCount={setCount}
                     count={count}
                   />
-
-                  {/* <th
-                    id="title"
-                    onClick={(e) => {
-                      setSorting(e.target.id);
-                      setCount((prev) => prev + 1);
-                    }}
-                  >
-                    Tytuł
-                  </th>
-
-                  <th id="date" onClick={(e) => setSorting(e.target.id)}>
-                    Data
-                  </th>
-                  <th id="desc" onClick={(e) => setSorting(e.target.id)}>
-                    Opis
-                  </th>
-                  <th id="category" onClick={(e) => setSorting(e.target.id)}>
-                    Kategoria
-                  </th>
-                  <th id="createdAt" onClick={(e) => setSorting(e.target.id)}>
-                    Data dodania
-                  </th>
-                  <th id="mileage" onClick={(e) => setSorting(e.target.id)}>
-                    Przebieg
-                  </th>
-                  <th id="price" onClick={(e) => setSorting(e.target.id)}>
-                    Cena
-                  </th> */}
                 </tr>
               </thead>
               {filteredServices &&

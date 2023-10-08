@@ -8,7 +8,6 @@ export default function ServicesTable(
   { index, service, deleteService, onServiceEdit },
   { key, id, viewedCarID }
 ) {
-  const { loading } = useContext(DataContext);
   return (
     <tbody>
       <tr
@@ -21,10 +20,10 @@ export default function ServicesTable(
         }}
       >
         <td>{index + 1}.</td>
-        <td>{service?.title}</td>
+        <td className="title">{service?.title}</td>
         <td>{service?.date}</td>
         <td className="desc">{service?.desc}</td>
-        <td className="desc">{service?.category}</td>
+        <td className="category">{service?.category}</td>
         <td>{service?.createdAt}</td>
         <td>{Number(service?.mileage).toLocaleString()}</td>
         <td>{cash(Number(service?.price))}</td>

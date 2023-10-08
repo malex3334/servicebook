@@ -27,6 +27,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     setMileage("");
     setPrice("");
     setCategory("");
+    setCategory("maintenance");
   };
 
   const [date, setDate] = useState(getCurrentDate());
@@ -69,9 +70,10 @@ export default function NewServiceForm({ editedService, setEditedService }) {
       setTitle(editedService.title);
       setDate(editedService.date);
       setDescription(editedService.desc);
-      setMileage(editedService.mileage);
-      setPrice(editedService.price);
-      setCategory(editedService?.category);
+      setMileage(editedService.mileage.toString());
+      setPrice(editedService.price.toString());
+
+      setCategory(editedService.category);
       if (editedService?.category === undefined) {
         setCategory("maintenance");
       }
@@ -124,6 +126,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
           onChange={(e) => setCategory(e.target.value)}
           name="category"
           id="category"
+          value={category}
         >
           <option value="maintenance">maintenance</option>
           <option value="fix">fix</option>
