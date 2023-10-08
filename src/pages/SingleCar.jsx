@@ -4,18 +4,20 @@ import PleaseLogin from "../components/PleaseLogin";
 import NewServiceForm from "../components/NewServiceForm";
 import { NavLink, useParams } from "react-router-dom";
 import { utils, writeFile } from "xlsx";
-import { cash } from "../helpers/Helpers";
+import { cash, scrollToElement } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import Loading from "../components/Loading";
 import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
 import ServicesTable from "../components/ServicesTable";
 import ServicesHeaders from "../components/ServicesHeaders";
+import { useRef } from "react";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
   const [sorting, setSorting] = useState("date");
   const [count, setCount] = useState(0);
+  const scrollRef = useRef(null);
 
   const [filters, setFilters] = useState({
     fix: true,
@@ -38,6 +40,7 @@ export default function SingleCar() {
 
   const onServiceEdit = (service) => {
     setEditedService(service);
+    scrollToElement(scrollRef);
   };
 
   useEffect(() => {
@@ -197,7 +200,7 @@ export default function SingleCar() {
   } else {
     return (
       <div className="singlecar_container container">
-        <div>{carData()}</div>
+        <div ref={scrollRef}>{carData()}</div>
         <NewServiceForm
           editedService={editedService}
           setEditedService={setEditedService}

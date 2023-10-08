@@ -44,3 +44,10 @@ export const noImg =
 
 export const noAvatar =
   "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png";
+
+export function scrollToElement(ref) {
+  window.scrollTo({
+    top: ref.current.offsetTop,
+    behavior: "smooth",
+  });
+}

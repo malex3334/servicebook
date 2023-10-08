@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import PleaseLogin from "../components/PleaseLogin";
 import { NavLink } from "react-router-dom";
@@ -7,6 +7,7 @@ import NewCarForm from "../components/NewCarForm";
 import Loading from "../components/Loading";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { contentObj } from "../language";
+import { scrollToElement } from "../helpers/Helpers";
 
 export default function MyGarage() {
   const { user, cars, showServices, deleteCar, loading, language } =
@@ -14,10 +15,12 @@ export default function MyGarage() {
 
   const [newCarTab, setNewCarTab] = useState(false);
   const [editedCar, setEditedCar] = useState();
+  const scrollRef = useRef(null);
 
   const onCarEdit = (car) => {
     setNewCarTab(true);
     setEditedCar(car);
+    scrollToElement(scrollRef);
   };
 
   const newCarElement = function () {
@@ -37,7 +40,7 @@ export default function MyGarage() {
   } else {
     if (user) {
       return (
-        <div className="mygarage_container container">
+        <div className="mygarage_container container" ref={scrollRef}>
           <h2>{contentObj?.[language].myCars.title}</h2>
           {!newCarTab ? (
             <button
