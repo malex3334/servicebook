@@ -545,15 +545,17 @@
     display: flex;
     justify-content: center;
     gap: 3rem;
+    flex-wrap: wrap;
 
     .single_filter {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 0.5rem;
 
       input {
-        height: auto;
+        height: 2rem;
+        width: 2rem;
+        cursor: pointer;
       }
     }
   }

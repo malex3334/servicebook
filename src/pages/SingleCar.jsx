@@ -16,20 +16,24 @@ export default function SingleCar() {
   const [editedService, setEditedService] = useState();
   const [sorting, setSorting] = useState("date");
   const [count, setCount] = useState(0);
-  const [fix, setFix] = useState(true);
-  const [aesthetics, setAesthetics] = useState(true);
-  const [maintenance, setMaintenance] = useState(true);
+
+  const [filters, setFilters] = useState({
+    fix: true,
+    aesthetics: true,
+    maintenance: true,
+  });
 
   const {
     filteredServices,
     isLogged,
     cars,
     deleteService,
-    viewedCarID,
     setviewedCarId,
     loading,
     language,
   } = useContext(DataContext);
+
+  const [filteredData, setFilteredData] = useState([]);
   const { id: carID } = useParams();
 
   const onServiceEdit = (service) => {
@@ -90,6 +94,51 @@ export default function SingleCar() {
     }
   };
 
+  // const filterFunction = (data, filters) => {
+  //   let result = [];
+
+  //   if (!filters.aesthetics) {
+  //     result = data.filter((element) => element.category === "aesthetics");
+  //     return result;
+  //   }
+  //   if (filters.aesthetics) {
+  //     return data;
+  //   }
+
+  //   if (!filters.fix) {
+  //     result = data.filter((element) => element.category === "fix");
+  //     return result;
+  //   }
+  //   if (filters.fix) {
+  //     return data;
+  //   }
+  // };
+
+  const filterFunction = (data, filters) => {
+    return data.filter((element) => {
+      if (
+        (filters.aesthetics && element.category === "aesthetics") ||
+        (filters.fix && element.category === "fix") ||
+        (filters.maintenance && element.category === "maintenance")
+      ) {
+        return true;
+      }
+      return false;
+    });
+  };
+
+  useEffect(() => {
+    setFilteredData(filterFunction(filteredServices, filters));
+  }, [filters, filteredServices]);
+
+  const handleInputChange = (e) => {
+    const { name, checked } = e.target;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: checked,
+    }));
+  };
+
   const carData = () => {
     const currentCar = cars.find((car) => car.id === carID);
 
@@ -126,7 +175,13 @@ export default function SingleCar() {
     );
   };
 
-  const sum = filteredServices?.reduce((accumulator, currentValue) => {
+  // const sum = filteredServices?.reduce((accumulator, currentValue) => {
+  //   if (filteredServices && filteredServices.length > 0) {
+  //     let result = accumulator + Number(currentValue.price);
+  //     return result;
+  //   }
+  // }, 0);
+  const sum = filteredData?.reduce((accumulator, currentValue) => {
     if (filteredServices && filteredServices.length > 0) {
       let result = accumulator + Number(currentValue.price);
       return result;
@@ -159,24 +214,27 @@ export default function SingleCar() {
               <div className="single_filter">
                 <input
                   type="checkbox"
-                  checked={fix}
-                  onChange={() => setFix(!fix)}
+                  name="fix"
+                  checked={filters.fix}
+                  onChange={handleInputChange}
                 />
                 <label htmlFor="">fix</label>
               </div>
               <div className="single_filter">
                 <input
                   type="checkbox"
-                  checked={aesthetics}
-                  onChange={() => setAesthetics(!aesthetics)}
+                  name="aesthetics"
+                  checked={filters.aesthetics}
+                  onChange={handleInputChange}
                 />
                 <label htmlFor="">aesthetics</label>
               </div>
               <div className="single_filter">
                 <input
                   type="checkbox"
-                  checked={maintenance}
-                  onChange={() => setMaintenance(!maintenance)}
+                  name="maintenance"
+                  checked={filters.maintenance}
+                  onChange={handleInputChange}
                 />
                 <label htmlFor="">maintenance</label>
               </div>
@@ -236,9 +294,9 @@ export default function SingleCar() {
                   />
                 </tr>
               </thead>
-              {filteredServices &&
-                filteredServices.length > 0 &&
-                sortBy(filteredServices, sorting).map(
+              {filteredData &&
+                filteredData.length > 0 &&
+                sortBy(filteredData, sorting).map(
                   (
                     {
                       id,

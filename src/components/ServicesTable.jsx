@@ -1,8 +1,6 @@
 import React from "react";
 import { cash } from "../helpers/Helpers";
 import { FaTrashAlt } from "react-icons/fa";
-import { useContext } from "react";
-import { DataContext } from "../context/DataContext";
 
 export default function ServicesTable(
   { index, service, deleteService, onServiceEdit },
