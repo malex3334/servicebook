@@ -118,6 +118,11 @@ export default function SingleCar() {
   // };
 
   const filterFunction = (data, filters) => {
+    data.map((element) => {
+      if (element.category === undefined) {
+        element.category = "maintenance";
+      }
+    });
     return data.filter((element) => {
       if (
         (filters.aesthetics && element.category === "aesthetics") ||
