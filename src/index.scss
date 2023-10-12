@@ -216,12 +216,9 @@
 
   th,
   td {
-    // border: 1px solid black;
-    padding: 8px;
+    padding: 6px;
     text-align: left;
     white-space: nowrap;
-    // white-space: nowrap;
-    // text-wrap: wrap;
   }
   // table header
 
@@ -537,7 +534,8 @@
 .table_container {
   margin: 0 auto;
   width: 90%;
-  overflow: auto;
+  overflow-y: hidden;
+  max-height: 40rem;
 
   .filters_container {
     width: 60%;
@@ -558,6 +556,16 @@
         cursor: pointer;
       }
     }
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+  }
+
+  .table_content {
+    max-height: 30rem;
+    overflow: auto;
   }
 }
 

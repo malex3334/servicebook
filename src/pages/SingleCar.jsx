@@ -302,60 +302,63 @@ export default function SingleCar() {
                   />
                 </tr>
               </thead>
-              {filteredData &&
-                filteredData.length > 0 &&
-                sortBy(filteredData, sorting).map(
-                  (
-                    {
-                      id,
-                      title,
-                      desc,
-                      price,
-                      date,
-                      createdAt,
-                      mileage,
-                      category,
-                    },
-                    index,
-                    service
-                  ) => {
-                    return (
-                      <ServicesTable
-                        key={id}
-                        index={index}
-                        service={{
-                          id,
-                          title,
-                          desc,
-                          price,
-                          date,
-                          createdAt,
-                          mileage,
-                          category,
-                        }}
-                        deleteService={deleteService}
-                        onServiceEdit={onServiceEdit}
-                      />
-                    );
-                  }
-                )}
-              <tbody>
-                <tr>
-                  <td className="blind_row"></td>
-                  <td className="blind_row"></td>
-                  <td className="blind_row"></td>
-                  <td className="blind_row"></td>
-                  <td className="blind_row"></td>
-                  <td className="blind_row"></td>
-                  <td className="line">RAZEM</td>
-                  <td className="line">
-                    <b>{cash(sum)} zł</b>
-                  </td>
-                </tr>
+
+              <tbody className="table_content">
+                {filteredData &&
+                  filteredData.length > 0 &&
+                  sortBy(filteredData, sorting).map(
+                    (
+                      {
+                        id,
+                        title,
+                        desc,
+                        price,
+                        date,
+                        createdAt,
+                        mileage,
+                        category,
+                      },
+                      index,
+                      service
+                    ) => {
+                      return (
+                        <ServicesTable
+                          key={id}
+                          index={index}
+                          service={{
+                            id,
+                            title,
+                            desc,
+                            price,
+                            date,
+                            createdAt,
+                            mileage,
+                            category,
+                          }}
+                          deleteService={deleteService}
+                          onServiceEdit={onServiceEdit}
+                        />
+                      );
+                    }
+                  )}
               </tbody>
             </table>
           </div>
         )}
+        <div style={{ width: "90%", marginRight: "0", marginLeft: "auto" }}>
+          <tr>
+            <td className="blind_row"></td>
+            <td className="blind_row"></td>
+            <td className="blind_row"></td>
+            <td className="blind_row"></td>
+            <td className="blind_row"></td>
+            <td className="blind_row"></td>
+            <td className="line">RAZEM</td>
+            <td className="line">
+              <b>{cash(sum)} zł</b>
+            </td>
+          </tr>
+        </div>
         <button style={{ marginTop: "1rem" }} onClick={() => exportToXLS()}>
           Pobierz jako plik Excel
         </button>
