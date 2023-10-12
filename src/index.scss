@@ -534,8 +534,8 @@
 .table_container {
   margin: 0 auto;
   width: 90%;
-  overflow-y: hidden;
-  max-height: 40rem;
+  overflow-y: scroll;
+  max-height: 60rem;
 
   .filters_container {
     width: 60%;

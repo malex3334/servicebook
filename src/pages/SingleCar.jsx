@@ -3,7 +3,6 @@ import { DataContext } from "../context/DataContext";
 import PleaseLogin from "../components/PleaseLogin";
 import NewServiceForm from "../components/NewServiceForm";
 import { NavLink, useParams } from "react-router-dom";
-import { utils, writeFile } from "xlsx";
 import { cash, scrollToElement } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import Loading from "../components/Loading";
@@ -12,6 +11,7 @@ import { contentObj } from "../language";
 import ServicesTable from "../components/ServicesTable";
 import ServicesHeaders from "../components/ServicesHeaders";
 import { useRef } from "react";
+import { exportToXLS } from "../helpers/Helpers";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
@@ -51,15 +51,6 @@ export default function SingleCar() {
     cars?.find((car) => car.id === carID)
   );
 
-  function exportToXLS() {
-    const table = document.getElementById("myTable");
-    const workbook = utils.table_to_book(table);
-    writeFile(
-      workbook,
-      `${currentCar?.brand} ${currentCar?.model} - mycarservice.xls`
-    );
-  }
-
   const sortBy = (data, sortedHeader) => {
     // change to numbers
     const toNumber = data.map((element) => ({
@@ -96,26 +87,6 @@ export default function SingleCar() {
       }
     }
   };
-
-  // const filterFunction = (data, filters) => {
-  //   let result = [];
-
-  //   if (!filters.aesthetics) {
-  //     result = data.filter((element) => element.category === "aesthetics");
-  //     return result;
-  //   }
-  //   if (filters.aesthetics) {
-  //     return data;
-  //   }
-
-  //   if (!filters.fix) {
-  //     result = data.filter((element) => element.category === "fix");
-  //     return result;
-  //   }
-  //   if (filters.fix) {
-  //     return data;
-  //   }
-  // };
 
   const filterFunction = (data, filters) => {
     data.map((element) => {
@@ -183,12 +154,6 @@ export default function SingleCar() {
     );
   };
 
-  // const sum = filteredServices?.reduce((accumulator, currentValue) => {
-  //   if (filteredServices && filteredServices.length > 0) {
-  //     let result = accumulator + Number(currentValue.price);
-  //     return result;
-  //   }
-  // }, 0);
   const sum = filteredData?.reduce((accumulator, currentValue) => {
     if (filteredServices && filteredServices.length > 0) {
       let result = accumulator + Number(currentValue.price);
@@ -345,7 +310,14 @@ export default function SingleCar() {
             </table>
           </div>
         )}
-        <div style={{ width: "90%", marginRight: "0", marginLeft: "auto" }}>
+        <div
+          style={{
+            width: "90%",
+            display: "flex",
+            justifyContent: "flex-end",
+            marginTop: "2rem",
+          }}
+        >
           <tr>
             <td className="blind_row"></td>
             <td className="blind_row"></td>

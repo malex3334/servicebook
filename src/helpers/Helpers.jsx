@@ -1,3 +1,5 @@
+import { utils, writeFile } from "xlsx";
+
 export function filterArrayOfObjects(filteredArrayOfObjects, filterBy) {
   return filteredArrayOfObjects.filter((obiekt) =>
     filterBy.objectParameter.includes(obiekt.id)
@@ -50,4 +52,10 @@ export function scrollToElement(ref) {
     top: ref.current.offsetTop,
     behavior: "smooth",
   });
+}
+
+export function exportToXLS(data) {
+  const table = document.getElementById("myTable");
+  const workbook = utils.table_to_book(table);
+  writeFile(workbook, `${data?.brand} ${data?.model} - mycarservice.xls`);
 }
