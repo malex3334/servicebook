@@ -44,13 +44,12 @@ export default function SingleCar() {
     scrollToElement(scrollRef);
   };
 
+  const [currentCar, setCurrentCar] = useState();
+
   useEffect(() => {
+    setCurrentCar(cars?.find((car) => car.id === carID));
     setviewedCarId(carID);
   }, [carID]);
-
-  const [currentCar, setCurrentCar] = useState(
-    cars?.find((car) => car.id === carID)
-  );
 
   const sortBy = (data, sortedHeader) => {
     // change to numbers
@@ -188,8 +187,9 @@ export default function SingleCar() {
             onChange={handleInputChange}
           />
           <SingleFilter
-            key="3"
+            key="2"
             name="aesthetics"
+            // name={contentObj?.[language].services.filters.aesthetics}
             checked={filters.aesthetics}
             onChange={handleInputChange}
           />
@@ -323,7 +323,10 @@ export default function SingleCar() {
             </td>
           </tr>
         </div>
-        <button style={{ marginTop: "1rem" }} onClick={() => exportToXLS()}>
+        <button
+          style={{ marginTop: "1rem" }}
+          onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}
+        >
           Pobierz jako plik Excel
         </button>
       </div>

@@ -42,6 +42,11 @@ export const contentObj = {
       mileage: "przebieg",
       price: "cena",
       addButton: "dodaj",
+      filters: {
+        fix: "naprawy",
+        aesthetics: "estetyka",
+        maintenance: "serwisy",
+      },
     },
 
     welcome: "Witaj",
@@ -115,6 +120,11 @@ export const contentObj = {
       mileage: "Mileage",
       price: "Price",
       addButton: "Add",
+      filters: {
+        fix: "fix",
+        aesthetics: "aesthetics",
+        maintenance: "maintenance",
+      },
     },
     welcome: "Hello",
     login: "Login",

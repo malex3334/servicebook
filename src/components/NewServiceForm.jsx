@@ -64,6 +64,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     } else {
       addService(serviceObject, id);
       clearInputs();
+      titleRef.current.focus();
     }
   };
   useEffect(() => {

@@ -1,11 +1,16 @@
 import React from "react";
 import { cash } from "../helpers/Helpers";
 import { FaTrashAlt } from "react-icons/fa";
+import { useContext } from "react";
+import { DataContext } from "../context/DataContext";
+import { contentObj } from "../language";
 
 export default function ServicesTable(
   { index, service, deleteService, onServiceEdit },
   { key, id, viewedCarID }
 ) {
+  const { language } = useContext(DataContext);
+
   return (
     <tr
       onClick={() => {
