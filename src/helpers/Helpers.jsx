@@ -48,8 +48,10 @@ export const noAvatar =
   "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png";
 
 export function scrollToElement(ref) {
+  const elementRect = ref.current.getBoundingClientRect();
+  const middleY = elementRect.top + elementRect.height / 2;
   window.scrollTo({
-    top: ref.current.offsetTop,
+    top: middleY,
     behavior: "smooth",
   });
 }

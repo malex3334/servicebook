@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { useParams } from "react-router-dom";
 import { getCurrentDate } from "../helpers/Helpers";
@@ -17,7 +17,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
   const [mileage, setMileage] = useState(
     cars && cars.filter((car) => car.id === id)[0]?.mileage
   );
-
+  const titleRef = useRef(null);
   const [editFlag, setEditFlag] = useState(false);
 
   const clearInputs = () => {
@@ -100,6 +100,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
         }}
       >
         <input
+          ref={titleRef}
           type="text"
           placeholder={contentObj?.[language].services.title}
           onChange={(e) => setTitle(e.target.value)}
