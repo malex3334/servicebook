@@ -531,32 +531,32 @@
   }
 }
 
+.filters_container {
+  width: 60%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+
+  .single_filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    input {
+      height: 2rem;
+      width: 2rem;
+      cursor: pointer;
+    }
+  }
+}
+
 .table_container {
   margin: 0 auto;
   width: 90%;
   overflow-y: scroll;
   max-height: 60rem;
-
-  .filters_container {
-    width: 60%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-
-    .single_filter {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      input {
-        height: 2rem;
-        width: 2rem;
-        cursor: pointer;
-      }
-    }
-  }
 
   thead {
     position: sticky;

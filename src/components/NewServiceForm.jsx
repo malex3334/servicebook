@@ -19,6 +19,8 @@ export default function NewServiceForm({ editedService, setEditedService }) {
   );
   const titleRef = useRef(null);
   const [editFlag, setEditFlag] = useState(false);
+  const [lastMileage, setLastMileage] = useState("");
+  const [lastDate, setLastDate] = useState("");
 
   const clearInputs = () => {
     setTitle("");

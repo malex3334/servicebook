@@ -12,6 +12,7 @@ import ServicesTable from "../components/ServicesTable";
 import ServicesHeaders from "../components/ServicesHeaders";
 import { useRef } from "react";
 import { exportToXLS } from "../helpers/Helpers";
+import SingleFilter from "../components/SingleFilter";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
@@ -179,39 +180,30 @@ export default function SingleCar() {
           <MdConstruction className="react-icon" />
           {contentObj?.[language].services.heading}
         </h2>
+        <div className="filters_container">
+          <SingleFilter
+            key="1"
+            name="fix"
+            checked={filters.fix}
+            onChange={handleInputChange}
+          />
+          <SingleFilter
+            key="3"
+            name="aesthetics"
+            checked={filters.aesthetics}
+            onChange={handleInputChange}
+          />
+          <SingleFilter
+            key="3"
+            name="maintenance"
+            checked={filters.maintenance}
+            onChange={handleInputChange}
+          />
+        </div>
         {loading ? (
           <Loading />
         ) : (
           <div className="table_container">
-            <div className="filters_container">
-              <div className="single_filter">
-                <input
-                  type="checkbox"
-                  name="fix"
-                  checked={filters.fix}
-                  onChange={handleInputChange}
-                />
-                <label htmlFor="">fix</label>
-              </div>
-              <div className="single_filter">
-                <input
-                  type="checkbox"
-                  name="aesthetics"
-                  checked={filters.aesthetics}
-                  onChange={handleInputChange}
-                />
-                <label htmlFor="">aesthetics</label>
-              </div>
-              <div className="single_filter">
-                <input
-                  type="checkbox"
-                  name="maintenance"
-                  checked={filters.maintenance}
-                  onChange={handleInputChange}
-                />
-                <label htmlFor="">maintenance</label>
-              </div>
-            </div>
             <table id="myTable">
               <thead>
                 <tr>
