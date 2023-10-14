@@ -3,12 +3,12 @@ import { cash } from "../helpers/Helpers";
 import { FaTrashAlt } from "react-icons/fa";
 import { DataContext } from "../context/DataContext";
 import { useContext } from "react";
-
+import { contentObj } from "../language";
 export default function ServicesTable(
   { index, service, deleteService, onServiceEdit },
   { key, id, viewedCarID }
 ) {
-  const { editedServiceData } = useContext(DataContext);
+  const { editedServiceData, language } = useContext(DataContext);
 
   const handleCheckboxChange = (e) => {
     const updatedService = { ...service, done: !service.done };
@@ -38,7 +38,10 @@ export default function ServicesTable(
       <td className="title">{service?.title}</td>
       <td>{service?.date}</td>
       <td className="desc">{service?.desc}</td>
-      <td className="category">{service?.category}</td>
+      {/* <td className="category">{service?.category}</td> */}
+      <td className="category">
+        {contentObj?.[language].services.filters[service?.category]}
+      </td>
       <td>{service?.createdAt}</td>
       <td>{Number(service?.mileage).toLocaleString()}</td>
       <td>{cash(Number(service?.price))}</td>

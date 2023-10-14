@@ -110,10 +110,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
           onSubmit(e, serviceObject);
         }}
       >
-        <div
-          className="serviceform_container"
-    
-        >
+        <div className="serviceform_container">
           <input
             ref={titleRef}
             type="text"
@@ -144,9 +141,17 @@ export default function NewServiceForm({ editedService, setEditedService }) {
             id="category"
             value={category}
           >
-            <option value="maintenance">maintenance</option>
-            <option value="fix">fix</option>
-            <option value="aesthetics">aesthetics</option>
+            <option value="maintenance">
+              {contentObj?.[language].services.categories.maintenance}
+            </option>
+            <option value="fix">
+              {" "}
+              {contentObj?.[language].services.categories.fix}
+            </option>
+            <option value="aesthetics">
+              {" "}
+              {contentObj?.[language].services.categories.aesthetics}
+            </option>
           </select>
 
           <input

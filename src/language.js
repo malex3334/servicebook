@@ -42,6 +42,11 @@ export const contentObj = {
       mileage: "przebieg",
       price: "cena",
       addButton: "dodaj",
+      categories: {
+        maintenance: "serwis",
+        fix: "naprawa",
+        aesthetics: "estetyka",
+      },
       filters: {
         fix: "naprawy",
         aesthetics: "estetyka",
