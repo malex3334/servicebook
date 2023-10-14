@@ -266,6 +266,8 @@ export default function SingleCar() {
                     setCount={setCount}
                     count={count}
                   />
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
 
@@ -283,6 +285,7 @@ export default function SingleCar() {
                         createdAt,
                         mileage,
                         category,
+                        done,
                       },
                       index,
                       service
@@ -300,6 +303,7 @@ export default function SingleCar() {
                             createdAt,
                             mileage,
                             category,
+                            done,
                           }}
                           deleteService={deleteService}
                           onServiceEdit={onServiceEdit}

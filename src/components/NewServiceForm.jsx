@@ -19,6 +19,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
   );
   const titleRef = useRef(null);
   const [editFlag, setEditFlag] = useState(false);
+  const [done, setDone] = useState();
   const [lastMileage, setLastMileage] = useState("");
   const [lastDate, setLastDate] = useState("");
 
@@ -30,6 +31,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     setPrice("");
     setCategory("");
     setCategory("maintenance");
+    setDone();
   };
 
   const [date, setDate] = useState(getCurrentDate());
@@ -43,6 +45,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     mileage: mileage,
     price: price,
     category: category,
+    done: done,
   };
 
   const onEditCancel = () => {
@@ -75,10 +78,13 @@ export default function NewServiceForm({ editedService, setEditedService }) {
       setDescription(editedService.desc);
       setMileage(editedService.mileage.toString());
       setPrice(editedService.price.toString());
-
+      setDone(editedService.done);
       setCategory(editedService.category);
       if (editedService?.category === undefined) {
         setCategory("maintenance");
+      }
+      if (editedService?.done === undefined) {
+        // setDone(true);
       }
     }
   }, [editedService]);
@@ -92,6 +98,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     mileage: mileage,
     price: price,
     category: category,
+    done: done,
   };
 
   return (
@@ -153,6 +160,20 @@ export default function NewServiceForm({ editedService, setEditedService }) {
           onChange={(e) => setPrice(e.target.value)}
           value={cash(price)}
         />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={done}
+            onChange={() => setDone(!done)}
+          />
+          <label htmlFor="">zrobione</label>
+        </div>
         <button type="submit">
           {!editFlag ? contentObj?.[language].services.addButton : "aktualizuj"}
         </button>
