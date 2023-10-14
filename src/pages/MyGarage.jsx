@@ -64,14 +64,7 @@ export default function MyGarage() {
             {cars &&
               cars?.map((car) => {
                 return (
-                  <div
-                    key={car.id}
-                    style={{
-                      display: "flex",
-                      margin: "3rem auto",
-                      // width: "80rem",
-                    }}
-                  >
+                  <div className="singlecar_container" key={car.id}>
                     <NavLink
                       key={car.id}
                       onClick={() => {
