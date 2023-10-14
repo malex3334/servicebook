@@ -118,6 +118,14 @@ export default function SingleCar() {
     }));
   };
 
+  const handleResetFilters = (e) => {
+    const newFilters = {};
+    for (const key in filters) {
+      newFilters[key] = true;
+    }
+    setFilters(newFilters);
+  };
+
   const carData = () => {
     const currentCar = cars.find((car) => car.id === carID);
 
@@ -199,6 +207,7 @@ export default function SingleCar() {
             checked={filters.maintenance}
             onChange={handleInputChange}
           />
+          <button onClick={handleResetFilters}>Resetuj filtry</button>
         </div>
         {loading ? (
           <Loading />
