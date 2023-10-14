@@ -1,13 +1,13 @@
 import React, { useContext, useRef, useState } from "react";
 import { DataContext } from "../context/DataContext";
-import PleaseLogin from "../components/PleaseLogin";
 import { NavLink } from "react-router-dom";
-import CarDetails from "../components/CarDetails";
-import NewCarForm from "../components/NewCarForm";
-import Loading from "../components/Loading";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { contentObj } from "../language";
 import { scrollToElement } from "../helpers/Helpers";
+import PleaseLogin from "../components/PleaseLogin";
+import CarDetails from "../components/CarDetails";
+import NewCarForm from "../components/NewCarForm";
+import Loading from "../components/Loading";
 
 export default function MyGarage() {
   const { user, cars, showServices, deleteCar, loading, language } =

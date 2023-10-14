@@ -3,7 +3,6 @@ import { contentObj } from "../language";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { MdConstruction } from "react-icons/md";
-import LogoComponent from "../components/LogoComponent";
 
 export default function About() {
   const { language } = useContext(DataContext);

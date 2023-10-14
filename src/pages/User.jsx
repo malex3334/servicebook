@@ -3,9 +3,9 @@ import { useContext, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { noAvatar } from "../helpers/Helpers";
-import Loading from "../components/Loading";
 import { FaEdit, FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
+import Loading from "../components/Loading";
 
 export default function User() {
   const [edit, setEdit] = useState(false);

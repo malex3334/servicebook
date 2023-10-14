@@ -18,7 +18,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     cars && cars.filter((car) => car.id === id)[0]?.mileage
   );
   const titleRef = useRef(null);
-  const [done, setDone] = useState();
+  const [done, setDone] = useState(true);
   const [editFlag, setEditFlag] = useState(false);
 
   const [lastMileage, setLastMileage] = useState("");

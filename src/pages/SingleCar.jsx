@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
-import PleaseLogin from "../components/PleaseLogin";
-import NewServiceForm from "../components/NewServiceForm";
 import { NavLink, useParams } from "react-router-dom";
-import { cash, scrollToElement } from "../helpers/Helpers";
+import { cash, exportToPDF, scrollToElement } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
-import Loading from "../components/Loading";
 import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
-import ServicesTable from "../components/ServicesTable";
-import ServicesHeaders from "../components/ServicesHeaders";
 import { useRef } from "react";
 import { exportToXLS } from "../helpers/Helpers";
+import PleaseLogin from "../components/PleaseLogin";
+import NewServiceForm from "../components/NewServiceForm";
+import Loading from "../components/Loading";
+import ServicesTable from "../components/ServicesTable";
+import ServicesHeaders from "../components/ServicesHeaders";
 import SingleFilter from "../components/SingleFilter";
 
 export default function SingleCar() {
@@ -118,25 +118,6 @@ export default function SingleCar() {
 
     return data;
   };
-  // const filterFunction = (data, filters) => {
-  //   data.map((element) => {
-  //     if (element.category === undefined) {
-  //       element.category = "maintenance";
-  //     }
-  //   });
-  //   return data.filter((element) => {
-  //     if (
-  //       (filters.aesthetics && element.category === "aesthetics") ||
-  //       (filters.fix && element.category === "fix") ||
-  //       (filters.maintenance && element.category === "maintenance") ||
-  //       (filters.done && element.done == true) ||
-  //       (filters.todo && element.done == false)
-  //     ) {
-  //       return true;
-  //     }
-  //     return false;
-  //   });
-  // };
 
   useEffect(() => {
     setFilteredData(filterFunction(filteredServices, filters));
@@ -251,7 +232,7 @@ export default function SingleCar() {
             checked={filters.todo}
             onChange={handleInputChange}
           />
-          <button onClick={handleResetFilters}>Resetuj filtry</button>
+          <button onClick={handleResetFilters}>Resetuj</button>
         </div>
         {loading ? (
           <Loading />

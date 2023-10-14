@@ -545,6 +545,21 @@
   justify-content: center;
   gap: 3rem;
   flex-wrap: wrap;
+  padding: 2rem 1rem;
+  border: 1px solid #404040;
+  border-radius: $border-radius--small;
+
+  button {
+    font-weight: inherit;
+    letter-spacing: inherit;
+    background: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    &:hover {
+      color: $maincolor-primary;
+    }
+  }
 
   .single_filter {
     display: flex;
@@ -643,6 +658,22 @@
     .userdata_body {
       width: 90vw;
       margin: 0 auto;
+    }
+  }
+
+  .singlecar_container {
+    td {
+      padding: 0;
+    }
+
+    table {
+      padding: 0;
+    }
+    td,
+    th,
+    tr,
+    .desc {
+      font-size: 1rem;
     }
   }
 }

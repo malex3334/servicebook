@@ -62,3 +62,14 @@ export function exportToXLS(data) {
   const workbook = utils.table_to_book(table);
   writeFile(workbook, `${data?.brand} ${data?.model} - mycarservice.xls`);
 }
+
+export function exportToPDF() {
+  const element = document.getElementById("contentToExport"); // Replace with the ID of the content you want to export
+  const pdfOptions = {
+    margin: 10,
+    filename: "exported-document.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  };
+}
