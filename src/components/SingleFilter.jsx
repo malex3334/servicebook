@@ -15,9 +15,7 @@ export default function SingleFilter(props) {
         checked={checked}
         onChange={onChange}
       />
-      <clabel htmlFor="">
-        {contentObj?.[language].services.filters[name]}
-      </clabel>
+      <label htmlFor="">{contentObj?.[language].services.filters[name]}</label>
     </div>
   );
 }

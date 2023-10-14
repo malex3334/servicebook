@@ -24,6 +24,8 @@ export default function SingleCar() {
     fix: true,
     aesthetics: true,
     maintenance: true,
+    done: true,
+    todo: true,
   });
 
   const {
@@ -94,17 +96,47 @@ export default function SingleCar() {
         element.category = "maintenance";
       }
     });
-    return data.filter((element) => {
-      if (
+
+    // Apply the "done" filter
+    if (!filters.done) {
+      data = data.filter((element) => element.done == false);
+    }
+
+    // Apply the "todo" filter
+    if (!filters.todo) {
+      data = data.filter((element) => element.done == true);
+    }
+
+    // Apply the "aesthetics," "fix," and "maintenance" filters
+    data = data.filter((element) => {
+      return (
         (filters.aesthetics && element.category === "aesthetics") ||
         (filters.fix && element.category === "fix") ||
         (filters.maintenance && element.category === "maintenance")
-      ) {
-        return true;
-      }
-      return false;
+      );
     });
+
+    return data;
   };
+  // const filterFunction = (data, filters) => {
+  //   data.map((element) => {
+  //     if (element.category === undefined) {
+  //       element.category = "maintenance";
+  //     }
+  //   });
+  //   return data.filter((element) => {
+  //     if (
+  //       (filters.aesthetics && element.category === "aesthetics") ||
+  //       (filters.fix && element.category === "fix") ||
+  //       (filters.maintenance && element.category === "maintenance") ||
+  //       (filters.done && element.done == true) ||
+  //       (filters.todo && element.done == false)
+  //     ) {
+  //       return true;
+  //     }
+  //     return false;
+  //   });
+  // };
 
   useEffect(() => {
     setFilteredData(filterFunction(filteredServices, filters));
@@ -205,6 +237,18 @@ export default function SingleCar() {
             key="3"
             name="maintenance"
             checked={filters.maintenance}
+            onChange={handleInputChange}
+          />
+          <SingleFilter
+            key="4"
+            name="done"
+            checked={filters.done}
+            onChange={handleInputChange}
+          />
+          <SingleFilter
+            key="5"
+            name="todo"
+            checked={filters.todo}
             onChange={handleInputChange}
           />
           <button onClick={handleResetFilters}>Resetuj filtry</button>

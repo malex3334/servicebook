@@ -46,6 +46,8 @@ export const contentObj = {
         fix: "naprawy",
         aesthetics: "estetyka",
         maintenance: "serwisy",
+        done: "zrobione",
+        todo: "do zrobienia",
       },
     },
 
@@ -124,6 +126,8 @@ export const contentObj = {
         fix: "fix",
         aesthetics: "aesthetics",
         maintenance: "maintenance",
+        done: "zrobione",
+        todo: "do zrobienia",
       },
     },
     welcome: "Hello",
