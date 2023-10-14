@@ -18,8 +18,9 @@ export default function NewServiceForm({ editedService, setEditedService }) {
     cars && cars.filter((car) => car.id === id)[0]?.mileage
   );
   const titleRef = useRef(null);
-  const [editFlag, setEditFlag] = useState(false);
   const [done, setDone] = useState();
+  const [editFlag, setEditFlag] = useState(false);
+
   const [lastMileage, setLastMileage] = useState("");
   const [lastDate, setLastDate] = useState("");
 
@@ -180,6 +181,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
         {editFlag === true && (
           <button
             type="button"
+            style={{ margin: "0 1rem" }}
             onClick={() => {
               onEditCancel();
             }}

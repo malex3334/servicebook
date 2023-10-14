@@ -1,15 +1,33 @@
 import React from "react";
 import { cash } from "../helpers/Helpers";
 import { FaTrashAlt } from "react-icons/fa";
+import { DataContext } from "../context/DataContext";
+import { useContext } from "react";
 
 export default function ServicesTable(
   { index, service, deleteService, onServiceEdit },
   { key, id, viewedCarID }
 ) {
+  const { editedServiceData } = useContext(DataContext);
+
+  const handleCheckboxChange = (e) => {
+    const updatedService = { ...service, done: !service.done };
+    editedServiceData(e, updatedService);
+  };
+
+  const handleCheckboxClick = (e) => {
+    if (e === "checkbox") {
+      return;
+    } else {
+      onServiceEdit(service);
+    }
+  };
+
   return (
     <tr
-      onClick={() => {
-        onServiceEdit(service);
+      onClick={(e) => {
+        handleCheckboxClick(e.target.type);
+        // onServiceEdit(service);
       }}
       style={{
         cursor: "pointer",
@@ -34,7 +52,15 @@ export default function ServicesTable(
       >
         <FaTrashAlt style={{ fontSize: "1.5rem" }} />
       </td>
-      <td>{service?.done ? "true" : "false"}</td>
+      <td>
+        <input
+          type="checkbox"
+          checked={service?.done}
+          onChange={(e) => {
+            handleCheckboxChange(e);
+          }}
+        />
+      </td>
     </tr>
   );
 }
