@@ -26,13 +26,13 @@ export default function NewServiceForm({ editedService, setEditedService }) {
 
   const clearInputs = () => {
     setTitle("");
-    setDate("");
+    setDate(getCurrentDate());
     setDescription("");
     setMileage("");
     setPrice("");
     setCategory("");
     setCategory("maintenance");
-    setDone();
+    setDone(true);
   };
 
   const [date, setDate] = useState(getCurrentDate());
