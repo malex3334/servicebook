@@ -103,77 +103,82 @@ export default function NewServiceForm({ editedService, setEditedService }) {
   };
 
   return (
-    <div>
+    <>
       <form
         action=""
         onSubmit={(e) => {
           onSubmit(e, serviceObject);
         }}
       >
-        <input
-          ref={titleRef}
-          type="text"
-          placeholder={contentObj?.[language].services.title}
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          required
-          maxLength={40}
-        />
-        <input
-          type="date"
-          placeholder={contentObj?.[language].services.date}
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
-          required
-        />
-        <input
-          type="text"
-          placeholder={contentObj?.[language].services.desc}
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-          required
-          maxLength={120}
-        />
-        <select
-          onChange={(e) => setCategory(e.target.value)}
-          name="category"
-          id="category"
-          value={category}
-        >
-          <option value="maintenance">maintenance</option>
-          <option value="fix">fix</option>
-          <option value="aesthetics">aesthetics</option>
-        </select>
-
-        <input
-          type="number"
-          placeholder={contentObj?.[language].services.mileage}
-          onChange={(e) => setMileage(e.target.value)}
-          value={mileage?.toLocaleString()}
-          maxLength="6"
-          min="0"
-          max="1000000"
-        />
-        <input
-          type="number"
-          placeholder={contentObj?.[language].services.price}
-          min="0"
-          onChange={(e) => setPrice(e.target.value)}
-          value={cash(price)}
-        />
         <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="serviceform_container"
+    
         >
           <input
-            type="checkbox"
-            checked={done}
-            onChange={() => setDone(!done)}
+            ref={titleRef}
+            type="text"
+            placeholder={contentObj?.[language].services.title}
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            required
+            maxLength={40}
           />
-          <label htmlFor="">zrobione</label>
+          <input
+            type="date"
+            placeholder={contentObj?.[language].services.date}
+            onChange={(e) => setDate(e.target.value)}
+            value={date}
+            required
+          />
+          <input
+            type="text"
+            placeholder={contentObj?.[language].services.desc}
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+            required
+            maxLength={120}
+          />
+          <select
+            onChange={(e) => setCategory(e.target.value)}
+            name="category"
+            id="category"
+            value={category}
+          >
+            <option value="maintenance">maintenance</option>
+            <option value="fix">fix</option>
+            <option value="aesthetics">aesthetics</option>
+          </select>
+
+          <input
+            type="number"
+            placeholder={contentObj?.[language].services.mileage}
+            onChange={(e) => setMileage(e.target.value)}
+            value={mileage?.toLocaleString()}
+            maxLength="6"
+            min="0"
+            max="1000000"
+          />
+          <input
+            type="number"
+            placeholder={contentObj?.[language].services.price}
+            min="0"
+            onChange={(e) => setPrice(e.target.value)}
+            value={cash(price)}
+          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={done}
+              onChange={() => setDone(!done)}
+            />
+            <label htmlFor="">zrobione</label>
+          </div>
         </div>
         <button type="submit">
           {!editFlag ? contentObj?.[language].services.addButton : "aktualizuj"}
@@ -190,6 +195,6 @@ export default function NewServiceForm({ editedService, setEditedService }) {
           </button>
         )}
       </form>
-    </div>
+    </>
   );
 }

@@ -219,6 +219,9 @@
     width: 90%;
     text-align: start;
     // border-collapse: collapse;
+    input {
+      height: auto;
+    }
   }
 
   th,
@@ -279,6 +282,17 @@
         color: $maincolor-primary;
       }
     }
+  }
+}
+
+.serviceform_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+form {
+  button {
+    margin: 1rem !important;
   }
 }
 

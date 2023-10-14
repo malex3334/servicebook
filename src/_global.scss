@@ -58,6 +58,15 @@ select {
     outline: 3px solid rgba(255, 68, 0, 0.5);
   }
 }
+
+input[type="number"] {
+  width: 7em;
+}
+
+input[type="checkbox"] {
+  width: 1.5em;
+  // height: 2em;
+}
 button {
   // margin: auto 1rem;
 }
