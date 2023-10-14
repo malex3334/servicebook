@@ -178,12 +178,12 @@ export default function SingleCar() {
   } else {
     return (
       <div className="singlecar_container container">
-        <div ref={scrollRef}>{carData()}</div>
+        <div>{carData()}</div>
         <NewServiceForm
           editedService={editedService}
           setEditedService={setEditedService}
         />
-        <h2>
+        <h2 ref={scrollRef}>
           <MdConstruction className="react-icon" />
           {contentObj?.[language].services.heading}
         </h2>
@@ -311,7 +311,7 @@ export default function SingleCar() {
             </table>
           </div>
         )}
-        <div
+        <tfoot
           style={{
             width: "90%",
             display: "flex",
@@ -331,7 +331,7 @@ export default function SingleCar() {
               <b>{cash(sum)} zł</b>
             </td>
           </tr>
-        </div>
+        </tfoot>
         <button
           style={{ marginTop: "1rem" }}
           onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}
