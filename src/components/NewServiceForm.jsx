@@ -5,6 +5,7 @@ import { getCurrentDate } from "../helpers/Helpers";
 import { v4 as uuidv4 } from "uuid";
 import { cash } from "../helpers/Helpers";
 import { contentObj } from "../language";
+import Input from "./Input";
 
 export default function NewServiceForm({ editedService, setEditedService }) {
   const { addService, cars, language, editedServiceData } =
@@ -111,63 +112,60 @@ export default function NewServiceForm({ editedService, setEditedService }) {
         }}
       >
         <div className="serviceform_container">
-          <input
-            ref={titleRef}
+          <Input
             type="text"
-            placeholder={contentObj?.[language].services.title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={setTitle}
             value={title}
-            required
-            maxLength={40}
+            name={contentObj?.[language].services.title}
           />
-          <input
+          <Input
             type="date"
-            placeholder={contentObj?.[language].services.date}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={setDate}
             value={date}
-            required
+            name={contentObj?.[language].services.date}
           />
-          <input
+          <Input
             type="text"
-            placeholder={contentObj?.[language].services.desc}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={setDescription}
             value={description}
-            required
-            maxLength={120}
+            name={contentObj?.[language].services.desc}
           />
-          <select
-            onChange={(e) => setCategory(e.target.value)}
-            name="category"
-            id="category"
-            value={category}
-          >
-            <option value="maintenance">
-              {contentObj?.[language].services.categories.maintenance}
-            </option>
-            <option value="fix">
-              {contentObj?.[language].services.categories.fix}
-            </option>
-            <option value="aesthetics">
-              {contentObj?.[language].services.categories.aesthetics}
-            </option>
-          </select>
 
-          <input
+          <div className="input">
+            <select
+              onChange={(e) => setCategory(e.target.value)}
+              name="category"
+              id="category"
+              value={category}
+            >
+              <option value="maintenance">
+                {contentObj?.[language].services.categories.maintenance}
+              </option>
+              <option value="fix">
+                {contentObj?.[language].services.categories.fix}
+              </option>
+              <option value="aesthetics">
+                {contentObj?.[language].services.categories.aesthetics}
+              </option>
+            </select>
+            <label htmlFor="" className="input_label">
+              kategoria
+            </label>
+          </div>
+
+          <Input
             type="number"
-            placeholder={contentObj?.[language].services.mileage}
-            onChange={(e) => setMileage(e.target.value)}
+            onChange={setMileage}
             value={mileage?.toLocaleString()}
-            maxLength="6"
-            min="0"
-            max="1000000"
+            name={contentObj?.[language].services.mileage}
           />
-          <input
+          <Input
             type="number"
-            placeholder={contentObj?.[language].services.price}
-            min="0"
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={setPrice}
             value={cash(price)}
+            name={contentObj?.[language].services.price}
           />
+
           <div
             style={{
               display: "flex",

@@ -208,8 +208,10 @@ export default function SingleCar() {
           <MdConstruction className="react-icon" />
           {contentObj?.[language].services.heading}
         </h2>
-        <h4>{contentObj?.[language].services.filters.filters}</h4>
         <div className="filters_container">
+          <h4 className="filters_header">
+            {contentObj?.[language].services.filters.filters}
+          </h4>
           <div>
             <SingleFilter
               key="1"

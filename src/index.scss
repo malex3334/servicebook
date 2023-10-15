@@ -261,7 +261,7 @@
   }
 
   .desc {
-    font-size: 1.75rem;
+    // font-size: 1.75rem;
     min-width: 25rem;
     text-wrap: wrap;
   }
@@ -296,6 +296,24 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.input {
+  position: relative;
+}
+
+.input_label {
+  font-size: 1.25rem;
+  position: absolute;
+  top: -0.1rem;
+  left: 3rem;
+  // background-color: $maincolor-primary;
+  background-color: #404040;
+  border-radius: $border-radius--small;
+  color: white;
+  padding: 0.25em 0.5em;
+  font-weight: normal;
+}
+
 form {
   button {
     margin: 1rem !important;
@@ -562,7 +580,19 @@ form {
   }
 }
 
+.filters_header {
+  position: absolute;
+  top: -3rem;
+  display: block;
+  background: #404040;
+  padding: 0.25em 0.5em;
+  border-radius: $border-radius--small;
+  color: white;
+  letter-spacing: 2px;
+}
+
 .filters_container {
+  position: relative;
   max-width: 40rem;
   margin: 1rem auto;
   display: flex;
@@ -570,7 +600,8 @@ form {
   gap: 3rem;
   // flex-wrap: wrap;
   padding: 2rem 1rem;
-  border: 1px solid #404040;
+  // border: 1px solid #404040;
+  border: 1px solid $maincolor-primary;
   border-radius: $border-radius--small;
   // background: rgba(64, 64, 64, 0.716);
   // color: white;
@@ -703,13 +734,18 @@ form {
 
     table {
       padding: 0;
+      td,
+      th,
+      tr,
+      .desc {
+        font-size: 1rem !important;
+      }
     }
-    td,
-    th,
-    tr,
-    .desc {
-      font-size: 1rem !important;
-    }
+  }
+
+  .title {
+    text-wrap: wrap;
+    word-wrap: wrap;
   }
 
   .filters_container {
