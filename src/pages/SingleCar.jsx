@@ -124,6 +124,14 @@ export default function SingleCar() {
   }, [filters, filteredServices]);
 
   const handleInputChange = (e) => {
+    if (e.target.tagName === "LABEL") {
+      const { name, checked } = e.target.previousElementSibling;
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        [name]: !checked,
+      }));
+    }
+
     const { name, checked } = e.target;
     setFilters((prevFilters) => ({
       ...prevFilters,

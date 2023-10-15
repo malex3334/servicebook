@@ -15,7 +15,9 @@ export default function SingleFilter(props) {
         checked={checked}
         onChange={onChange}
       />
-      <label htmlFor="">{contentObj?.[language].services.filters[name]}</label>
+      <label htmlFor="" style={{ cursor: "pointer" }} onClick={onChange}>
+        {contentObj?.[language].services.filters[name]}
+      </label>
     </div>
   );
 }

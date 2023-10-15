@@ -173,7 +173,9 @@ export default function NewServiceForm({ editedService, setEditedService }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              cursor: "pointer",
             }}
+            onClick={() => setDone(!done)}
           >
             <input
               type="checkbox"
