@@ -6,6 +6,7 @@ import { noAvatar } from "../helpers/Helpers";
 import { FaEdit, FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import Loading from "../components/Loading";
+import Input from "../components/Input";
 
 export default function User() {
   const [edit, setEdit] = useState(false);
@@ -34,15 +35,13 @@ export default function User() {
           <h2>Twoje dane</h2>
           {edit ? (
             <div className="name_container">
-              <label htmlFor="">avatar:</label>
-              <input
-                className="name_input"
+              <Input
+                type="text"
                 value={editedImg}
-                onChange={(e) => {
-                  setEditedImg(e.target.value);
-                }}
-                placeholder="img"
+                onChange={setEditedImg}
+                name="avatar"
               />
+
               <div className="buttons">
                 <button type="submit" className="nobutton">
                   <FaCheck
@@ -71,15 +70,13 @@ export default function User() {
           />
           {edit ? (
             <div className="name_container">
-              <label htmlFor="">name</label>
-              <input
-                className="name_input"
+              <Input
+                type="text"
                 value={editedName}
-                onChange={(e) => {
-                  setEditedName(e.target.value);
-                }}
-                placeholder="name"
+                onChange={setEditedName}
+                name="imię"
               />
+
               <div className="buttons">
                 <button type="submit" className="nobutton">
                   <FaCheck
