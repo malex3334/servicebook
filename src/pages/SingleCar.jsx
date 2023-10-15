@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { NavLink, useParams } from "react-router-dom";
-import { cash, exportToPDF, scrollToElement } from "../helpers/Helpers";
+import { cash, scrollToElement } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
@@ -208,7 +208,7 @@ export default function SingleCar() {
           <MdConstruction className="react-icon" />
           {contentObj?.[language].services.heading}
         </h2>
-        <h4>Filtry</h4>
+        <h4>{contentObj?.[language].services.filters.filters}</h4>
         <div className="filters_container">
           <div>
             <SingleFilter
@@ -220,7 +220,6 @@ export default function SingleCar() {
             <SingleFilter
               key="2"
               name="aesthetics"
-              // name={contentObj?.[language].services.filters.aesthetics}
               checked={filters.aesthetics}
               onChange={handleInputChange}
             />

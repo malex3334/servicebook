@@ -48,6 +48,7 @@ export const contentObj = {
         aesthetics: "estetyka",
       },
       filters: {
+        filters: "Filtry",
         fix: "naprawy",
         aesthetics: "estetyka",
         maintenance: "serwisy",
@@ -127,12 +128,18 @@ export const contentObj = {
       mileage: "Mileage",
       price: "Price",
       addButton: "Add",
+      categories: {
+        maintenance: "Maintenance",
+        fix: "Fix",
+        aesthetics: "Aesthetics",
+      },
       filters: {
+        filters: "Filters",
         fix: "fix",
         aesthetics: "aesthetics",
         maintenance: "maintenance",
-        done: "zrobione",
-        todo: "do zrobienia",
+        done: "done",
+        todo: "todo",
       },
     },
     welcome: "Hello",

@@ -94,7 +94,7 @@
     display: flex;
     margin: 3rem auto;
     min-height: 25rem;
-    max-height: 35rem;
+    max-height: 50rem;
   }
 }
 
@@ -216,8 +216,8 @@
 
   table {
     margin: 2rem auto;
-    width: 90%;
     text-align: start;
+    line-height: 1.5;
     // border-collapse: collapse;
     input {
       height: auto;
@@ -226,11 +226,16 @@
 
   th,
   td {
-    padding: 6px 12px;
+    padding: 12px 12px;
     text-align: left;
     white-space: nowrap;
+    // text-wrap: wrap;
   }
   // table header
+
+  .title {
+    text-wrap: wrap;
+  }
 
   th {
     padding: 1rem;
@@ -260,6 +265,7 @@
     min-width: 25rem;
     text-wrap: wrap;
   }
+
   .title {
     min-width: 20rem;
   }
@@ -557,15 +563,17 @@ form {
 }
 
 .filters_container {
-  max-width: 35%;
+  max-width: 40rem;
   margin: 1rem auto;
   display: flex;
   justify-content: space-evenly;
   gap: 3rem;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   padding: 2rem 1rem;
   border: 1px solid #404040;
   border-radius: $border-radius--small;
+  // background: rgba(64, 64, 64, 0.716);
+  // color: white;
 
   button {
     font-weight: inherit;
@@ -606,6 +614,15 @@ form {
   .table_content {
     max-height: 30rem;
     overflow: auto;
+  }
+}
+
+@media (max-width: 1400px) {
+  table,
+  td,
+  th,
+  tr {
+    font-size: 1.5rem !important;
   }
 }
 

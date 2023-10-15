@@ -12,7 +12,6 @@ import { DataContext } from "./context/DataContext";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 import User from "./pages/User";
-import { useEffect, useState } from "react";
 
 function App() {
   const { user } = useContext(DataContext);
