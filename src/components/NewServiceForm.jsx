@@ -145,11 +145,9 @@ export default function NewServiceForm({ editedService, setEditedService }) {
               {contentObj?.[language].services.categories.maintenance}
             </option>
             <option value="fix">
-              {" "}
               {contentObj?.[language].services.categories.fix}
             </option>
             <option value="aesthetics">
-              {" "}
               {contentObj?.[language].services.categories.aesthetics}
             </option>
           </select>

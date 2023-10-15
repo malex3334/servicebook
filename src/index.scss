@@ -294,6 +294,10 @@ form {
   button {
     margin: 1rem !important;
   }
+
+  input[type="checkbox"] {
+    width: 2rem;
+  }
 }
 
 .newcar_container {
@@ -553,10 +557,10 @@ form {
 }
 
 .filters_container {
-  width: 60%;
+  max-width: 35%;
   margin: 1rem auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 3rem;
   flex-wrap: wrap;
   padding: 2rem 1rem;
@@ -689,5 +693,13 @@ form {
     .desc {
       font-size: 1rem !important;
     }
+  }
+
+  .filters_container {
+    gap: 1rem;
+  }
+
+  label {
+    font-size: 1.5rem;
   }
 }

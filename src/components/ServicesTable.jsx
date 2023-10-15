@@ -23,6 +23,9 @@ export default function ServicesTable(
     }
   };
 
+  const borderColorDone = `#07E607`;
+  const borderColorTodo = "orange";
+
   return (
     <tr
       onClick={(e) => {
@@ -34,11 +37,17 @@ export default function ServicesTable(
         backgroundColor: index % 2 === 0 ? "#f2f2f2" : "inherit",
       }}
     >
-      <td>{index + 1}.</td>
+      <td
+        style={{
+          borderLeft: ".5em solid ",
+          borderLeftColor: service.done ? borderColorDone : borderColorTodo,
+        }}
+      >
+        {index + 1}.
+      </td>
       <td className="title">{service?.title}</td>
       <td>{service?.date}</td>
       <td className="desc">{service?.desc}</td>
-      {/* <td className="category">{service?.category}</td> */}
       <td className="category">
         {contentObj?.[language].services.filters[service?.category]}
       </td>
@@ -55,7 +64,12 @@ export default function ServicesTable(
       >
         <FaTrashAlt style={{ fontSize: "1.5rem" }} />
       </td>
-      <td>
+      <td
+        style={{
+          borderRight: ".5em solid ",
+          borderRightColor: service.done ? borderColorDone : borderColorTodo,
+        }}
+      >
         <input
           type="checkbox"
           checked={service?.done}
