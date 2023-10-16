@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { noImg } from "../helpers/Helpers.jsx";
 import { contentObj } from "../language";
 import { useEffect } from "react";
+import {Input} from "./Input.jsx"
 
 export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
   const [brand, setBrand] = useState();
@@ -86,22 +87,26 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
         }}
         action=""
       >
-        <input
+      <Input type="text" onChange={setBrand} value={brand} maxLength={12} name={contentObj?.[language].myCars.brand} />
+        {/* <input
           type="text"
           onChange={(e) => setBrand(e.target.value)}
           value={brand}
           placeholder={contentObj?.[language].myCars.brand}
           required
           maxLength={12}
-        />
-        <input
+        /> */}
+        <Input type="text" onChange={setModel} value={model} maxLength={15} name={contentObj?.[language].myCars.model} />
+        {/* <input
           type="text"
           placeholder={contentObj?.[language].myCars.model}
           onChange={(e) => setModel(e.target.value)}
           value={model}
           maxLength={15}
-        />
-        <input
+        /> */}
+        <Input type="text" onChange={setYear} value={year} maxLength={4} name={contentObj?.[language].myCars.year} />
+
+        {/* <input
           type="year"
           placeholder={contentObj?.[language].myCars.year}
           onChange={(e) => setYear(e.target.value)}
@@ -109,8 +114,11 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
           min="1900"
           value={year}
           maxLength={4}
-        />
-        <input
+        /> */}
+
+        <Input type="number" onChange={setMileage} value={mileage} maxLength={6} name={contentObj?.[language].myCars.mileage} />
+
+        {/* <input
           type="number"
           placeholder={contentObj?.[language].myCars.mileage}
           onChange={(e) => setMileage(e.target.value)}
@@ -118,20 +126,26 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
           min="0"
           max="1000000"
           maxLength={6}
-        />
-        <input
+        /> */}
+
+<Input type="text" onChange={setImg} value={img}  name={contentObj?.[language].myCars.img} />
+
+        {/* <input
           type="text"
           placeholder={contentObj?.[language].myCars.img}
           onChange={(e) => setImg(e.target.value)}
           value={img}
-        />
-        <input
+        /> */}
+
+<Input type="text" onChange={setPlates} value={plates} maxLength={8} name={contentObj?.[language].myCars.plates} />
+
+        {/* <input
           type="text"
           placeholder={contentObj?.[language].myCars.plates}
           onChange={(e) => setPlates(e.target.value)}
           value={plates}
           maxLength="8"
-        />
+        /> */}
 
         <button type="submit">
           {editedCar == null
