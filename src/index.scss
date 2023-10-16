@@ -307,7 +307,7 @@
   top: -0.1rem;
   left: 3rem;
   // background-color: $maincolor-primary;
-  background-color: #404040;
+  // background-color: #404040;
   border-radius: $border-radius--small;
   color: white;
   padding: 0.25em 0.5em;
@@ -585,11 +585,12 @@ form {
   position: absolute;
   top: -3rem;
   display: block;
-  background: #404040;
+  // background: #404040;
   padding: 0.25em 0.5em;
   border-radius: $border-radius--small;
-  color: white;
+  color: #404040;
   letter-spacing: 2px;
+  backdrop-filter: blur(20px);
 }
 
 .filters_container {
