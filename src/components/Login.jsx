@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Loading from "./Loading";
 import { contentObj } from "../language";
+import {Input} from "./Input,.jsx"
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -72,7 +73,8 @@ export default function Login() {
             ) : (
               <form onSubmit={(e) => emailAndPasswordLogin(e)} action="">
                 <div className="label_container">
-                  <label htmlFor="login">
+                  <Input type='email' value={email} onChange={setEmail} name={contentObj?.[language].loginPage.email}/>
+                  {/* <label htmlFor="login">
                     {contentObj?.[language].loginPage.email}
                   </label>
                   <input
@@ -81,10 +83,12 @@ export default function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                  />
+                  /> */}
                 </div>
                 <div className="label_container">
-                  <label htmlFor="password">
+                <Input type='password' value={password} onChange={setPassword} name={contentObj?.[language].loginPage.password}/>
+
+                  {/* <label htmlFor="password">
                     {contentObj?.[language].loginPage.password}
                   </label>
                   <input
@@ -93,7 +97,7 @@ export default function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                  />
+                  /> */}
                 </div>
                 <span style={{ color: "red" }}>
                   {error && `${contentObj?.[language].loginPage.wrongUser}`}
