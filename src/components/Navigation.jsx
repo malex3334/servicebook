@@ -7,22 +7,14 @@ import { contentObj } from "../language";
 import { MdLanguage } from "react-icons/md";
 import LogoComponent from "./LogoComponent";
 import { useEffect, useState } from "react";
-import { RiLogoutBoxRLine, RiHomeLine } from "react-icons/ri";
+import { RiHomeLine } from "react-icons/ri";
 import { PiGarageBold, PiInfo } from "react-icons/pi";
 import { MdLogout, MdLogin } from "react-icons/md";
 
 export default function Navigation() {
   const navigate = useNavigate();
-  const {
-    user,
-    userData,
-    logIn,
-    isLogged,
-    setUserCarIDs,
-    setCars,
-    language,
-    setLanguage,
-  } = useContext(DataContext);
+  const { user, userData, setUserCarIDs, setCars, language, setLanguage } =
+    useContext(DataContext);
 
   const [isMobile, setIsMobile] = useState(false);
 

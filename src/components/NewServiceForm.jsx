@@ -22,9 +22,6 @@ export default function NewServiceForm({ editedService, setEditedService }) {
   const [done, setDone] = useState(true);
   const [editFlag, setEditFlag] = useState(false);
 
-  const [lastMileage, setLastMileage] = useState("");
-  const [lastDate, setLastDate] = useState("");
-
   const clearInputs = () => {
     setTitle("");
     setDate(getCurrentDate());

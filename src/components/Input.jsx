@@ -6,15 +6,12 @@ export default function Input(props) {
   const inputRef = useRef();
 
   const handleFocus = () => {
-    console.log(inputRef.current.type);
     if (inputRef.current.type === "select") {
       labelRef.current.className = "input_label input focus";
     }
     if (inputRef.current.value === "") {
-      console.log("empty");
       labelRef.current.className = "input_label";
     } else {
-      console.log("not empty");
       labelRef.current.className = "input_label transparent";
     }
 

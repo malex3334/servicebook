@@ -30,7 +30,6 @@ export default function ServicesTable(
     <tr
       onClick={(e) => {
         handleCheckboxClick(e.target.type);
-        // onServiceEdit(service);
       }}
       style={{
         cursor: "pointer",
