@@ -13,34 +13,26 @@
 
 .logo {
   z-index: 99;
-  // position: absolute;
   top: 0rem;
   left: 10rem;
   font-size: 8rem;
-  // background-color: $maincolor-primary;
   background-color: white;
   color: $maincolor-primary;
   border-radius: 50%;
-  // color: white;
   padding: 0.9rem;
   border: 0.75rem solid $maincolor-primary;
-
-  // color: $darker-primary;
   margin-left: 4rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
 }
 
 .nav-list {
-  // position: relative;
   width: auto;
   display: flex;
   flex-direction: row;
-  // justify-content: space-around;
   justify-content: end;
   gap: 6rem;
   align-items: center;
   padding: 2rem;
-  // background: $darker-primary;
   border-radius: 0 0 0.5rem 0.5rem;
   color: $lightcolor-primary;
 
@@ -74,6 +66,14 @@
   .nav-icon {
     font-size: 3rem;
   }
+
+  select {
+    color: white;
+  }
+
+  option {
+    color: $dark-font;
+  }
 }
 
 .hero_btn {
@@ -101,11 +101,10 @@
 .cardetails_container {
   position: relative;
   display: flex;
-  color: black !important;
+  color: $dark-font !important;
   background: white;
   width: 60rem;
   min-height: 20rem;
-  // height: 30rem;
   padding: 2rem;
   border-radius: $border-radius--small;
   align-items: flex-start;
@@ -172,11 +171,9 @@
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: 50% !important;
-  // position: relative;
   filter: blur(8px);
 
   &::after {
-    // z-index: 1;
     position: absolute;
     content: " ";
     height: 100%;
@@ -207,8 +204,7 @@
 .singlecar_container {
   .goback {
     margin: 1rem;
-    // color: $maincolor-primary;
-    color: black;
+    color: $dark-font;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -218,7 +214,7 @@
     margin: 2rem auto;
     text-align: start;
     line-height: 1.5;
-    // border-collapse: collapse;
+
     input {
       height: auto;
     }
@@ -229,9 +225,7 @@
     padding: 12px 12px;
     text-align: left;
     white-space: nowrap;
-    // text-wrap: wrap;
   }
-  // table header
 
   .title {
     text-wrap: wrap;
@@ -260,8 +254,11 @@
     margin: 1rem;
   }
 
+  input[type="checkbox"] {
+    cursor: pointer;
+  }
+
   .desc {
-    // font-size: 1.75rem;
     min-width: 25rem;
     text-wrap: wrap;
   }
@@ -273,14 +270,16 @@
   .blind_row {
     border: none;
   }
+
   .line {
-    border-top: 3px solid black;
+    border-top: 3px solid $dark-font;
   }
 
   .sort_icon {
     color: $lightcolor-secondary;
     font-size: 1.75rem;
   }
+
   .table_header {
     &.active {
       span,
@@ -302,17 +301,35 @@
 }
 
 .input_label {
-  font-size: 1.25rem;
+  z-index: 999;
+  font-size: 1.75rem;
   position: absolute;
-  top: -0.1rem;
-  left: 3rem;
-  // background-color: $maincolor-primary;
-  // background-color: #404040;
+  top: 2rem;
+  left: 2rem;
   border-radius: $border-radius--small;
-  color: white;
+  color: $dark-font;
   padding: 0.25em 0.5em;
   font-weight: normal;
-  backdrop-filter: blur(20px);
+  pointer-events: none;
+  transition-property: color, font-size, padding, font-weight, top, left;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in-out;
+}
+
+input:focus + .input_label,
+.input-focus {
+  top: -0.5rem;
+  font-size: 1.5rem;
+  background-image: $background-primary;
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+  background-position: 0;
+  background-repeat: no-repeat;
+  color: $dark-font;
+}
+
+.transparent {
+  color: transparent;
 }
 
 form {
@@ -334,7 +351,6 @@ form {
 }
 
 .about_container {
-  // min-height: 76vh;
   padding: 2rem;
   max-width: 90%;
   margin: 5rem auto;
@@ -420,16 +436,10 @@ form {
     z-index: 1;
     content: " ";
     position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
     top: 2%;
     right: 2%;
-
     width: 50%;
     height: 50%;
-    // border-right: 10px solid $darker-primary;
-    // border-top: 10px solid $darker-primary;
     border-right: 10px solid $maincolor-primary;
     border-top: 10px solid $maincolor-primary;
     border-radius: $border-radius--small;
@@ -455,21 +465,15 @@ form {
     top: -4rem;
     right: -4rem;
     font-size: 12rem;
-    // background-color: $maincolor-primary;
     background-color: white;
     color: $maincolor-primary;
     border-radius: 50%;
-    // color: white;
     padding: 2rem;
     border: 0.75rem solid $maincolor-primary;
-
-    // color: $darker-primary;
-
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.481);
   }
 
   .list {
-    // list-style: disc;
     margin-left: 2rem;
 
     &::before {
@@ -489,7 +493,6 @@ form {
 
 .footer_container {
   width: 100%;
-  // position: fixed;
   bottom: 0;
   background: $darker-primary;
   color: lightgrey;
@@ -571,13 +574,12 @@ form {
 
     &:hover {
       box-shadow: none;
-      // background: none;
-      color: black;
+      color: $dark-font;
     }
-  }
 
-  .icon {
-    cursor: pointer;
+    .icon {
+      cursor: pointer;
+    }
   }
 }
 
@@ -585,7 +587,6 @@ form {
   position: absolute;
   top: -3rem;
   display: block;
-  // background: #404040;
   padding: 0.25em 0.5em;
   border-radius: $border-radius--small;
   color: #404040;
@@ -600,13 +601,9 @@ form {
   display: flex;
   justify-content: space-evenly;
   gap: 3rem;
-  // flex-wrap: wrap;
   padding: 2rem 1rem;
-  // border: 1px solid #404040;
   border: 1px solid $maincolor-primary;
   border-radius: $border-radius--small;
-  // background: rgba(64, 64, 64, 0.716);
-  // color: white;
 
   button {
     font-weight: inherit;
@@ -673,7 +670,6 @@ form {
   .nav-list {
     width: 100%;
     justify-content: space-between;
-    // align-items: baseline;
     align-items: flex-start;
     gap: 1rem;
 
@@ -706,16 +702,11 @@ form {
     margin-right: 0;
     width: 95vw;
 
-    // &::after {
-    //   border: none;
-    // }
-
     .start_body {
       padding: 5rem;
     }
 
     .start_icon {
-      // display: none;
       right: 2rem;
     }
   }

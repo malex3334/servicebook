@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Loading from "./Loading";
 import { contentObj } from "../language";
-import {Input} from "./Input,.jsx"
+import Input from "./Input";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -73,7 +73,12 @@ export default function Login() {
             ) : (
               <form onSubmit={(e) => emailAndPasswordLogin(e)} action="">
                 <div className="label_container">
-                  <Input type='email' value={email} onChange={setEmail} name={contentObj?.[language].loginPage.email}/>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={setEmail}
+                    name={contentObj?.[language].loginPage.email}
+                  />
                   {/* <label htmlFor="login">
                     {contentObj?.[language].loginPage.email}
                   </label>
@@ -86,7 +91,12 @@ export default function Login() {
                   /> */}
                 </div>
                 <div className="label_container">
-                <Input type='password' value={password} onChange={setPassword} name={contentObj?.[language].loginPage.password}/>
+                  <Input
+                    type="password"
+                    value={password}
+                    onChange={setPassword}
+                    name={contentObj?.[language].loginPage.password}
+                  />
 
                   {/* <label htmlFor="password">
                     {contentObj?.[language].loginPage.password}

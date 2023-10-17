@@ -1,5 +1,7 @@
 $cardetails-background: grey;
 
+$dark-font: #404040;
+
 $lightcolor-primary: white;
 $lightcolor-secondary: rgb(175, 175, 175);
 
@@ -15,3 +17,7 @@ $border-radius--small: 3px;
 
 //color succes
 $color-success: rgb(114, 183, 11);
+
+//background
+$background-primary: linear-gradient(to right, #ffffff, rgba(236, 233, 230, 1));
+$background-secondary: white;

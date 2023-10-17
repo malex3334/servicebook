@@ -5,14 +5,20 @@ html {
   font-size: 61.5%;
   font-family: "Lato", sans-serif;
   letter-spacing: 1.1px;
-  background: #ece9e6; /* fallback for old browsers */
-  background: linear-gradient(
-    to right,
-    #ffffff,
-    #ece9e69a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  // background: #ece9e6; /* fallback for old browsers */
+  // background: linear-gradient(
+  //   to right,
+  //   #ffffff,
+  //   #ece9e69a
+  // ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   // font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  background-image: $background-primary;
+  background-size: 100vw 100vh;
+  background-attachment: fixed;
+  background-position: 0;
+  background-repeat: no-repeat;
 }
 
 * {
@@ -52,7 +58,7 @@ select {
   margin: 1rem;
   border-radius: 3px;
   border: 1px solid rgba(255, 68, 0, 0.5);
-
+  background-color: transparent;
   &:focus {
     // background: rgba(0, 0, 255, 0.138);
     outline: 3px solid rgba(255, 68, 0, 0.5);

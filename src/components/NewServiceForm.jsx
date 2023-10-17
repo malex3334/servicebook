@@ -148,7 +148,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
                 {contentObj?.[language].services.categories.aesthetics}
               </option>
             </select>
-            <label htmlFor="" className="input_label">
+            <label htmlFor="" className="input_label input-focus">
               kategoria
             </label>
           </div>
