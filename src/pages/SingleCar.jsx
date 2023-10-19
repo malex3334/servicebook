@@ -208,51 +208,55 @@ export default function SingleCar() {
           <MdConstruction className="react-icon" />
           {contentObj?.[language].services.heading}
         </h2>
-        <div className="filters_container">
-          <h4 className="filters_header">
-            {contentObj?.[language].services.filters.filters}
-          </h4>
-          <div>
-            <SingleFilter
-              key="1"
-              name="fix"
-              checked={filters.fix}
-              onChange={handleInputChange}
-            />
-            <SingleFilter
-              key="2"
-              name="aesthetics"
-              checked={filters.aesthetics}
-              onChange={handleInputChange}
-            />
-            <SingleFilter
-              key="3"
-              name="maintenance"
-              checked={filters.maintenance}
-              onChange={handleInputChange}
-            />
+        <div>
+          <div className="filters_container">
+            <h4 className="filters_header">
+              {contentObj?.[language].services.filters.filters}
+            </h4>
+            <div>
+              <SingleFilter
+                key="1"
+                name="fix"
+                checked={filters.fix}
+                onChange={handleInputChange}
+              />
+              <SingleFilter
+                key="2"
+                name="aesthetics"
+                checked={filters.aesthetics}
+                onChange={handleInputChange}
+              />
+              <SingleFilter
+                key="3"
+                name="maintenance"
+                checked={filters.maintenance}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <SingleFilter
+                key="4"
+                name="done"
+                checked={filters.done}
+                onChange={handleInputChange}
+              />
+              <SingleFilter
+                key="5"
+                name="todo"
+                checked={filters.todo}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <SingleFilter
-              key="4"
-              name="done"
-              checked={filters.done}
-              onChange={handleInputChange}
-            />
-            <SingleFilter
-              key="5"
-              name="todo"
-              checked={filters.todo}
-              onChange={handleInputChange}
-            />
-          </div>
+          <button style={{ marginBottom: "2rem" }} onClick={handleResetFilters}>
+            Resetuj
+          </button>
         </div>
-        <button onClick={handleResetFilters}>Resetuj</button>
         {loading ? (
           <Loading />
         ) : (
