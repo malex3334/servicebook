@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { DataContext } from "../context/DataContext";
-
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { contentObj } from "../language";
@@ -10,6 +9,7 @@ import { useEffect, useState } from "react";
 import { RiHomeLine } from "react-icons/ri";
 import { PiGarageBold, PiInfo } from "react-icons/pi";
 import { MdLogout, MdLogin } from "react-icons/md";
+import NavIcon from "./NavIcon";
 
 export default function Navigation() {
   const navigate = useNavigate();
@@ -60,13 +60,23 @@ export default function Navigation() {
           </select>
         </li>
         <NavLink className="navlink" to="/" end>
-          {!isMobile ? "Start" : <RiHomeLine className="nav-icon" />}
+          {!isMobile ? (
+            "Start"
+          ) : (
+            <NavIcon
+              title={"Start"}
+              icon={<RiHomeLine className="nav-icon" />}
+            />
+          )}
         </NavLink>
         <NavLink className="navlink" to="/about">
           {!isMobile ? (
-            contentObj?.[language].about.title
+            contentObj?.[language].about.navTitle
           ) : (
-            <PiInfo className="nav-icon" />
+            <NavIcon
+              title={contentObj?.[language].about.navTitle}
+              icon={<PiInfo className="nav-icon" />}
+            />
           )}
         </NavLink>
         <>
@@ -74,7 +84,10 @@ export default function Navigation() {
             {!isMobile ? (
               contentObj?.[language].myCars.title
             ) : (
-              <PiGarageBold className="nav-icon" />
+              <NavIcon
+                title={contentObj?.[language].myCars.title}
+                icon={<PiGarageBold className="nav-icon" />}
+              />
             )}
           </NavLink>
           {user ? (
@@ -95,15 +108,26 @@ export default function Navigation() {
                   ></img>
                 </span>
               ) : (
-                <img
-                  alt="user avatar"
-                  className="user_img"
-                  src={
-                    userData?.photoURL
-                      ? userData?.photoURL
-                      : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
+                <NavIcon
+                  title={
+                    userData?.name == null
+                      ? "Anonymous"
+                      : userData?.name.split(" ") >= 1
+                      ? userData?.name
+                      : userData?.name.split(" ")[0]
                   }
-                ></img>
+                  icon={
+                    <img
+                      alt="user avatar"
+                      className="user_img"
+                      src={
+                        userData?.photoURL
+                          ? userData?.photoURL
+                          : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
+                      }
+                    />
+                  }
+                />
               )}
             </NavLink>
           ) : null}
@@ -114,7 +138,10 @@ export default function Navigation() {
                   {contentObj?.[language].login}
                 </button>
               ) : (
-                <MdLogin className="nav-icon" />
+                <NavIcon
+                  title={contentObj?.[language].login}
+                  icon={<MdLogin className="nav-icon" />}
+                />
               )}
             </NavLink>
           )}
@@ -132,15 +159,20 @@ export default function Navigation() {
                 {contentObj?.[language].logout}
               </button>
             ) : (
-              <MdLogout
-                style={{ cursor: "pointer" }}
-                className="nav-icon"
-                onClick={() => {
-                  auth.signOut();
-                  setUserCarIDs([]);
-                  setCars([]);
-                  navigate("/");
-                }}
+              <NavIcon
+                title={contentObj?.[language].logout}
+                icon={
+                  <MdLogout
+                    style={{ cursor: "pointer" }}
+                    className="nav-icon"
+                    onClick={() => {
+                      auth.signOut();
+                      setUserCarIDs([]);
+                      setCars([]);
+                      navigate("/");
+                    }}
+                  />
+                }
               />
             ))}
         </>

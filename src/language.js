@@ -16,6 +16,7 @@ export const contentObj = {
 
     about: {
       title: "O projekcie",
+      navTitle: "Projekt",
       paragraph:
         "Aplikacja do śledzenia serwisów Twojego pojazdu. Pozwala w prosty sposób być na bieżąco z naprawami oraz wydatkami.",
     },
@@ -102,6 +103,7 @@ export const contentObj = {
     },
     about: {
       title: "About",
+      navTitle: "About",
       paragraph:
         "A car service app is a mobile application designed to help car owners conveniently manage and maintain their vehicles. It provides a range of features and functionalities to streamline the car servicing process and enhance the overall experience for users.",
     },
