@@ -29,7 +29,7 @@ export const contentObj = {
       year: "Rocznik",
       mileage: "Przebieg",
       img: "Wklej zdjęcie",
-      plates: "nr rejestracyjny",
+      plates: "Rejestracja",
       submit: "Dodaj",
       currentMileage: "Aktualny przebieg",
       submit: "dodaj",
