@@ -49,8 +49,10 @@ export const noAvatar =
 
 export function scrollToElement(ref) {
   const elementRect = ref.current.getBoundingClientRect();
-  const middleY = elementRect.top + elementRect.height / 2;
-  console.log(middleY);
+  const element = ref.current.offsetTop - elementRect.height;
+  // const middleY = elementRect.top + elementRect.height / 2;
+  const middleY = element;
+
   window.scrollTo({
     top: middleY,
     behavior: "smooth",

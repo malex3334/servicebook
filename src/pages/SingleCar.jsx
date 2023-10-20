@@ -176,7 +176,7 @@ export default function SingleCar() {
           </div>
           <div>{/* info box */}</div>
         </div>
-        <h2>
+        <h2 ref={scrollRef}>
           {currentCar?.brand} {currentCar?.model}
         </h2>
       </div>
@@ -204,7 +204,7 @@ export default function SingleCar() {
           editedService={editedService}
           setEditedService={setEditedService}
         />
-        <h2 ref={scrollRef}>
+        <h2>
           <MdConstruction className="react-icon" />
           {contentObj?.[language].services.heading}
         </h2>
