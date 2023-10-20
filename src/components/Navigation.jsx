@@ -93,10 +93,9 @@ export default function Navigation() {
           {user ? (
             <NavLink className="navlink" to="/user">
               {!isMobile ? (
-                <span className="user_container">
+                <div className="user_container">
                   {contentObj?.[language].welcome},{" "}
                   {userData?.name != null ? userData?.name : "Anonymous"}
-                  {/*to do: default user photo or icon */}
                   <img
                     alt="user avatar"
                     className="user_img"
@@ -106,7 +105,7 @@ export default function Navigation() {
                         : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
                     }
                   ></img>
-                </span>
+                </div>
               ) : (
                 <NavIcon
                   title={
