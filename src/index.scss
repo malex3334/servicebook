@@ -238,6 +238,13 @@
     }
   }
 
+  table,
+  td,
+  th,
+  tr {
+    font-size: 1.75rem !important;
+  }
+
   th,
   td {
     padding: 12px 12px;
@@ -250,7 +257,7 @@
   }
 
   th {
-    width: 90%;
+    // width: 90%;
     padding: 1rem;
     background-color: #404040;
     color: white;
@@ -291,7 +298,7 @@
   }
 
   .line {
-    border-top: 3px solid $dark-font;
+    border-top: 0.25rem solid $dark-font;
   }
 
   .sort_icon {
@@ -784,6 +791,10 @@ form {
       .desc {
         font-size: 1rem !important;
       }
+    }
+
+    .line {
+      min-width: 5em;
     }
   }
 
