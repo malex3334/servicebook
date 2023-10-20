@@ -79,6 +79,7 @@
     height: 2em;
     margin: 0 0.75em;
     border: 2px solid $maincolor-primary;
+    flex-shrink: 0;
   }
 
   .nav-icon {
