@@ -45,6 +45,7 @@
   }
 
   .navlink {
+    position: relative;
     &.active {
       color: $maincolor-primary;
     }
@@ -684,6 +685,28 @@ form {
     justify-content: space-between;
     align-items: flex-start;
     gap: 1rem;
+
+    .navlink {
+      &::after {
+        content: " ";
+        width: 70px;
+        height: 30px;
+        position: absolute;
+        left: 50%;
+        z-index: -1;
+        transform: translate(-50%, -50rem);
+        background: $darker-primary;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        // opacity: 0;
+        transition: transform 0.25s ease;
+      }
+      &.active {
+        &::after {
+          // opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+    }
 
     .user_img {
       margin: 0;
