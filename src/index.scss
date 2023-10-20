@@ -244,6 +244,12 @@
   th,
   tr {
     font-size: 1.75rem !important;
+
+    input[type="checkbox"] {
+      width: 0.85em;
+      height: 0.85em;
+      margin: 0.25rem;
+    }
   }
 
   th,
@@ -283,6 +289,8 @@
 
   input[type="checkbox"] {
     cursor: pointer;
+    // width: 0.85em;
+    // height: 0.85em;
   }
 
   .desc {
@@ -630,6 +638,23 @@ form {
   color: #404040;
   letter-spacing: 2px;
   backdrop-filter: blur(20px);
+  background: $background-primary;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  background-position: 0;
+  background-repeat: no-repeat;
+}
+
+.newservice_container {
+  position: relative;
+  width: 90%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 3rem;
+  padding: 2rem 1rem;
+  border: 1px solid $maincolor-primary;
+  border-radius: $border-radius--small;
 }
 
 .filters_container {
@@ -686,11 +711,19 @@ form {
 }
 
 @media (max-width: 1400px) {
+  .navlink {
+    font-size: 1.5rem !important;
+  }
+
   table,
   td,
   th,
   tr {
     font-size: 1.5rem !important;
+  }
+  button,
+  .user_container {
+    font-size: 1.5rem;
   }
 }
 
