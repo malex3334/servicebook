@@ -19,7 +19,6 @@ export default function User() {
     editUserData(userID, editedData, editedParam);
   };
 
-  console.log(userData?.name);
   useEffect(() => {}, [userData?.name, userData?.photoURL, editedImg, setEdit]);
 
   if (loading) {
@@ -67,6 +66,10 @@ export default function User() {
             className="user_avatar"
             src={photoURL ? photoURL : noAvatar}
             alt="user avatar"
+            onError={(e) =>
+              (e.target.src =
+                "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png")
+            }
           />
           {edit ? (
             <div className="name_container">

@@ -103,6 +103,10 @@ export default function Navigation() {
                         ? userData?.photoURL
                         : "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png"
                     }
+                    onError={(e) =>
+                      (e.target.src =
+                        "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png")
+                    }
                   ></img>
                 </div>
               ) : (
