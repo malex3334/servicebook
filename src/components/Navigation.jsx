@@ -94,7 +94,6 @@ export default function Navigation() {
             <NavLink className="navlink" to="/user">
               {!isMobile ? (
                 <div className="user_container">
-                  {contentObj?.[language].welcome},{" "}
                   {userData?.name != null ? userData?.name : "Anonymous"}
                   <img
                     alt="user avatar"

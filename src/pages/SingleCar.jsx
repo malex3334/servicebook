@@ -265,133 +265,139 @@ export default function SingleCar() {
             Resetuj
           </button>
         </div>
-        {loading ? (
-          <Loading />
-        ) : (
-          <div className="table_container">
-            <table id="myTable">
-              <thead>
-                <tr>
-                  <th>lp</th>
-                  <ServicesHeaders
-                    header="Tytuł"
-                    id="title"
-                    setSorting={setSorting}
-                    setCount={setCount}
-                    count={count}
-                  />
-                  <ServicesHeaders
-                    header="Data"
-                    id="date"
-                    setSorting={setSorting}
-                    setCount={setCount}
-                    count={count}
-                  />
-                  <ServicesHeaders
-                    header="Opis"
-                    id="desc"
-                    setSorting={setSorting}
-                    setCount={setCount}
-                    count={count}
-                  />
-                  <ServicesHeaders
-                    header="Kategoria"
-                    id="category"
-                    setSorting={setSorting}
-                    setCount={setCount}
-                    count={count}
-                  />
-                  <ServicesHeaders
-                    header="Data dodania"
-                    id="createdAt"
-                    setSorting={setSorting}
-                    setCount={setCount}
-                    count={count}
-                  />
-                  <ServicesHeaders
-                    header="Przebieg"
-                    id="mileage"
-                    setSorting={setSorting}
-                    setCount={setCount}
-                    count={count}
-                  />
-                  <ServicesHeaders
-                    header="Cena"
-                    id="price"
-                    setSorting={setSorting}
-                    setCount={setCount}
-                    count={count}
-                  />
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody className="table_content">
-                {filteredData &&
-                  filteredData.length > 0 &&
-                  sortBy(filteredData, sorting).map(
-                    (
-                      {
-                        id,
-                        title,
-                        desc,
-                        price,
-                        date,
-                        createdAt,
-                        mileage,
-                        category,
-                        done,
-                      },
-                      index,
-                      service
-                    ) => {
-                      return (
-                        <ServicesTable
-                          key={id}
-                          index={index}
-                          service={{
-                            id,
-                            title,
-                            desc,
-                            price,
-                            date,
-                            createdAt,
-                            mileage,
-                            category,
-                            done,
-                          }}
-                          deleteService={deleteService}
-                          onServiceEdit={onServiceEdit}
-                        />
-                      );
-                    }
-                  )}
-              </tbody>
-            </table>
+        {filteredServices <= 0 ? (
+          <div className="noservice">
+            brak serwisów - uzyj formularza by dodać pierwszy serwis
           </div>
+        ) : (
+          // <Loading />
+          <>
+            <div className="table_container">
+              <table id="myTable">
+                <thead>
+                  <tr>
+                    <th>lp</th>
+                    <ServicesHeaders
+                      header="Tytuł"
+                      id="title"
+                      setSorting={setSorting}
+                      setCount={setCount}
+                      count={count}
+                    />
+                    <ServicesHeaders
+                      header="Data"
+                      id="date"
+                      setSorting={setSorting}
+                      setCount={setCount}
+                      count={count}
+                    />
+                    <ServicesHeaders
+                      header="Opis"
+                      id="desc"
+                      setSorting={setSorting}
+                      setCount={setCount}
+                      count={count}
+                    />
+                    <ServicesHeaders
+                      header="Kategoria"
+                      id="category"
+                      setSorting={setSorting}
+                      setCount={setCount}
+                      count={count}
+                    />
+                    <ServicesHeaders
+                      header="Data dodania"
+                      id="createdAt"
+                      setSorting={setSorting}
+                      setCount={setCount}
+                      count={count}
+                    />
+                    <ServicesHeaders
+                      header="Przebieg"
+                      id="mileage"
+                      setSorting={setSorting}
+                      setCount={setCount}
+                      count={count}
+                    />
+                    <ServicesHeaders
+                      header="Cena"
+                      id="price"
+                      setSorting={setSorting}
+                      setCount={setCount}
+                      count={count}
+                    />
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody className="table_content">
+                  {filteredData &&
+                    filteredData.length > 0 &&
+                    sortBy(filteredData, sorting).map(
+                      (
+                        {
+                          id,
+                          title,
+                          desc,
+                          price,
+                          date,
+                          createdAt,
+                          mileage,
+                          category,
+                          done,
+                        },
+                        index,
+                        service
+                      ) => {
+                        return (
+                          <ServicesTable
+                            key={id}
+                            index={index}
+                            service={{
+                              id,
+                              title,
+                              desc,
+                              price,
+                              date,
+                              createdAt,
+                              mileage,
+                              category,
+                              done,
+                            }}
+                            deleteService={deleteService}
+                            onServiceEdit={onServiceEdit}
+                          />
+                        );
+                      }
+                    )}
+                </tbody>
+              </table>
+            </div>
+
+            <tfoot
+              style={{
+                width: "90%",
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "2rem",
+              }}
+            >
+              <tr>
+                <td className="blind_row"></td>
+                <td className="blind_row"></td>
+                <td className="blind_row"></td>
+                <td className="blind_row"></td>
+                <td className="blind_row"></td>
+                <td className="blind_row"></td>
+                <td className="line">RAZEM</td>
+                <td className="line">
+                  <b>{cash(sum)} zł</b>
+                </td>
+              </tr>
+            </tfoot>
+          </>
         )}
-        <tfoot
-          style={{
-            width: "90%",
-            display: "flex",
-            justifyContent: "flex-end",
-            marginTop: "2rem",
-          }}
-        >
-          <tr>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="blind_row"></td>
-            <td className="line">RAZEM</td>
-            <td className="line">
-              <b>{cash(sum)} zł</b>
-            </td>
-          </tr>
-        </tfoot>
         <button
           style={{ marginTop: "1rem" }}
           onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}

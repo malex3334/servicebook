@@ -688,6 +688,11 @@ form {
   }
 }
 
+.noservice {
+  margin: 3rem 0;
+  font-style: italic;
+}
+
 @media (max-width: 1400px) {
   .navlink {
     font-size: 1.5rem !important;
