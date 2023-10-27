@@ -101,91 +101,96 @@ export default function NewServiceForm({ editedService, setEditedService }) {
   };
 
   return (
-    <>
-      <form
-        action=""
-        onSubmit={(e) => {
-          onSubmit(e, serviceObject);
-        }}
-      >
-        <div className="serviceform_container">
-          <Input
-            type="text"
-            onChange={setTitle}
-            value={title}
-            name={contentObj?.[language].services.title}
-          />
-          <Input
-            type="date"
-            onChange={setDate}
-            value={date}
-            name={contentObj?.[language].services.date}
-          />
-          <Input
-            type="text"
-            onChange={setDescription}
-            value={description}
-            name={contentObj?.[language].services.desc}
-          />
-
-          <div className="input">
-            <select
-              onChange={(e) => setCategory(e.target.value)}
-              name="category"
-              id="category"
-              value={category}
-            >
-              <option value="maintenance">
-                {contentObj?.[language].services.categories.maintenance}
-              </option>
-              <option value="fix">
-                {contentObj?.[language].services.categories.fix}
-              </option>
-              <option value="aesthetics">
-                {contentObj?.[language].services.categories.aesthetics}
-              </option>
-            </select>
-            <label htmlFor="" className="input_label input-focus">
-              kategoria
-            </label>
-          </div>
-
-          <Input
-            type="number"
-            onChange={setMileage}
-            value={mileage?.toLocaleString()}
-            name={contentObj?.[language].services.mileage}
-          />
-          <Input
-            type="number"
-            onChange={setPrice}
-            value={cash(price)}
-            name={contentObj?.[language].services.price}
-          />
-
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
-            onClick={() => setDone(!done)}
-          >
-            <input
-              type="checkbox"
-              checked={done}
-              onChange={() => setDone(!done)}
+    <form
+      action=""
+      onSubmit={(e) => {
+        onSubmit(e, serviceObject);
+      }}
+    >
+      <div className="newservice_container">
+        <h4 className="filters_header">Serwis</h4>
+        <div>
+          <div className="serviceform_container">
+            <Input
+              type="text"
+              onChange={setTitle}
+              value={title}
+              name={contentObj?.[language].services.title}
             />
-            <label htmlFor="">zrobione</label>
+            <Input
+              type="date"
+              onChange={setDate}
+              value={date}
+              name={contentObj?.[language].services.date}
+            />
+            <Input
+              type="text"
+              onChange={setDescription}
+              value={description}
+              name={contentObj?.[language].services.desc}
+            />
+
+            <div className="input">
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                name="category"
+                id="category"
+                value={category}
+              >
+                <option value="maintenance">
+                  {contentObj?.[language].services.categories.maintenance}
+                </option>
+                <option value="fix">
+                  {contentObj?.[language].services.categories.fix}
+                </option>
+                <option value="aesthetics">
+                  {contentObj?.[language].services.categories.aesthetics}
+                </option>
+              </select>
+              <label htmlFor="" className="input_label input-focus">
+                kategoria
+              </label>
+            </div>
+
+            <Input
+              type="text"
+              onChange={setMileage}
+              value={mileage?.toLocaleString()}
+              name={contentObj?.[language].services.mileage}
+            />
+            <Input
+              type="text"
+              onChange={setPrice}
+              value={cash(price)}
+              name={contentObj?.[language].services.price}
+            />
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
+              onClick={() => setDone(!done)}
+            >
+              <input
+                type="checkbox"
+                checked={done}
+                onChange={() => setDone(!done)}
+              />
+              <label htmlFor="">zrobione</label>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="buttons_container">
         <button type="submit">
           {!editFlag ? contentObj?.[language].services.addButton : "aktualizuj"}
         </button>
         {editFlag === true && (
           <button
-            type="button"
+            type="submit"
             style={{ margin: "0 1rem" }}
             onClick={() => {
               onEditCancel();
@@ -194,7 +199,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
             anuluj
           </button>
         )}
-      </form>
-    </>
+      </div>
+    </form>
   );
 }

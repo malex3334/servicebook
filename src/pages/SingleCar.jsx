@@ -205,13 +205,10 @@ export default function SingleCar() {
     return (
       <div className="singlecar_container container">
         <div>{carData()}</div>
-        <div className="newservice_container">
-          <h4 className="filters_header">Serwis</h4>
-          <NewServiceForm
-            editedService={editedService}
-            setEditedService={setEditedService}
-          />
-        </div>
+        <NewServiceForm
+          editedService={editedService}
+          setEditedService={setEditedService}
+        />
         <h2>
           <MdConstruction className="react-icon" />
           {contentObj?.[language].services.heading}
