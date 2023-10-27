@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { NavLink, useParams } from "react-router-dom";
-import { cash, scrollToElement } from "../helpers/Helpers";
+import { cash, handleImgError, scrollToElement } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import { MdConstruction } from "react-icons/md";
 import { contentObj } from "../language";
@@ -19,6 +19,8 @@ export default function SingleCar() {
   const [sorting, setSorting] = useState("date");
   const [count, setCount] = useState(0);
   const scrollRef = useRef(null);
+  const carImgRef = useRef(null);
+  const carImgBackground = useRef();
 
   const [filters, setFilters] = useState({
     fix: true,
@@ -166,10 +168,13 @@ export default function SingleCar() {
               background: `url(${currentCar?.img})`,
             }}
             className="singlecar_background"
+            ref={carImgBackground}
           ></div>
           <div>
             <img
               src={currentCar?.img}
+              ref={carImgRef}
+              onError={(e) => handleImgError(carImgRef, carImgBackground)}
               alt=""
               className="single-car__img services"
             />
