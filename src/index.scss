@@ -804,10 +804,14 @@ form {
       padding: 0;
       td,
       th,
-      tr,
-      .desc {
+      tr {
         font-size: 1rem !important;
       }
+    }
+
+    .desc {
+      font-size: 1rem !important;
+      text-wrap: wrap;
     }
 
     .line {
