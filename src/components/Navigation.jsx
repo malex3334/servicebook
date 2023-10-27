@@ -122,6 +122,10 @@ export default function Navigation() {
                     <img
                       alt="user avatar"
                       className="user_img"
+                      onError={(e) =>
+                        (e.target.src =
+                          "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png")
+                      }
                       src={
                         userData?.photoURL
                           ? userData?.photoURL
