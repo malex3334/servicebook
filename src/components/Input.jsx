@@ -20,6 +20,12 @@ export default function Input(props) {
     }
   };
 
+  const handleMaxLength = () => {
+    if (inputRef.current.type === "password") {
+      return 14;
+    }
+  };
+
   useEffect(() => {
     handleFocus();
   }, [value]);
