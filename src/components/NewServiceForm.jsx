@@ -153,13 +153,13 @@ export default function NewServiceForm({ editedService, setEditedService }) {
             </div>
 
             <Input
-              type="text"
+              type="number"
               onChange={setMileage}
               value={mileage?.toLocaleString()}
               name={contentObj?.[language].services.mileage}
             />
             <Input
-              type="text"
+              type="number"
               onChange={setPrice}
               value={cash(price)}
               name={contentObj?.[language].services.price}

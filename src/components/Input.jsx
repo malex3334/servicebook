@@ -36,6 +36,7 @@ export default function Input(props) {
         maxLength={type === "number" ? 6 : 120}
         min="0"
         max="1000000"
+        step={0.1}
       />
       <label htmlFor="" className="input_label" ref={labelRef}>
         {name}
