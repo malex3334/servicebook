@@ -132,13 +132,13 @@ export default function Login() {
               </button>
             </div>
           </form>
-          <h3>{contentObj?.[language].register.useGoogle}</h3>
+          {/* <h3>{contentObj?.[language].register.useGoogle}</h3>
           <button onClick={GoogleLogin}>
             <div className="button_container">
               <FcGoogle className="react-icon" />
               {contentObj?.[language].register.signInGoogle}
             </div>
-          </button>
+          </button> */}
         </div>
       </div>
     );

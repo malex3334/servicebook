@@ -11,6 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import Loading from "./Loading";
 import { contentObj } from "../language";
 import Input from "./Input";
+import Register from "./Register";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -63,7 +64,8 @@ export default function Login() {
 
   if (!user) {
     return (
-      <>
+      <div style={{ display: "flex", justifyContent: "center", gap: "5rem" }}>
+        <Register />
         <div className="login_container container">
           <h2>{contentObj?.[language].loginPage.title}:</h2>
           <div className="login_credentials">
@@ -109,7 +111,7 @@ export default function Login() {
           </div>
         </div>
         <div className="login_container">{/* <Register /> */}</div>
-      </>
+      </div>
     );
   } else return navigate("/cars");
 }
