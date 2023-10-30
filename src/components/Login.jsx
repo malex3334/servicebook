@@ -3,8 +3,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth, app } from "../utils/firebase";
+import { auth } from "../utils/firebase";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -12,6 +13,7 @@ import Loading from "./Loading";
 import { contentObj } from "../language";
 import Input from "./Input";
 import Register from "./Register";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -19,6 +21,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -54,6 +58,24 @@ export default function Login() {
         }, 3000);
         console.log(errorCode, errorMessage);
       });
+  };
+
+  const handlePasswordReset = (e) => {
+    e.preventDefault();
+    let result = window.confirm("jesteś pewien??");
+
+    if (result) {
+      console.log(auth, resetEmail);
+      try {
+        sendPasswordResetEmail(auth, resetEmail);
+        toast.success("email z linkiem do resetowania hasła wysłany");
+      } catch (error) {
+        toast.error(error);
+        console.log(error);
+      }
+    }
+    setShowResetPassword(false);
+    setResetEmail("");
   };
 
   // end
@@ -114,6 +136,35 @@ export default function Login() {
                 {contentObj?.[language].loginPage.useGoogle}
               </div>
             </button>
+            <div className="reset_password">
+              {!showResetPassword ? (
+                <a
+                  href="#"
+                  style={{ fontStyle: "italic" }}
+                  onClick={() => setShowResetPassword(true)}
+                >
+                  nie pamiętam hasła
+                </a>
+              ) : (
+                <form action="" onSubmit={(e) => handlePasswordReset(e)}>
+                  <Input
+                    type="email"
+                    name="podaj email"
+                    value={resetEmail}
+                    onChange={setResetEmail}
+                  />
+                  <button type="submit">zresetuj</button>
+                  <button
+                    onClick={() => {
+                      setShowResetPassword(false);
+                      setResetEmail("");
+                    }}
+                  >
+                    anuluj
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
         <Register />

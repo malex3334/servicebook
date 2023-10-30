@@ -8,6 +8,9 @@ import { FaXmark } from "react-icons/fa6";
 import Loading from "../components/Loading";
 import Input from "../components/Input";
 import ChangePasswordForm from "../components/Login/ChangePasswordForm";
+import { auth } from "../utils/firebase";
+import { sendPasswordResetEmail } from "firebase/auth";
+import toast from "react-hot-toast";
 
 export default function User() {
   const [edit, setEdit] = useState(false);
@@ -18,6 +21,7 @@ export default function User() {
   const [editedImg, setEditedImg] = useState(userData?.photoURL);
   const [passwordChangeInput, setPasswordChangeInput] = useState();
   const navigate = useNavigate();
+  const { user } = useContext(DataContext);
 
   const onHandleSubmit = (userID, editedData, editedParam) => {
     editUserData(userID, editedData, editedParam);
@@ -29,6 +33,21 @@ export default function User() {
 
   const handleCancel = () => {
     setPasswordChangeInput(false);
+  };
+
+  const handlePasswordReset = () => {
+    let result = window.confirm("are you sure?");
+
+    if (result) {
+      console.log(auth, user?.email);
+      try {
+        sendPasswordResetEmail(auth, user?.email);
+        toast.success("email send");
+      } catch (error) {
+        toast.error(error);
+        console.log(error);
+      }
+    }
   };
 
   useEffect(() => {}, [userData?.name, userData?.photoURL, editedImg, setEdit]);
@@ -170,7 +189,9 @@ export default function User() {
               <button onClick={handleShowPasswordForm}>zmień hasło</button>
             </div>
           )}
-          <button className="account_settings">zresetuj hasło</button>
+          <button className="account_settings" onClick={handlePasswordReset}>
+            zresetuj hasło
+          </button>
           <button className="account_settings">usuń konto</button>
         </div>
       </div>

@@ -2,11 +2,8 @@ import React from "react";
 import Input from "../Input";
 import { useState } from "react";
 import { auth } from "../../utils/firebase";
-import { useContext } from "react";
-import { DataContext } from "../../context/DataContext";
 import {
   EmailAuthProvider,
-  getAuth,
   reauthenticateWithCredential,
   updatePassword,
 } from "firebase/auth";
