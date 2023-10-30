@@ -23,6 +23,13 @@ html {
   font-size: 2rem;
 }
 
+a {
+  color: $darker-primary;
+  &:hover {
+    color: black;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -63,10 +70,11 @@ input[type="number"] {
 
 input[type="checkbox"] {
 }
-button {
-}
 
+button :disabled {
+}
 button {
+  font-size: 1.75rem;
   background: white;
   border: none;
   border-radius: 3px;

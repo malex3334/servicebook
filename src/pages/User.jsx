@@ -44,38 +44,7 @@ export default function User() {
       <div className="userdata_container container">
         <div className="userdata_body">
           <h2>Twoje dane</h2>
-          {avatarEdit ? (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setAvatarEdit(false);
-                onHandleSubmit(id, editedImg, "photoURL");
-              }}
-            >
-              <div className="name_container">
-                <Input
-                  type="text"
-                  value={editedImg}
-                  onChange={setEditedImg}
-                  name="avatar"
-                />
 
-                <div className="buttons">
-                  <button type="submit" className="nobutton">
-                    <FaCheck className="icon success" />
-                  </button>
-                  <button type="submit" className="nobutton">
-                    <FaXmark
-                      onClick={(e) => {
-                        setAvatarEdit(false);
-                      }}
-                      className="icon danger"
-                    />
-                  </button>
-                </div>
-              </div>
-            </form>
-          ) : null}
           <div style={{ position: "relative" }}>
             <img
               className="user_avatar"
@@ -108,6 +77,38 @@ export default function User() {
               )}
             </button>
           </div>
+          {avatarEdit ? (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setAvatarEdit(false);
+                onHandleSubmit(id, editedImg, "photoURL");
+              }}
+            >
+              <div className="name_container">
+                <Input
+                  type="text"
+                  value={editedImg}
+                  onChange={setEditedImg}
+                  name="avatar"
+                />
+
+                <div className="buttons">
+                  <button type="submit" className="nobutton">
+                    <FaCheck className="icon success" />
+                  </button>
+                  <button type="submit" className="nobutton">
+                    <FaXmark
+                      onClick={(e) => {
+                        setAvatarEdit(false);
+                      }}
+                      className="icon danger"
+                    />
+                  </button>
+                </div>
+              </div>
+            </form>
+          ) : null}
           {nameEdit ? (
             <div className="name_container">
               <form
@@ -162,16 +163,27 @@ export default function User() {
             <span className="bold">cars: </span>
             <span>{carsIDs ? carsIDs.length : "no cars yet"}</span>
           </div>
-          <h6 style={{ margin: "1rem 0" }}>ustawienia:</h6>
-          {passwordChangeInput ? (
-            <ChangePasswordForm handleCancel={handleCancel} />
-          ) : (
-            <div className="account_settings">
-              <button onClick={handleShowPasswordForm}>zmień hasło</button>
-            </div>
-          )}
-
-          <button className="account_settings">usuń konto</button>
+          <div
+            style={{
+              padding: "2rem 1rem",
+              borderTop: "1px solid gray",
+              marginTop: "2rem",
+              width: "90%",
+            }}
+          >
+            {/* <h6 style={{ margin: "1rem 0" }}>ustawienia:</h6> */}
+            {passwordChangeInput ? (
+              <ChangePasswordForm handleCancel={handleCancel} />
+            ) : (
+              <div className="account_settings">
+                <button onClick={handleShowPasswordForm}>zmień hasło</button>
+              </div>
+            )}
+            {/* 
+            <button className="account_settings" disabled>
+              usuń konto
+            </button> */}
+          </div>
         </div>
       </div>
     );

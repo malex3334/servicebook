@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { DataContext } from "../context/DataContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import Loading from "./Loading";
 import { contentObj } from "../language";
@@ -34,6 +34,7 @@ export default function Login() {
       console.log(result.user);
     } catch (error) {
       console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -53,6 +54,7 @@ export default function Login() {
         const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage);
+        toast.error(errorMessage);
         setTimeout(() => {
           setError(null);
         }, 3000);
@@ -86,89 +88,100 @@ export default function Login() {
 
   if (!user) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "5rem",
-          flexWrap: "wrap",
-        }}
-      >
-        <div className="login_container">
-          <h2>{contentObj?.[language].loginPage.title}:</h2>
-          <div className="login_credentials">
-            <h3>{contentObj?.[language].loginPage.loginCredentials}:</h3>
-            {loading ? (
-              <Loading />
-            ) : (
-              <form onSubmit={(e) => emailAndPasswordLogin(e)} action="">
-                <div className="name_container">
-                  <Input
-                    type="email"
-                    value={email}
-                    onChange={setEmail}
-                    name={contentObj?.[language].loginPage.email}
-                  />
-
-                  <Input
-                    type="password"
-                    value={password}
-                    onChange={setPassword}
-                    name={contentObj?.[language].loginPage.password}
-                  />
-                </div>
-
-                <span style={{ color: "red" }}>
-                  {error && `${contentObj?.[language].loginPage.wrongUser}`}
-                </span>
-                <button style={{ marginTop: "2rem" }} type="submit">
-                  <div className="button_container">
-                    {contentObj?.[language].loginPage.login}
-                  </div>
-                </button>
-              </form>
-            )}
-            <h3>{contentObj?.[language].loginPage.useServices}:</h3>
-
-            <button onClick={GoogleLogin}>
-              <div className="button_container">
-                <FcGoogle className="react-icon" />
-                {contentObj?.[language].loginPage.useGoogle}
+      <div style={{ minHeight: "79vh" }}>
+        <h2>Zaloguj się lub dołącz</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "5rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <div className="login_container">
+            {/* <h2>{contentObj?.[language].loginPage.title}:</h2> */}
+            <div className="login_credentials">
+              <div>
+                <span>Nie masz jeszcze konta?</span>
+                <NavLink to="/register">
+                  <span>Zarejestruj się</span>
+                </NavLink>
               </div>
-            </button>
-            <div className="reset_password">
-              {!showResetPassword ? (
-                <a
-                  href="#"
-                  style={{ fontStyle: "italic" }}
-                  onClick={() => setShowResetPassword(true)}
-                >
-                  Nie pamiętam hasła
-                </a>
+              <h3>{contentObj?.[language].loginPage.loginCredentials}:</h3>
+              {loading ? (
+                <Loading />
               ) : (
-                <form action="" onSubmit={(e) => handlePasswordReset(e)}>
-                  <h4>Resetowanie hasła:</h4>
-                  <Input
-                    type="Email"
-                    name="Podaj email"
-                    value={resetEmail}
-                    onChange={setResetEmail}
-                  />
-                  <button type="submit">Zresetuj</button>
-                  <button
-                    onClick={() => {
-                      setShowResetPassword(false);
-                      setResetEmail("");
-                    }}
-                  >
-                    Anuluj
+                <form onSubmit={(e) => emailAndPasswordLogin(e)} action="">
+                  <div className="name_container">
+                    <Input
+                      type="email"
+                      value={email}
+                      onChange={setEmail}
+                      name={contentObj?.[language].loginPage.email}
+                    />
+
+                    <Input
+                      type="password"
+                      value={password}
+                      onChange={setPassword}
+                      name={contentObj?.[language].loginPage.password}
+                    />
+                  </div>
+
+                  <span style={{ color: "red" }}>
+                    {error && `${contentObj?.[language].loginPage.wrongUser}`}
+                  </span>
+                  <button style={{ marginTop: "2rem" }} type="submit">
+                    <div className="button_container">
+                      {contentObj?.[language].loginPage.login}
+                    </div>
                   </button>
                 </form>
               )}
+              <h3 style={{ fontWeight: "normal" }}>
+                {contentObj?.[language].loginPage.useServices}:
+              </h3>
+
+              <button onClick={GoogleLogin}>
+                <div className="button_container">
+                  <FcGoogle className="react-icon" />
+                  {contentObj?.[language].loginPage.useGoogle}
+                </div>
+              </button>
+              <div className="reset_password">
+                {!showResetPassword ? (
+                  <a
+                    href="#"
+                    style={{ fontStyle: "italic" }}
+                    onClick={() => setShowResetPassword(true)}
+                  >
+                    Nie pamiętam hasła
+                  </a>
+                ) : (
+                  <form action="" onSubmit={(e) => handlePasswordReset(e)}>
+                    <h4 style={{ fontWeight: "normal" }}>Resetowanie hasła:</h4>
+                    <Input
+                      type="Email"
+                      name="Podaj email"
+                      value={resetEmail}
+                      onChange={setResetEmail}
+                    />
+                    <button type="submit">Zresetuj</button>
+                    <button
+                      onClick={() => {
+                        setShowResetPassword(false);
+                        setResetEmail("");
+                      }}
+                    >
+                      Anuluj
+                    </button>
+                  </form>
+                )}
+              </div>
             </div>
           </div>
+          {/* <Register /> */}
         </div>
-        <Register />
       </div>
     );
   } else return navigate("/cars");

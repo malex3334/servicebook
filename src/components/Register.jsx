@@ -84,7 +84,7 @@ export default function Login() {
 
   if (!user) {
     return (
-      <div className="login_container">
+      <div className="login_container" style={{ minHeight: "79vh" }}>
         <h2>{contentObj?.[language].register.title}</h2>
         <div className="login_credentials">
           <h3>{contentObj?.[language].register.loginCredentials}:</h3>
@@ -126,7 +126,8 @@ export default function Login() {
 
               <button style={{ marginTop: "2rem" }} type="submit">
                 <div className="button_container">
-                  {contentObj?.[language].register.sign}
+                  {/* {contentObj?.[language].register.sign} */}
+                  Zarejestruj
                 </div>
               </button>
             </div>

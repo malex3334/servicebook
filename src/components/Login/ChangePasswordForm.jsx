@@ -44,7 +44,7 @@ export default function ChangePasswordForm({ handleCancel }) {
         toast.success("hasło zmienione");
         cancel();
       } catch (error) {
-        toast.error(error);
+        toast.error(error.message);
         console.error("error changing password:", error);
       }
     } else {
@@ -59,7 +59,12 @@ export default function ChangePasswordForm({ handleCancel }) {
         <Loading />
       ) : (
         <form action="" onSubmit={(e) => handleSubmit(e)}>
-          <label htmlFor="">zmień hasło:</label>
+          <span
+            style={{ display: "block", margin: "0 0 1.25rem 0" }}
+            htmlFor=""
+          >
+            zmień hasło:
+          </span>
           <Input
             name="aktualne hasło"
             value={currentPassword}

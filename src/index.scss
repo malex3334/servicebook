@@ -606,6 +606,8 @@ form {
     }
 
     .icon {
+      background-color: white;
+      border: 2px solid white;
       cursor: pointer;
       transition: transition 0.5s ease-in-out;
       &:hover {
@@ -616,7 +618,7 @@ form {
   }
 
   .account_settings {
-    margin: 0.25rem 0;
+    margin: 1rem auto;
     align-self: flex-start;
   }
 }
