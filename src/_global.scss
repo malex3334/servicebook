@@ -12,6 +12,7 @@ html {
   background-position: 0;
   background-repeat: no-repeat;
   overflow-x: hidden;
+  color: $dark-font;
 }
 
 * {
@@ -72,7 +73,7 @@ button {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
   padding: 0.5em 1em;
   cursor: pointer;
-  color: black;
+  color: $dark-font;
   transition: background 0.2s ease-in-out;
 
   &:hover {

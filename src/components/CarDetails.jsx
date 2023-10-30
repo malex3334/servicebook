@@ -21,7 +21,8 @@ export default function CarDetails({ car }) {
           {car.brand} {car.model}
         </h4>
         <p>
-          {contentObj?.[language].myCars.mileage}:<span> {car.mileage} km</span>
+          {contentObj?.[language].myCars.mileage}:
+          <span> {Number(car.mileage).toLocaleString()} km</span>
         </p>
         <p>
           {contentObj?.[language].myCars.year}:<span> {car.year}</span>

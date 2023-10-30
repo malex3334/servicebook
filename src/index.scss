@@ -764,6 +764,10 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .cardetails__text {
+      width: 90%;
+    }
   }
 
   .about_container {

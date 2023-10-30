@@ -59,7 +59,9 @@ export default function ServicesTable(
           fontWeight: "bold",
           cursor: "pointer",
         }}
-        onClick={() => deleteService(service?.id, viewedCarID)}
+        onClick={() => {
+          deleteService(service?.id, viewedCarID);
+        }}
       >
         <FaTrashAlt style={{ fontSize: "1.5rem" }} />
       </td>

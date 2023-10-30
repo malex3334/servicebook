@@ -364,14 +364,6 @@ export function DataProvider({ children }) {
   }
   // delete service
   function deleteService(serviceId, currentCarID) {
-    // toast((t) => (
-    //   <span>
-    //     Are you sure?
-    //     <button onClick={() => toast.dismiss(t.id)}>Yes</button>
-    //     <button onClick={() => toast.dismiss(t.id)}>No</button>
-    //   </span>
-    // ));
-
     const result = window.confirm("are you sure?");
 
     if (result) {
