@@ -44,6 +44,7 @@ export default function ChangePasswordForm({ handleCancel }) {
         toast.success("hasło zmienione");
         cancel();
       } catch (error) {
+        toast.error(error);
         console.error("error changing password:", error);
       }
     } else {

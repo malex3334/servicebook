@@ -143,24 +143,25 @@ export default function Login() {
                   style={{ fontStyle: "italic" }}
                   onClick={() => setShowResetPassword(true)}
                 >
-                  nie pamiętam hasła
+                  Nie pamiętam hasła
                 </a>
               ) : (
                 <form action="" onSubmit={(e) => handlePasswordReset(e)}>
+                  <h4>Resetowanie hasła:</h4>
                   <Input
-                    type="email"
-                    name="podaj email"
+                    type="Email"
+                    name="Podaj email"
                     value={resetEmail}
                     onChange={setResetEmail}
                   />
-                  <button type="submit">zresetuj</button>
+                  <button type="submit">Zresetuj</button>
                   <button
                     onClick={() => {
                       setShowResetPassword(false);
                       setResetEmail("");
                     }}
                   >
-                    anuluj
+                    Anuluj
                   </button>
                 </form>
               )}
