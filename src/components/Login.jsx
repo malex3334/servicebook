@@ -64,9 +64,16 @@ export default function Login() {
 
   if (!user) {
     return (
-      <div style={{ display: "flex", justifyContent: "center", gap: "5rem" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "5rem",
+          flexWrap: "wrap",
+        }}
+      >
         <Register />
-        <div className="login_container container">
+        <div className="login_container">
           <h2>{contentObj?.[language].loginPage.title}:</h2>
           <div className="login_credentials">
             <h3>{contentObj?.[language].loginPage.loginCredentials}:</h3>
@@ -110,7 +117,6 @@ export default function Login() {
             </button>
           </div>
         </div>
-        <div className="login_container">{/* <Register /> */}</div>
       </div>
     );
   } else return navigate("/cars");
