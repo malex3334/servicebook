@@ -7,16 +7,26 @@ import { FaEdit, FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import Loading from "../components/Loading";
 import Input from "../components/Input";
+import ChangePasswordForm from "../components/Login/ChangePasswordForm";
 
 export default function User() {
   const [edit, setEdit] = useState(false);
   const { userData, loading, editUserData } = useContext(DataContext);
   const [editedName, setEditedName] = useState(userData?.name);
   const [editedImg, setEditedImg] = useState(userData?.photoURL);
+  const [passwordChangeInput, setPasswordChangeInput] = useState();
   const navigate = useNavigate();
 
   const onHandleSubmit = (userID, editedData, editedParam) => {
     editUserData(userID, editedData, editedParam);
+  };
+
+  const handleShowPasswordForm = () => {
+    setPasswordChangeInput(true);
+  };
+
+  const handleCancel = () => {
+    setPasswordChangeInput(false);
   };
 
   useEffect(() => {}, [userData?.name, userData?.photoURL, editedImg, setEdit]);
@@ -122,10 +132,15 @@ export default function User() {
             <span className="bold">cars: </span>
             <span>{carsIDs ? carsIDs.length : "no cars yet"}</span>
           </div>
+
+          {passwordChangeInput ? (
+            <ChangePasswordForm handleCancel={handleCancel} />
+          ) : (
+            <div>
+              <button onClick={handleShowPasswordForm}>zmień hasło</button>
+            </div>
+          )}
         </div>
-        {/* <div>
-          <button>usuń konto</button>
-        </div> */}
       </div>
     );
   } else {

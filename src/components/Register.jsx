@@ -5,11 +5,10 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { getDoc, getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { auth } from "../utils/firebase";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { uuidv4 } from "@firebase/util";
 import { contentObj } from "../language";
 import Input from "./Input";
