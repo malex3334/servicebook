@@ -11,6 +11,8 @@ import ChangePasswordForm from "../components/Login/ChangePasswordForm";
 
 export default function User() {
   const [edit, setEdit] = useState(false);
+  const [avatarEdit, setAvatarEdit] = useState(false);
+  const [nameEdit, setNameEdit] = useState(false);
   const { userData, loading, editUserData } = useContext(DataContext);
   const [editedName, setEditedName] = useState(userData?.name);
   const [editedImg, setEditedImg] = useState(userData?.photoURL);
@@ -42,74 +44,98 @@ export default function User() {
       <div className="userdata_container container">
         <div className="userdata_body">
           <h2>Twoje dane</h2>
-          {edit ? (
-            <div className="name_container">
-              <Input
-                type="text"
-                value={editedImg}
-                onChange={setEditedImg}
-                name="avatar"
-              />
+          {avatarEdit ? (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setAvatarEdit(false);
+                onHandleSubmit(id, editedImg, "photoURL");
+              }}
+            >
+              <div className="name_container">
+                <Input
+                  type="text"
+                  value={editedImg}
+                  onChange={setEditedImg}
+                  name="avatar"
+                />
 
-              <div className="buttons">
-                <button type="submit" className="nobutton">
-                  <FaCheck
-                    onClick={(e) => {
-                      setEdit(false);
-                      onHandleSubmit(id, editedImg, "photoURL");
-                    }}
-                    className="icon success"
-                  />
-                </button>
-                <button type="submit" className="nobutton">
-                  <FaXmark
-                    onClick={(e) => {
-                      setEdit(false);
-                    }}
-                    className="icon danger"
-                  />
-                </button>
+                <div className="buttons">
+                  <button type="submit" className="nobutton">
+                    <FaCheck className="icon success" />
+                  </button>
+                  <button type="submit" className="nobutton">
+                    <FaXmark
+                      onClick={(e) => {
+                        setAvatarEdit(false);
+                      }}
+                      className="icon danger"
+                    />
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
           ) : null}
-          <img
-            className="user_avatar"
-            src={photoURL ? photoURL : noAvatar}
-            alt="user avatar"
-            onError={(e) =>
-              (e.target.src =
-                "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png")
-            }
-          />
-          {edit ? (
-            <div className="name_container">
-              <Input
-                type="text"
-                value={editedName}
-                onChange={setEditedName}
-                name="imię"
+          <div style={{ position: "relative" }}>
+            <img
+              className="user_avatar"
+              src={photoURL ? photoURL : noAvatar}
+              alt="user avatar"
+              onClick={() => setAvatarEdit(true)}
+              onError={(e) =>
+                (e.target.src =
+                  "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png")
+              }
+            />
+            <button
+              style={{
+                position: "absolute",
+                right: "1rem",
+                top: "1rem",
+                background: "none",
+              }}
+              className="nobutton"
+            >
+              <FaEdit
+                onClick={() => {
+                  setAvatarEdit(true);
+                }}
+                className="icon"
               />
+            </button>
+          </div>
+          {nameEdit ? (
+            <div className="name_container">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setNameEdit(false);
+                  onHandleSubmit(id, editedName, "name");
+                }}
+                action=""
+              >
+                <Input
+                  type="text"
+                  value={editedName}
+                  onChange={setEditedName}
+                  name="imię"
+                />
 
-              <div className="buttons">
-                <button type="submit" className="nobutton">
-                  <FaCheck
-                    onClick={(e) => {
-                      setEdit(false);
-                      onHandleSubmit(id, editedName, "name");
-                    }}
-                    className="icon success"
-                  />
-                </button>
-                <button type="submit" className="nobutton">
-                  <FaXmark
-                    onClick={(e) => {
-                      setEdit(false);
-                      setEditedName(name);
-                    }}
-                    className="icon danger"
-                  />
-                </button>
-              </div>
+                <div className="buttons">
+                  <button type="submit" className="nobutton">
+                    <FaCheck className="icon success" />
+                  </button>
+                  <button type="submit" className="nobutton">
+                    <FaXmark
+                      onClick={(e) => {
+                        setNameEdit(false);
+                        setEditedName(name);
+                      }}
+                      className="icon danger"
+                    />
+                  </button>
+                </div>
+              </form>
             </div>
           ) : (
             <div className="name_container">
@@ -117,7 +143,7 @@ export default function User() {
               <button className="nobutton">
                 <FaEdit
                   onClick={() => {
-                    setEdit(true);
+                    setNameEdit(true);
                   }}
                   className="icon"
                 />
