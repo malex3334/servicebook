@@ -423,6 +423,7 @@ export function DataProvider({ children }) {
         addService,
         setviewedCarId,
         deleteService,
+        userCarIDs,
         setUserCarIDs,
         loading,
         setCars,

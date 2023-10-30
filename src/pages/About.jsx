@@ -20,7 +20,9 @@ export default function About() {
           })}
 
           <span>{contentObj?.[language].start.ending}</span>
-          <span>{contentObj?.[language].start.testingAlert}</span>
+          <span style={{ color: "crimson" }}>
+            {contentObj?.[language].start.testingAlert}
+          </span>
         </div>
       </div>
     </div>
