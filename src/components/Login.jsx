@@ -72,7 +72,6 @@ export default function Login() {
           flexWrap: "wrap",
         }}
       >
-        <Register />
         <div className="login_container">
           <h2>{contentObj?.[language].loginPage.title}:</h2>
           <div className="login_credentials">
@@ -117,6 +116,7 @@ export default function Login() {
             </button>
           </div>
         </div>
+        <Register />
       </div>
     );
   } else return navigate("/cars");

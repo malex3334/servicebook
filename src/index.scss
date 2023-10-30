@@ -529,6 +529,10 @@ form {
 .userdata_container {
   margin: 5rem auto;
 
+  button {
+    font-size: 1.5rem;
+  }
+
   .userdata_body {
     margin: 0 auto;
     width: 40rem;
@@ -550,10 +554,6 @@ form {
       border: 3px solid $maincolor-primary;
       border-radius: $border-radius--small;
       transition: transform 0.35s ease-in-out;
-
-      &:hover {
-        transform: scale(1.05);
-      }
     }
 
     .data_container {
@@ -603,7 +603,17 @@ form {
 
     .icon {
       cursor: pointer;
+      transition: transition 0.5s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+        color: $maincolor-primary;
+      }
     }
+  }
+
+  .account_settings {
+    margin: 0.25rem 0;
+    align-self: flex-start;
   }
 }
 

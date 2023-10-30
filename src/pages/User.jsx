@@ -96,12 +96,16 @@ export default function User() {
               }}
               className="nobutton"
             >
-              <FaEdit
-                onClick={() => {
-                  setAvatarEdit(true);
-                }}
-                className="icon"
-              />
+              {!avatarEdit ? (
+                <FaEdit
+                  onClick={() => {
+                    setAvatarEdit(true);
+                  }}
+                  className="icon"
+                />
+              ) : (
+                ""
+              )}
             </button>
           </div>
           {nameEdit ? (
@@ -158,14 +162,16 @@ export default function User() {
             <span className="bold">cars: </span>
             <span>{carsIDs ? carsIDs.length : "no cars yet"}</span>
           </div>
-
+          <h6 style={{ margin: "1rem 0" }}>ustawienia:</h6>
           {passwordChangeInput ? (
             <ChangePasswordForm handleCancel={handleCancel} />
           ) : (
-            <div>
+            <div className="account_settings">
               <button onClick={handleShowPasswordForm}>zmień hasło</button>
             </div>
           )}
+          <button className="account_settings">zresetuj hasło</button>
+          <button className="account_settings">usuń konto</button>
         </div>
       </div>
     );
