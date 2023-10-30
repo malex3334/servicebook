@@ -104,7 +104,7 @@ export default function Login() {
               <div>
                 <span>Nie masz jeszcze konta?</span>
                 <NavLink to="/register">
-                  <span>Zarejestruj się</span>
+                  <span style={{ fontSize: "2rem" }}>Zarejestruj się</span>
                 </NavLink>
               </div>
               <h3>{contentObj?.[language].loginPage.loginCredentials}:</h3>

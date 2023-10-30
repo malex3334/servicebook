@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { uuidv4 } from "@firebase/util";
 import { contentObj } from "../language";
 import Input from "./Input";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
   const { user, language } = useContext(DataContext);
@@ -87,6 +88,13 @@ export default function Login() {
       <div className="login_container" style={{ minHeight: "79vh" }}>
         <h2>{contentObj?.[language].register.title}</h2>
         <div className="login_credentials">
+          <div>
+            <span>Masz już swoje konto?</span>
+            <br />
+            <NavLink to="/login">
+              <span style={{ fontSize: "2rem" }}>Zaloguj się</span>
+            </NavLink>
+          </div>
           <h3>{contentObj?.[language].register.loginCredentials}:</h3>
           <form onSubmit={(e) => onSubmit(e)} action="">
             <div className="name_container">
