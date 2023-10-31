@@ -52,7 +52,7 @@ export default function Login() {
           auth.signOut();
           setLoading(false);
 
-          toast.error(activationMsg);
+          toast.error(activationMsg, { autoClose: 5000 });
           setError(activationMsg);
           setTimeout(() => {
             setError(null);

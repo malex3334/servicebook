@@ -16,7 +16,6 @@ import {
   arrayUnion,
   setDoc,
   deleteDoc,
-  writeBatch,
 } from "firebase/firestore";
 
 export const DataContext = createContext();
@@ -433,8 +432,7 @@ export function DataProvider({ children }) {
         editedServiceData,
         userData,
         editUserData,
-      }}
-    >
+      }}>
       {children}
     </DataContext.Provider>
   );

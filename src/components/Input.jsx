@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
+import Tips from "./Tips";
 
 export default function Input(props) {
   const { onChange, type, value, name, note } = props;
@@ -31,21 +32,7 @@ export default function Input(props) {
       setShowNote(false);
     }, 3000);
   };
-  noteTimer(3500);
-
-  const noteStyle = {
-    position: "absolute",
-    bottom: "-30%",
-    left: "30%",
-    fontSize: "1.25rem",
-    background: "white",
-    padding: ".75rem",
-    textWrap: "nowrap",
-    boxShadow: "0px 0px 5px rgba(64,64,64,0.5)",
-    borderRadius: "3px",
-    color: "#404040",
-    zIndex: "999",
-  };
+  noteTimer(8000);
 
   return (
     <div className="input">
@@ -64,7 +51,7 @@ export default function Input(props) {
       <label htmlFor="" className="input_label" ref={labelRef}>
         {name}
       </label>
-      {note && showNote && <span style={noteStyle}>{note}</span>}
+      {note && showNote && <Tips text={note} />}
     </div>
   );
 }
