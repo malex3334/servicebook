@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { v4 as uuidv4 } from "uuid";
-import { noImg } from "../helpers/Helpers.jsx";
+import { imgWarning, noImg } from "../helpers/Helpers.jsx";
 import { contentObj } from "../language";
 import { useEffect } from "react";
 import Input from "./Input";
@@ -84,8 +84,7 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
         onSubmit={(e) => {
           onSubmit(e, carObject);
         }}
-        action=""
-      >
+        action="">
         <div className="serviceform_container">
           <Input
             type="text"
@@ -124,6 +123,7 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
             onChange={setImg}
             value={img}
             name={contentObj?.[language].myCars.img}
+            note={imgWarning}
           />
 
           <Input

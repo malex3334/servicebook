@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { auth } from "../utils/firebase";
@@ -13,6 +14,9 @@ import { uuidv4 } from "@firebase/util";
 import { contentObj } from "../language";
 import Input from "./Input";
 import { NavLink } from "react-router-dom";
+import { imgWarning } from "../helpers/Helpers";
+import toast from "react-hot-toast";
+import { activationMsg } from "../helpers/Helpers";
 
 export default function Login() {
   const { user, language } = useContext(DataContext);
@@ -21,6 +25,7 @@ export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [avatarLink, setAvatarLink] = useState("");
+  const navigate = useNavigate();
 
   const newUserObject = {
     displayName: name,
@@ -42,6 +47,8 @@ export default function Login() {
       );
       const user = userCredential.user;
 
+      await sendEmailVerification(user);
+
       // After creating the user, update their profile
       await updateProfile(user, {
         displayName: name,
@@ -53,15 +60,18 @@ export default function Login() {
           photoURL: avatarLink,
           name: user.displayName,
           id: user?.uid,
+          confirmed: false,
         });
       };
       checkData();
+      toast.success(activationMsg);
+      auth.signOut();
+      navigate("/login");
     } catch (error) {
       console.error("Error registering user:", error);
     }
   };
 
-  const navigate = useNavigate();
   // sign in with google
   const googleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
@@ -130,6 +140,7 @@ export default function Login() {
                 value={avatarLink}
                 onChange={setAvatarLink}
                 name={contentObj?.[language].register.avatar}
+                note={imgWarning}
               />
 
               <button style={{ marginTop: "2rem" }} type="submit">

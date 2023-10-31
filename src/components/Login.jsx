@@ -12,8 +12,8 @@ import { FcGoogle } from "react-icons/fc";
 import Loading from "./Loading";
 import { contentObj } from "../language";
 import Input from "./Input";
-import Register from "./Register";
 import toast from "react-hot-toast";
+import { activationMsg } from "../helpers/Helpers";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -45,9 +45,19 @@ export default function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        navigate("/cars");
-        console.log(user);
+        if (userCredential.user.emailVerified) {
+          navigate("/cars");
+          console.log(user);
+        } else {
+          auth.signOut();
+          setLoading(false);
+
+          toast.error(activationMsg);
+          setError(activationMsg);
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+        }
       })
       .catch((error) => {
         setLoading(false);
@@ -80,12 +90,6 @@ export default function Login() {
     setResetEmail("");
   };
 
-  // end
-
-  // if (loading) {
-  //  return <Loading />
-  //}
-
   if (!user) {
     return (
       <div style={{ minHeight: "79vh" }}>
@@ -96,8 +100,7 @@ export default function Login() {
             justifyContent: "center",
             gap: "5rem",
             flexWrap: "wrap",
-          }}
-        >
+          }}>
           <div className="login_container">
             {/* <h2>{contentObj?.[language].loginPage.title}:</h2> */}
             <div className="login_credentials">
@@ -153,8 +156,7 @@ export default function Login() {
                   <a
                     href="#"
                     style={{ fontStyle: "italic" }}
-                    onClick={() => setShowResetPassword(true)}
-                  >
+                    onClick={() => setShowResetPassword(true)}>
                     Nie pamiętam hasła
                   </a>
                 ) : (
@@ -171,8 +173,7 @@ export default function Login() {
                       onClick={() => {
                         setShowResetPassword(false);
                         setResetEmail("");
-                      }}
-                    >
+                      }}>
                       Anuluj
                     </button>
                   </form>
@@ -184,5 +185,5 @@ export default function Login() {
         </div>
       </div>
     );
-  } else return navigate("/cars");
+  } else return navigate("/login");
 }

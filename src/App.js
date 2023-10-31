@@ -12,6 +12,7 @@ import { DataContext } from "./context/DataContext";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 import User from "./pages/User";
+import ConfirmEmail from "./components/Login/ConfirmEmail";
 
 function App() {
   const { user } = useContext(DataContext);
@@ -43,6 +44,7 @@ function App() {
         )}
 
         <Route path="user" element={<User />} />
+        <Route path="confirm_error" element={<ConfirmEmail />} />
       </Routes>
       <Footer />
     </div>

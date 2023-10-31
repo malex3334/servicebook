@@ -86,3 +86,7 @@ export function handleImgError(carImgRef, carImgBackground) {
     carImgBackground.current.style.background = `url(${noImg})`;
   }
 }
+
+export const imgWarning = "* Link musi prowadzić bezpośrednio do zdjęcia!";
+export const activationMsg =
+  "Na podany adres wysłano wiadomość z potwierdzeniem rejestracji konta. Aktywuj konto i zaloguj się. ";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useContext, useEffect } from "react";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
-import { noAvatar } from "../helpers/Helpers";
+import { imgWarning, noAvatar } from "../helpers/Helpers";
 import { FaEdit, FaCheck } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import Loading from "../components/Loading";
@@ -63,8 +63,7 @@ export default function User() {
                 top: "1rem",
                 background: "none",
               }}
-              className="nobutton"
-            >
+              className="nobutton">
               {!avatarEdit ? (
                 <FaEdit
                   onClick={() => {
@@ -83,14 +82,14 @@ export default function User() {
                 e.preventDefault();
                 setAvatarEdit(false);
                 onHandleSubmit(id, editedImg, "photoURL");
-              }}
-            >
+              }}>
               <div className="name_container">
                 <Input
                   type="text"
                   value={editedImg}
                   onChange={setEditedImg}
                   name="avatar"
+                  note={imgWarning}
                 />
 
                 <div className="buttons">
@@ -117,8 +116,7 @@ export default function User() {
                   setNameEdit(false);
                   onHandleSubmit(id, editedName, "name");
                 }}
-                action=""
-              >
+                action="">
                 <Input
                   type="text"
                   value={editedName}
@@ -169,8 +167,7 @@ export default function User() {
               borderTop: "1px solid gray",
               marginTop: "2rem",
               width: "90%",
-            }}
-          >
+            }}>
             {/* <h6 style={{ margin: "1rem 0" }}>ustawienia:</h6> */}
             {passwordChangeInput ? (
               <ChangePasswordForm handleCancel={handleCancel} />
