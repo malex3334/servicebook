@@ -86,6 +86,7 @@ export default function Login() {
     e.preventDefault();
     if (password != confirmPassword) {
       console.log("password error");
+      toast.error("password error");
       return;
     } else {
       console.log(newUserObject);

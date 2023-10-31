@@ -25,6 +25,7 @@ export default function Tips({ text }) {
     bottom: "60%",
     transform: "translateY(50%)",
     fontSize: "2rem",
+    fontWeight: "bold",
     cursor: "pointer",
     color: "crimson",
   };
