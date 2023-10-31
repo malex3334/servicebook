@@ -31,7 +31,6 @@ export default function Login() {
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result.user);
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -47,7 +46,6 @@ export default function Login() {
         // Signed in
         if (userCredential.user.emailVerified) {
           navigate("/cars");
-          console.log(user);
         } else {
           auth.signOut();
           setLoading(false);
@@ -77,7 +75,6 @@ export default function Login() {
     let result = window.confirm("jesteś pewien??");
 
     if (result) {
-      console.log(auth, resetEmail);
       try {
         sendPasswordResetEmail(auth, resetEmail);
         toast.success("email z linkiem do resetowania hasła wysłany");
@@ -185,5 +182,5 @@ export default function Login() {
         </div>
       </div>
     );
-  } else return navigate("/login");
+  } else return navigate("/");
 }
