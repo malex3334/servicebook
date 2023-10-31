@@ -112,9 +112,10 @@
   border-radius: $border-radius--small;
   align-items: flex-start;
   justify-content: space-around;
-  gap: 1rem;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.071);
+  gap: 3rem;
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.21);
   color: $lightcolor-primary;
+  transition: all 0.25s ease-in-out;
 
   &::before {
     position: absolute;
@@ -127,6 +128,7 @@
   }
 
   &:hover {
+    border-right: 12px solid $maincolor-primary;
   }
   p {
     font-weight: bold;
@@ -186,7 +188,7 @@
 }
 
 .single-car__img {
-  max-width: 25rem;
+  max-width: 28rem;
   max-height: 35rem;
   border: 3px solid $maincolor-primary;
   border-radius: 3px;

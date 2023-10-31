@@ -17,7 +17,7 @@ export default function CarDetails({ car }) {
         ref={carimg}
       />
       <div className="cardetails__text">
-        <h4>
+        <h4 style={{ marginLeft: "0" }}>
           {car.brand} {car.model}
         </h4>
         <p>
