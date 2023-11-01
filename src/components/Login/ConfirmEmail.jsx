@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { activationMsg } from "../../helpers/Helpers";
-import { onAuthStateChanged, getAuth } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  getAuth,
+  sendEmailVerification,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { DataContext } from "../../context/DataContext";
+import toast from "react-hot-toast";
 
 export default function ConfirmEmail() {
   const navigate = useNavigate();
   const auth = getAuth();
+  const { user } = useContext(DataContext);
 
   useEffect(() => {
     const checkEmailVerification = (user) => {
@@ -39,14 +46,32 @@ export default function ConfirmEmail() {
     };
   }, []);
 
+  const sendAgain = async () => {
+    try {
+      await sendEmailVerification(user);
+      toast.success("Wysłano email aktywacyjny");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
   return (
-    <div style={{ minHeight: "80vh" }}>
+    <div
+      style={{
+        minHeight: "80vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "5rem",
+      }}>
       <h3 style={{ color: "red", fontSize: "2.25rem" }}>{activationMsg}</h3>
+      <span style={{ fontStyle: "italic" }}>{user?.email}</span>
       <p>
         Jeśli wiadomość nie dotarła, wyślij ponownie klikając w przycisk
         poniżej:
       </p>
-      {/* Add a button to manually send a verification email */}
+      <button onClick={() => sendAgain()}>Wyślij ponownie</button>
     </div>
   );
 }

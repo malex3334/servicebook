@@ -67,7 +67,8 @@ export default function Login() {
       auth.signOut();
       navigate("/login");
     } catch (error) {
-      console.error("Error registering user:", error);
+      console.error("Error registering user:", error.message);
+      toast.error(error.message);
     }
   };
 
@@ -87,7 +88,6 @@ export default function Login() {
       toast.error("password error");
       return;
     } else {
-      console.log(newUserObject);
       handleRegistration();
     }
   };
