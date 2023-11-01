@@ -58,5 +58,5 @@ export default function Input(props) {
 }
 
 Input.defaultProps = {
-  pattern: "normal",
+  pattern: undefined,
 };

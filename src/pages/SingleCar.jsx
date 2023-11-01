@@ -166,15 +166,13 @@ export default function SingleCar() {
         {/* car details */}
         <div
           className="singlecar_background_container"
-          style={{ marginTop: "2rem" }}
-        >
+          style={{ marginTop: "2rem" }}>
           <div
             style={{
               background: `url(${currentCar?.img})`,
             }}
             className="singlecar_background"
-            ref={carImgBackground}
-          ></div>
+            ref={carImgBackground}></div>
           <div>
             <img
               src={currentCar?.img}
@@ -260,8 +258,7 @@ export default function SingleCar() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                }}
-              >
+                }}>
                 <SingleFilter
                   key="4"
                   name="done"
@@ -278,8 +275,7 @@ export default function SingleCar() {
             </div>
             <button
               style={{ marginBottom: "2rem" }}
-              onClick={handleResetFilters}
-            >
+              onClick={handleResetFilters}>
               Resetuj
             </button>
           </div>
@@ -392,15 +388,13 @@ export default function SingleCar() {
                   </tbody>
                 </table>
               </div>
-
               <tfoot
                 style={{
                   width: "90%",
                   display: "flex",
                   justifyContent: "flex-end",
                   marginTop: "2rem",
-                }}
-              >
+                }}>
                 <tr>
                   <td className="blind_row"></td>
                   <td className="blind_row"></td>
@@ -418,8 +412,7 @@ export default function SingleCar() {
           )}
           <button
             style={{ marginTop: "1rem" }}
-            onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}
-          >
+            onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}>
             Pobierz jako plik Excel
           </button>
         </div>
