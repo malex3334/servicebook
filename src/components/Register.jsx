@@ -60,7 +60,6 @@ export default function Login() {
           photoURL: avatarLink,
           name: user.displayName,
           id: user?.uid,
-          confirmed: false,
         });
       };
       checkData();

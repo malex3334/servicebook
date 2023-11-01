@@ -47,7 +47,8 @@ export default function Login() {
         if (userCredential.user.emailVerified) {
           navigate("/cars");
         } else {
-          auth.signOut();
+          // auth.signOut();
+          navigate("/confirm_error");
           setLoading(false);
 
           toast.error(activationMsg, { autoClose: 5000 });

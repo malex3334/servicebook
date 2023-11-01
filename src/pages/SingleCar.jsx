@@ -209,7 +209,6 @@ export default function SingleCar() {
   } else {
     if (userCarIDs?.length === 0 || !userCarIDs?.includes(carID)) {
       setTimeout(() => {
-        console.log("test");
         navigate("/cars");
       }, 2000);
       return (

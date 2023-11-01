@@ -94,6 +94,7 @@ export function DataProvider({ children }) {
                 email: user?.email,
                 photoURL: user?.photoURL,
                 id: user?.uid,
+                emailVerified: user?.emailVerified,
               });
             };
             addUserToDataBase();
