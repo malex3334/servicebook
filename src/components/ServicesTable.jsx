@@ -42,9 +42,19 @@ export default function ServicesTable(
         }}>
         {index + 1}.
       </td>
-      <td className="title">{service?.title}</td>
+      <td className="title" style={{ whiteSpace: "normal", maxWidth: "20rem" }}>
+        {service?.title}
+      </td>
       <td>{service?.date}</td>
-      <td style={{ textWrap: "wrap" }}>{service?.desc}</td>
+      <td
+        style={{
+          textWrap: "wrap",
+          whiteSpace: "normal",
+          minWidth: "20rem",
+          maxWidth: "50rem",
+        }}>
+        {service?.desc}
+      </td>
       <td className="category">
         {contentObj?.[language].services.filters[service?.category]}
       </td>
