@@ -3,7 +3,7 @@ import { useState } from "react";
 import Tips from "./Tips";
 
 export default function Input(props) {
-  const { onChange, type, value, name, note } = props;
+  const { onChange, type, value, name, note, pattern } = props;
   const labelRef = useRef();
   const inputRef = useRef();
   const [showNote, setShowNote] = useState(true);
@@ -47,6 +47,7 @@ export default function Input(props) {
         min="0"
         max="1000000"
         step={0.1}
+        pattern={pattern}
       />
       <label htmlFor="" className="input_label" ref={labelRef}>
         {name}
@@ -55,3 +56,7 @@ export default function Input(props) {
     </div>
   );
 }
+
+Input.defaultProps = {
+  pattern: "normal",
+};

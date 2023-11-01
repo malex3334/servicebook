@@ -789,6 +789,10 @@ form {
     .cardetails__text {
       width: 90%;
     }
+
+    &:hover {
+      border: none;
+    }
   }
 
   .about_container {

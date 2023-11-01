@@ -108,6 +108,7 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
             value={year}
             maxLength={4}
             name={contentObj?.[language].myCars.year}
+            pattern="[0-9]*"
           />
 
           <Input
@@ -116,6 +117,7 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
             value={mileage}
             maxLength={6}
             name={contentObj?.[language].myCars.mileage}
+            pattern="[0-9]*"
           />
 
           <Input
