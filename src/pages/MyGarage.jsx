@@ -36,6 +36,10 @@ export default function MyGarage() {
     }
   };
 
+  if (!user) {
+    return <PleaseLogin />;
+  }
+
   if (!user?.emailVerified) {
     return <ConfirmEmail />;
   }
