@@ -3,7 +3,7 @@ import { useState } from "react";
 import Tips from "./Tips";
 
 export default function Input(props) {
-  const { onChange, type, value, name, note, pattern } = props;
+  const { onChange, type, value, name, note, pattern, required } = props;
   const labelRef = useRef();
   const inputRef = useRef();
   const [showNote, setShowNote] = useState(true);
@@ -12,12 +12,14 @@ export default function Input(props) {
     if (inputRef.current.type === "select") {
       labelRef.current.className = "input_label input focus";
     }
+    if (inputRef.current.type === "date") {
+      labelRef.current.className = "input_label input focus";
+    }
     if (inputRef.current.value === "") {
       labelRef.current.className = "input_label";
     } else {
       labelRef.current.className = "input_label transparent";
     }
-
     if (inputRef.current.value !== "") {
       labelRef.current.className = "input_label input-focus";
     }
@@ -42,7 +44,7 @@ export default function Input(props) {
         type={type}
         onChange={(e) => onChange(e.target.value)}
         value={value}
-        required
+        {...(!required ? { required: "required" } : {})}
         maxLength={type === "number" ? 6 : 120}
         min="0"
         max="1000000"
@@ -59,4 +61,5 @@ export default function Input(props) {
 
 Input.defaultProps = {
   pattern: undefined,
+  required: "true",
 };

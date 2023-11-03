@@ -90,3 +90,20 @@ export function handleImgError(carImgRef, carImgBackground) {
 export const imgWarning = "* Link musi prowadzić bezpośrednio do zdjęcia!";
 export const activationMsg =
   "Na podany adres wysłano wiadomość z potwierdzeniem rejestracji konta. Aktywuj konto i zaloguj się. ";
+
+export function calculateDaysLeft(inputDate) {
+  // Split the input date string into year, month, and day components
+  const [year, month, day] = inputDate.split("-").map(Number);
+
+  // Create Date objects for the target date and the current date
+  const currentDate = new Date();
+  const targetDate = new Date(year, month - 1, day); // Month is 0-based, so subtract 1
+
+  // Calculate the time difference in milliseconds
+  const timeDifference = targetDate - currentDate;
+
+  // Convert milliseconds to days (1 day = 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
+  const daysLeft = Math.ceil(timeDifference / (24 * 60 * 60 * 1000));
+
+  return daysLeft;
+}

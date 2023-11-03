@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { v4 as uuidv4 } from "uuid";
-import { imgWarning, noImg } from "../helpers/Helpers.jsx";
+import { getCurrentDate, imgWarning, noImg } from "../helpers/Helpers.jsx";
 import { contentObj } from "../language";
 import { useEffect } from "react";
 import Input from "./Input";
@@ -13,6 +13,8 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
   const [mileage, setMileage] = useState();
   const [img, setImg] = useState();
   const [plates, setPlates] = useState();
+  const [insurance, setInsurance] = useState(getCurrentDate());
+  const [inspection, setInspection] = useState(getCurrentDate());
   const { addCar, language, editCarData } = useContext(DataContext);
 
   const clearInputs = () => {
@@ -22,6 +24,8 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
     setMileage("");
     setYear("");
     setPlates("");
+    setInsurance(getCurrentDate());
+    setInspection(getCurrentDate());
   };
 
   const carObject = {
@@ -34,6 +38,8 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
     mileage,
     year,
     plates,
+    inspection,
+    insurance,
   };
   const editedCarObject = {
     id: editedCar?.id,
@@ -45,6 +51,8 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
     mileage,
     year,
     plates,
+    inspection,
+    insurance,
   };
 
   const onSubmit = (e, object) => {
@@ -75,6 +83,8 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
       setMileage(editedCar.mileage);
       setYear(editedCar.year);
       setPlates(editedCar.plates);
+      setInsurance(editedCar?.insurance);
+      setInspection(editedCar?.inspection);
     }
   }, [editedCar]);
 
@@ -134,6 +144,22 @@ export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
             value={plates}
             maxLength={8}
             name={contentObj?.[language].myCars.plates}
+          />
+          <Input
+            type="date"
+            onChange={setInsurance}
+            value={insurance}
+            maxLength={8}
+            name="Ubezpieczenie"
+            required="false"
+          />
+          <Input
+            type="date"
+            onChange={setInspection}
+            value={inspection}
+            maxLength={8}
+            name="Przegląd"
+            required="false"
           />
 
           <button type="submit">

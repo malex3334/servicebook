@@ -16,7 +16,7 @@ export default function Tips({ text }) {
     boxShadow: "0px 0px 5px rgba(64,64,64,0.5)",
     borderRadius: "3px",
     color: "#404040",
-    zIndex: "999",
+    zIndex: "9999",
   };
 
   const x = {

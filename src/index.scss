@@ -127,9 +127,9 @@
     border-left: 3px solid $maincolor-primary;
   }
 
-  &:hover {
-    border-right: 12px solid $maincolor-primary;
-  }
+  // &:hover {
+  //   border-right: 12px solid $maincolor-primary;
+  // }
 
   p {
     font-weight: bold;
@@ -144,6 +144,11 @@
     text-align: start;
     line-height: 1.5;
 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     p {
       font-size: 1.5rem;
     }
@@ -151,6 +156,34 @@
     span {
       font-size: 1.6rem;
     }
+  }
+
+  .cardetails__secondary {
+    width: 100%;
+    display: flex;
+    // justify-content: space-around;
+    gap: 3rem;
+  }
+
+  .reminder {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .icon {
+    color: $maincolor-light;
+  }
+
+  .icon_warning {
+    font-size: 2rem;
+    position: absolute;
+    left: 15%;
+    top: -20%;
+    color: white;
+    border-radius: 50%;
+    background-color: red;
   }
 }
 
