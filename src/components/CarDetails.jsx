@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { PiWarningCircle } from "react-icons/pi";
 import { calculateDaysLeft } from "../helpers/Helpers";
+import { NavLink } from "react-router-dom";
 
 export default function CarDetails({ car }) {
   const { language } = useContext(DataContext);
@@ -25,10 +26,13 @@ export default function CarDetails({ car }) {
         alt="car"
         ref={carimg}
       />
+
       <div className="cardetails__text">
-        <h4 style={{ marginLeft: "0" }}>
-          {car.brand} {car.model}
-        </h4>
+        <NavLink to={`/cars/${car.id}`}>
+          <h4 style={{ marginLeft: "0" }}>
+            {car.brand} {car.model}
+          </h4>
+        </NavLink>
         <div className="cardetails__primary">
           <p>
             {contentObj?.[language].myCars.mileage}:
@@ -44,7 +48,7 @@ export default function CarDetails({ car }) {
         </div>
         <div className="cardetails__secondary">
           {car.insurance && (
-            <div className="reminder">
+            <div className="reminder" title="koniec ubezpieczenia">
               <RiFileShield2Line
                 className="icon"
                 style={{ fontSize: "3rem" }}
@@ -56,7 +60,7 @@ export default function CarDetails({ car }) {
             </div>
           )}
           {car.inspection && (
-            <div className="reminder">
+            <div className="reminder" title="następny przegląd">
               <RiCarWashingLine className="icon" style={{ fontSize: "3rem" }} />
               {calculateDaysLeft(car?.inspection) < 30 && (
                 <PiWarningCircle className="icon_warning" />

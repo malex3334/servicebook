@@ -72,16 +72,14 @@ export default function MyGarage() {
               cars?.map((car) => {
                 return (
                   <div className="singlecar_container" key={car.id}>
-                    <NavLink
+                    <div
                       key={car.id}
-                      onClick={() => {
-                        showServices(car.id, car.services);
-                      }}
                       className="cardetails_container"
-                      to={`/cars/${car.id}`}>
+                      // to={`/cars/${car.id}`}
+                    >
                       <CarDetails car={car} />
-                    </NavLink>
-                    <div className="buttons">
+                    </div>
+                    <div className="buttons" title="usuń">
                       <button
                         className="btn danger"
                         onClick={() => {
@@ -90,7 +88,10 @@ export default function MyGarage() {
                         {" "}
                         <FaTrashAlt />
                       </button>
-                      <button onClick={() => onCarEdit(car)} className="btn">
+                      <button
+                        onClick={() => onCarEdit(car)}
+                        className="btn"
+                        title="edytuj">
                         <FaEdit />
                       </button>
                     </div>

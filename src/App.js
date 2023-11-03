@@ -45,6 +45,7 @@ function App() {
 
         <Route path="user" element={<User />} />
         <Route path="confirm_error" element={<ConfirmEmail />} />
+        <Route path="mygarage" element={<MyGarage />} />
       </Routes>
       <Footer />
     </div>

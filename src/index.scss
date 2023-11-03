@@ -116,16 +116,17 @@
   box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.21);
   color: $lightcolor-primary;
   transition: all 0.25s ease-in-out;
+  border-left: 3px solid $maincolor-primary;
 
-  &::before {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    content: " ";
-    height: 100%;
-    width: 100%;
-    border-left: 3px solid $maincolor-primary;
-  }
+  // &::before {
+  //   position: absolute;
+  //   left: 0;
+  //   bottom: 0;
+  //   content: " ";
+  //   height: 100%;
+  //   width: 100%;
+  //   border-left: 3px solid $maincolor-primary;
+  // }
 
   // &:hover {
   //   border-right: 12px solid $maincolor-primary;
