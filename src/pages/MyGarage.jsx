@@ -83,6 +83,8 @@ export default function MyGarage() {
                       <button
                         className="btn danger"
                         onClick={() => {
+                          setNewCarTab(false);
+                          setEditedCar(null);
                           deleteCar(car.id, car.services);
                         }}>
                         {" "}
