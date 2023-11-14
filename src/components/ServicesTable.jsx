@@ -34,19 +34,27 @@ export default function ServicesTable(
       style={{
         cursor: "pointer",
         backgroundColor: index % 2 === 0 ? "#f2f2f2" : "inherit",
-      }}
-    >
+      }}>
       <td
         style={{
           borderLeft: ".5em solid ",
           borderLeftColor: service.done ? borderColorDone : borderColorTodo,
-        }}
-      >
+        }}>
         {index + 1}.
       </td>
-      <td className="title">{service?.title}</td>
+      <td className="title" style={{ whiteSpace: "normal", maxWidth: "20rem" }}>
+        {service?.title}
+      </td>
       <td>{service?.date}</td>
-      <td className="desc">{service?.desc}</td>
+      <td
+        style={{
+          textWrap: "wrap",
+          whiteSpace: "normal",
+          minWidth: "20rem",
+          maxWidth: "50rem",
+        }}>
+        {service?.desc}
+      </td>
       <td className="category">
         {contentObj?.[language].services.filters[service?.category]}
       </td>
@@ -59,16 +67,16 @@ export default function ServicesTable(
           fontWeight: "bold",
           cursor: "pointer",
         }}
-        onClick={() => deleteService(service?.id, viewedCarID)}
-      >
+        onClick={() => {
+          deleteService(service?.id, viewedCarID);
+        }}>
         <FaTrashAlt style={{ fontSize: "1.5rem" }} />
       </td>
       <td
         style={{
           borderRight: ".5em solid ",
           borderRightColor: service.done ? borderColorDone : borderColorTodo,
-        }}
-      >
+        }}>
         <input
           type="checkbox"
           checked={service?.done}

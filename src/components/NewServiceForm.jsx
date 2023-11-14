@@ -105,8 +105,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
       action=""
       onSubmit={(e) => {
         onSubmit(e, serviceObject);
-      }}
-    >
+      }}>
       <div className="newservice_container">
         <h4 className="filters_header">Serwis</h4>
         <div>
@@ -135,8 +134,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
                 onChange={(e) => setCategory(e.target.value)}
                 name="category"
                 id="category"
-                value={category}
-              >
+                value={category}>
                 <option value="maintenance">
                   {contentObj?.[language].services.categories.maintenance}
                 </option>
@@ -157,12 +155,14 @@ export default function NewServiceForm({ editedService, setEditedService }) {
               onChange={setMileage}
               value={mileage?.toLocaleString()}
               name={contentObj?.[language].services.mileage}
+              pattern="[0-9]*"
             />
             <Input
               type="number"
               onChange={setPrice}
               value={cash(price)}
               name={contentObj?.[language].services.price}
+              pattern="[0-9]*"
             />
 
             <div
@@ -172,8 +172,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
                 justifyContent: "center",
                 cursor: "pointer",
               }}
-              onClick={() => setDone(!done)}
-            >
+              onClick={() => setDone(!done)}>
               <input
                 type="checkbox"
                 checked={done}
@@ -194,8 +193,7 @@ export default function NewServiceForm({ editedService, setEditedService }) {
             style={{ margin: "0 1rem" }}
             onClick={() => {
               onEditCancel();
-            }}
-          >
+            }}>
             anuluj
           </button>
         )}

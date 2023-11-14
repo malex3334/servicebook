@@ -8,6 +8,7 @@ import PleaseLogin from "../components/PleaseLogin";
 import CarDetails from "../components/CarDetails";
 import NewCarForm from "../components/NewCarForm";
 import Loading from "../components/Loading";
+import ConfirmEmail from "../components/Login/ConfirmEmail";
 
 export default function MyGarage() {
   const { user, cars, showServices, deleteCar, loading, language } =
@@ -35,6 +36,14 @@ export default function MyGarage() {
     }
   };
 
+  if (!user) {
+    return <PleaseLogin />;
+  }
+
+  if (!user?.emailVerified) {
+    return <ConfirmEmail />;
+  }
+
   if (loading) {
     return <Loading />;
   } else {
@@ -45,8 +54,7 @@ export default function MyGarage() {
           {!newCarTab ? (
             <button
               onClick={() => setNewCarTab(!newCarTab)}
-              style={{ marginBottom: "1rem" }}
-            >
+              style={{ marginBottom: "1rem" }}>
               {contentObj?.[language].myCars.addButton}
             </button>
           ) : (
@@ -54,8 +62,7 @@ export default function MyGarage() {
               onClick={() => {
                 setNewCarTab(!newCarTab);
                 setEditedCar(null);
-              }}
-            >
+              }}>
               {contentObj?.[language].myCars.closeButton}
             </button>
           )}
@@ -65,27 +72,28 @@ export default function MyGarage() {
               cars?.map((car) => {
                 return (
                   <div className="singlecar_container" key={car.id}>
-                    <NavLink
+                    <div
                       key={car.id}
-                      onClick={() => {
-                        showServices(car.id, car.services);
-                      }}
                       className="cardetails_container"
-                      to={`/cars/${car.id}`}
+                      // to={`/cars/${car.id}`}
                     >
                       <CarDetails car={car} />
-                    </NavLink>
-                    <div className="buttons">
+                    </div>
+                    <div className="buttons" title="usuń">
                       <button
                         className="btn danger"
                         onClick={() => {
+                          setNewCarTab(false);
+                          setEditedCar(null);
                           deleteCar(car.id, car.services);
-                        }}
-                      >
+                        }}>
                         {" "}
                         <FaTrashAlt />
                       </button>
-                      <button onClick={() => onCarEdit(car)} className="btn">
+                      <button
+                        onClick={() => onCarEdit(car)}
+                        className="btn"
+                        title="edytuj">
                         <FaEdit />
                       </button>
                     </div>

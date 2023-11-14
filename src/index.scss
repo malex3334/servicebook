@@ -112,25 +112,30 @@
   border-radius: $border-radius--small;
   align-items: flex-start;
   justify-content: space-around;
-  gap: 1rem;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.071);
+  gap: 3rem;
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.21);
   color: $lightcolor-primary;
+  transition: all 0.25s ease-in-out;
+  border-left: 3px solid $maincolor-primary;
 
-  &::before {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    content: " ";
-    height: 100%;
-    width: 100%;
-    border-left: 3px solid $maincolor-primary;
-  }
+  // &::before {
+  //   position: absolute;
+  //   left: 0;
+  //   bottom: 0;
+  //   content: " ";
+  //   height: 100%;
+  //   width: 100%;
+  //   border-left: 3px solid $maincolor-primary;
+  // }
 
-  &:hover {
-  }
+  // &:hover {
+  //   border-right: 12px solid $maincolor-primary;
+  // }
+
   p {
     font-weight: bold;
   }
+
   span {
     font-weight: normal;
   }
@@ -140,6 +145,11 @@
     text-align: start;
     line-height: 1.5;
 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     p {
       font-size: 1.5rem;
     }
@@ -147,6 +157,35 @@
     span {
       font-size: 1.6rem;
     }
+  }
+
+  .cardetails__secondary {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    // justify-content: space-around;
+    gap: 3rem;
+  }
+
+  .reminder {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .icon {
+    color: $maincolor-light;
+  }
+
+  .icon_warning {
+    font-size: 2rem;
+    position: absolute;
+    left: 15%;
+    top: -20%;
+    color: white;
+    border-radius: 50%;
+    background-color: red;
   }
 }
 
@@ -186,7 +225,7 @@
 }
 
 .single-car__img {
-  max-width: 25rem;
+  max-width: 28rem;
   max-height: 35rem;
   border: 3px solid $maincolor-primary;
   border-radius: 3px;
@@ -406,7 +445,7 @@ form {
     display: flex;
     gap: 2rem;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -438,6 +477,10 @@ form {
     .input-focus {
       background: white;
     }
+  }
+
+  .reset_password {
+    margin: 0.5rem 0;
   }
 }
 
@@ -531,6 +574,10 @@ form {
 .userdata_container {
   margin: 5rem auto;
 
+  button {
+    font-size: 1.5rem;
+  }
+
   .userdata_body {
     margin: 0 auto;
     width: 40rem;
@@ -552,10 +599,6 @@ form {
       border: 3px solid $maincolor-primary;
       border-radius: $border-radius--small;
       transition: transform 0.35s ease-in-out;
-
-      &:hover {
-        transform: scale(1.05);
-      }
     }
 
     .data_container {
@@ -586,6 +629,7 @@ form {
   .buttons {
     position: absolute;
     right: -3rem;
+    bottom: 15%;
     display: flex;
     flex-direction: row;
     gap: 0;
@@ -604,8 +648,20 @@ form {
     }
 
     .icon {
+      background-color: white;
+      border: 2px solid white;
       cursor: pointer;
+      transition: transition 0.5s ease-in-out;
+      &:hover {
+        transform: scale(1.1);
+        color: $maincolor-primary;
+      }
     }
+  }
+
+  .account_settings {
+    margin: 1rem auto;
+    align-self: flex-start;
   }
 }
 
@@ -766,6 +822,14 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .cardetails__text {
+      width: 90%;
+    }
+
+    &:hover {
+      border: none;
+    }
   }
 
   .about_container {
@@ -812,8 +876,8 @@ form {
     }
 
     .desc {
-      font-size: 1rem !important;
-      text-wrap: wrap;
+      // font-size: 1rem !important;
+      text-wrap: wrap !important;
     }
 
     .line {

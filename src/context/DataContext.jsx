@@ -16,7 +16,6 @@ import {
   arrayUnion,
   setDoc,
   deleteDoc,
-  writeBatch,
 } from "firebase/firestore";
 
 export const DataContext = createContext();
@@ -95,6 +94,7 @@ export function DataProvider({ children }) {
                 email: user?.email,
                 photoURL: user?.photoURL,
                 id: user?.uid,
+                emailVerified: user?.emailVerified,
               });
             };
             addUserToDataBase();
@@ -364,14 +364,6 @@ export function DataProvider({ children }) {
   }
   // delete service
   function deleteService(serviceId, currentCarID) {
-    // toast((t) => (
-    //   <span>
-    //     Are you sure?
-    //     <button onClick={() => toast.dismiss(t.id)}>Yes</button>
-    //     <button onClick={() => toast.dismiss(t.id)}>No</button>
-    //   </span>
-    // ));
-
     const result = window.confirm("are you sure?");
 
     if (result) {
@@ -431,6 +423,7 @@ export function DataProvider({ children }) {
         addService,
         setviewedCarId,
         deleteService,
+        userCarIDs,
         setUserCarIDs,
         loading,
         setCars,
@@ -440,8 +433,7 @@ export function DataProvider({ children }) {
         editedServiceData,
         userData,
         editUserData,
-      }}
-    >
+      }}>
       {children}
     </DataContext.Provider>
   );

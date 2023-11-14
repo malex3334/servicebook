@@ -20,7 +20,16 @@ export default function About() {
           })}
 
           <span>{contentObj?.[language].start.ending}</span>
-          <span>{contentObj?.[language].start.testingAlert}</span>
+          <span
+            style={{
+              color: "red",
+              textAlign: "center",
+              fontSize: "2.25rem",
+              letterSpacing: "1.5px",
+              marginTop: "2rem",
+            }}>
+            {contentObj?.[language].start.testingAlert}
+          </span>
         </div>
       </div>
     </div>

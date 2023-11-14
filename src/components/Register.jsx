@@ -4,15 +4,19 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
-import { getDoc, getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { auth } from "../utils/firebase";
 import { DataContext } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { uuidv4 } from "@firebase/util";
 import { contentObj } from "../language";
 import Input from "./Input";
+import { NavLink } from "react-router-dom";
+import { imgWarning } from "../helpers/Helpers";
+import toast from "react-hot-toast";
+import { activationMsg } from "../helpers/Helpers";
 
 export default function Login() {
   const { user, language } = useContext(DataContext);
@@ -21,6 +25,7 @@ export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [avatarLink, setAvatarLink] = useState("");
+  const navigate = useNavigate();
 
   const newUserObject = {
     displayName: name,
@@ -42,6 +47,8 @@ export default function Login() {
       );
       const user = userCredential.user;
 
+      await sendEmailVerification(user);
+
       // After creating the user, update their profile
       await updateProfile(user, {
         displayName: name,
@@ -56,18 +63,20 @@ export default function Login() {
         });
       };
       checkData();
+      toast.success(activationMsg);
+      auth.signOut();
+      navigate("/login");
     } catch (error) {
-      console.error("Error registering user:", error);
+      console.error("Error registering user:", error.message);
+      toast.error(error.message);
     }
   };
 
-  const navigate = useNavigate();
   // sign in with google
   const googleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result.user);
     } catch (error) {
       console.log(error);
     }
@@ -76,18 +85,25 @@ export default function Login() {
     e.preventDefault();
     if (password != confirmPassword) {
       console.log("password error");
+      toast.error("password error");
       return;
     } else {
-      console.log(newUserObject);
       handleRegistration();
     }
   };
 
   if (!user) {
     return (
-      <div className="login_container">
+      <div className="login_container" style={{ minHeight: "79vh" }}>
         <h2>{contentObj?.[language].register.title}</h2>
         <div className="login_credentials">
+          <div>
+            <span>Masz już swoje konto?</span>
+            <br />
+            <NavLink to="/login">
+              <span style={{ fontSize: "2rem" }}>Zaloguj się</span>
+            </NavLink>
+          </div>
           <h3>{contentObj?.[language].register.loginCredentials}:</h3>
           <form onSubmit={(e) => onSubmit(e)} action="">
             <div className="name_container">
@@ -123,11 +139,13 @@ export default function Login() {
                 value={avatarLink}
                 onChange={setAvatarLink}
                 name={contentObj?.[language].register.avatar}
+                note={imgWarning}
               />
 
               <button style={{ marginTop: "2rem" }} type="submit">
                 <div className="button_container">
-                  {contentObj?.[language].register.sign}
+                  {/* {contentObj?.[language].register.sign} */}
+                  Zarejestruj
                 </div>
               </button>
             </div>

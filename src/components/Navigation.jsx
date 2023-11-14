@@ -40,8 +40,7 @@ export default function Navigation() {
             display: "flex",
             alignItems: "center",
             gap: ".5em",
-          }}
-        >
+          }}>
           {!isMobile ? (
             <label htmlFor="">
               <MdLanguage
@@ -53,8 +52,7 @@ export default function Navigation() {
           <select
             onChange={(e) => setLanguage(e.target.value)}
             name="language"
-            id=""
-          >
+            id="">
             <option value="pl">PL</option>
             <option value="en">EN</option>
           </select>
@@ -106,8 +104,7 @@ export default function Navigation() {
                     onError={(e) =>
                       (e.target.src =
                         "https://upload.wikimedia.org/wikipedia/commons/9/9a/No_avatar.png")
-                    }
-                  ></img>
+                    }></img>
                 </div>
               ) : (
                 <NavIcon
@@ -160,8 +157,7 @@ export default function Navigation() {
                   setUserCarIDs([]);
                   setCars([]);
                   navigate("/");
-                }}
-              >
+                }}>
                 {contentObj?.[language].logout}
               </button>
             ) : (

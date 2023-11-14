@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "../context/DataContext";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, Navigate, useParams } from "react-router-dom";
 import { cash, handleImgError, scrollToElement } from "../helpers/Helpers";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import { MdConstruction } from "react-icons/md";
@@ -13,6 +13,7 @@ import Loading from "../components/Loading";
 import ServicesTable from "../components/ServicesTable";
 import ServicesHeaders from "../components/ServicesHeaders";
 import SingleFilter from "../components/SingleFilter";
+import { useNavigate } from "react-router-dom";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
@@ -21,6 +22,8 @@ export default function SingleCar() {
   const scrollRef = useRef(null);
   const carImgRef = useRef(null);
   const carImgBackground = useRef();
+
+  const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
     fix: true,
@@ -38,6 +41,8 @@ export default function SingleCar() {
     setviewedCarId,
     loading,
     language,
+    userData,
+    userCarIDs,
   } = useContext(DataContext);
 
   const [filteredData, setFilteredData] = useState([]);
@@ -161,15 +166,13 @@ export default function SingleCar() {
         {/* car details */}
         <div
           className="singlecar_background_container"
-          style={{ marginTop: "2rem" }}
-        >
+          style={{ marginTop: "2rem" }}>
           <div
             style={{
               background: `url(${currentCar?.img})`,
             }}
             className="singlecar_background"
-            ref={carImgBackground}
-          ></div>
+            ref={carImgBackground}></div>
           <div>
             <img
               src={currentCar?.img}
@@ -195,213 +198,223 @@ export default function SingleCar() {
     }
   }, 0);
 
-  if (isLogged) {
+  if (!userData || loading) {
+    return <Loading />;
+  }
+  if (!userData) {
     return <PleaseLogin />;
   }
-
   if (loading) {
     return <Loading />;
   } else {
-    return (
-      <div className="singlecar_container container">
-        <div>{carData()}</div>
-        <NewServiceForm
-          editedService={editedService}
-          setEditedService={setEditedService}
-        />
-        <h2>
-          <MdConstruction className="react-icon" />
-          {contentObj?.[language].services.heading}
-        </h2>
-        <div>
-          <div className="filters_container">
-            <h4 className="filters_header">
-              {contentObj?.[language].services.filters.filters}
-            </h4>
-            <div>
-              <SingleFilter
-                key="1"
-                name="fix"
-                checked={filters.fix}
-                onChange={handleInputChange}
-              />
-              <SingleFilter
-                key="2"
-                name="aesthetics"
-                checked={filters.aesthetics}
-                onChange={handleInputChange}
-              />
-              <SingleFilter
-                key="3"
-                name="maintenance"
-                checked={filters.maintenance}
-                onChange={handleInputChange}
-              />
+    if (userCarIDs?.length === 0 || !userCarIDs?.includes(carID)) {
+      setTimeout(() => {
+        navigate("/cars");
+      }, 2000);
+      return (
+        <div style={{ minHeight: "80vh" }}>
+          <h2>Nie masz dostępu do tego pojazdu</h2>
+        </div>
+      );
+    } else
+      return (
+        <div className="singlecar_container container">
+          <div>{carData()}</div>
+          <NewServiceForm
+            editedService={editedService}
+            setEditedService={setEditedService}
+          />
+          <h2>
+            <MdConstruction className="react-icon" />
+            {contentObj?.[language].services.heading}
+          </h2>
+          <div>
+            <div className="filters_container">
+              <h4 className="filters_header">
+                {contentObj?.[language].services.filters.filters}
+              </h4>
+              <div>
+                <SingleFilter
+                  key="1"
+                  name="fix"
+                  checked={filters.fix}
+                  onChange={handleInputChange}
+                />
+                <SingleFilter
+                  key="2"
+                  name="aesthetics"
+                  checked={filters.aesthetics}
+                  onChange={handleInputChange}
+                />
+                <SingleFilter
+                  key="3"
+                  name="maintenance"
+                  checked={filters.maintenance}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}>
+                <SingleFilter
+                  key="4"
+                  name="done"
+                  checked={filters.done}
+                  onChange={handleInputChange}
+                />
+                <SingleFilter
+                  key="5"
+                  name="todo"
+                  checked={filters.todo}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <SingleFilter
-                key="4"
-                name="done"
-                checked={filters.done}
-                onChange={handleInputChange}
-              />
-              <SingleFilter
-                key="5"
-                name="todo"
-                checked={filters.todo}
-                onChange={handleInputChange}
-              />
-            </div>
+            <button
+              style={{ marginBottom: "2rem" }}
+              onClick={handleResetFilters}>
+              Resetuj
+            </button>
           </div>
-          <button style={{ marginBottom: "2rem" }} onClick={handleResetFilters}>
-            Resetuj
+          {filteredServices <= 0 ? (
+            <div className="noservice">
+              brak serwisów - uzyj formularza by dodać pierwszy serwis
+            </div>
+          ) : (
+            // <Loading />
+            <>
+              <div className="table_container">
+                <table id="myTable">
+                  <thead>
+                    <tr>
+                      <th>lp</th>
+                      <ServicesHeaders
+                        header="Tytuł"
+                        id="title"
+                        setSorting={setSorting}
+                        setCount={setCount}
+                        count={count}
+                      />
+                      <ServicesHeaders
+                        header="Data"
+                        id="date"
+                        setSorting={setSorting}
+                        setCount={setCount}
+                        count={count}
+                      />
+                      <ServicesHeaders
+                        header="Opis"
+                        id="desc"
+                        setSorting={setSorting}
+                        setCount={setCount}
+                        count={count}
+                      />
+                      <ServicesHeaders
+                        header="Kategoria"
+                        id="category"
+                        setSorting={setSorting}
+                        setCount={setCount}
+                        count={count}
+                      />
+                      <ServicesHeaders
+                        header="Data dodania"
+                        id="createdAt"
+                        setSorting={setSorting}
+                        setCount={setCount}
+                        count={count}
+                      />
+                      <ServicesHeaders
+                        header="Przebieg"
+                        id="mileage"
+                        setSorting={setSorting}
+                        setCount={setCount}
+                        count={count}
+                      />
+                      <ServicesHeaders
+                        header="Cena"
+                        id="price"
+                        setSorting={setSorting}
+                        setCount={setCount}
+                        count={count}
+                      />
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+
+                  <tbody className="table_content">
+                    {filteredData &&
+                      filteredData.length > 0 &&
+                      sortBy(filteredData, sorting).map(
+                        (
+                          {
+                            id,
+                            title,
+                            desc,
+                            price,
+                            date,
+                            createdAt,
+                            mileage,
+                            category,
+                            done,
+                          },
+                          index,
+                          service
+                        ) => {
+                          return (
+                            <ServicesTable
+                              key={id}
+                              index={index}
+                              service={{
+                                id,
+                                title,
+                                desc,
+                                price,
+                                date,
+                                createdAt,
+                                mileage,
+                                category,
+                                done,
+                              }}
+                              deleteService={deleteService}
+                              onServiceEdit={onServiceEdit}
+                            />
+                          );
+                        }
+                      )}
+                  </tbody>
+                </table>
+              </div>
+              <tfoot
+                style={{
+                  width: "90%",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginTop: "2rem",
+                }}>
+                <tr>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="blind_row"></td>
+                  <td className="line">RAZEM</td>
+                  <td className="line">
+                    <b>{cash(sum)} zł</b>
+                  </td>
+                </tr>
+              </tfoot>
+            </>
+          )}
+          <button
+            style={{ marginTop: "1rem" }}
+            onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}>
+            Pobierz jako plik Excel
           </button>
         </div>
-        {filteredServices <= 0 ? (
-          <div className="noservice">
-            brak serwisów - uzyj formularza by dodać pierwszy serwis
-          </div>
-        ) : (
-          // <Loading />
-          <>
-            <div className="table_container">
-              <table id="myTable">
-                <thead>
-                  <tr>
-                    <th>lp</th>
-                    <ServicesHeaders
-                      header="Tytuł"
-                      id="title"
-                      setSorting={setSorting}
-                      setCount={setCount}
-                      count={count}
-                    />
-                    <ServicesHeaders
-                      header="Data"
-                      id="date"
-                      setSorting={setSorting}
-                      setCount={setCount}
-                      count={count}
-                    />
-                    <ServicesHeaders
-                      header="Opis"
-                      id="desc"
-                      setSorting={setSorting}
-                      setCount={setCount}
-                      count={count}
-                    />
-                    <ServicesHeaders
-                      header="Kategoria"
-                      id="category"
-                      setSorting={setSorting}
-                      setCount={setCount}
-                      count={count}
-                    />
-                    <ServicesHeaders
-                      header="Data dodania"
-                      id="createdAt"
-                      setSorting={setSorting}
-                      setCount={setCount}
-                      count={count}
-                    />
-                    <ServicesHeaders
-                      header="Przebieg"
-                      id="mileage"
-                      setSorting={setSorting}
-                      setCount={setCount}
-                      count={count}
-                    />
-                    <ServicesHeaders
-                      header="Cena"
-                      id="price"
-                      setSorting={setSorting}
-                      setCount={setCount}
-                      count={count}
-                    />
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-
-                <tbody className="table_content">
-                  {filteredData &&
-                    filteredData.length > 0 &&
-                    sortBy(filteredData, sorting).map(
-                      (
-                        {
-                          id,
-                          title,
-                          desc,
-                          price,
-                          date,
-                          createdAt,
-                          mileage,
-                          category,
-                          done,
-                        },
-                        index,
-                        service
-                      ) => {
-                        return (
-                          <ServicesTable
-                            key={id}
-                            index={index}
-                            service={{
-                              id,
-                              title,
-                              desc,
-                              price,
-                              date,
-                              createdAt,
-                              mileage,
-                              category,
-                              done,
-                            }}
-                            deleteService={deleteService}
-                            onServiceEdit={onServiceEdit}
-                          />
-                        );
-                      }
-                    )}
-                </tbody>
-              </table>
-            </div>
-
-            <tfoot
-              style={{
-                width: "90%",
-                display: "flex",
-                justifyContent: "flex-end",
-                marginTop: "2rem",
-              }}
-            >
-              <tr>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="blind_row"></td>
-                <td className="line">RAZEM</td>
-                <td className="line">
-                  <b>{cash(sum)} zł</b>
-                </td>
-              </tr>
-            </tfoot>
-          </>
-        )}
-        <button
-          style={{ marginTop: "1rem" }}
-          onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}
-        >
-          Pobierz jako plik Excel
-        </button>
-      </div>
-    );
+      );
   }
 }
