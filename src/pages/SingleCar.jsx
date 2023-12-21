@@ -14,11 +14,13 @@ import ServicesTable from "../components/ServicesTable";
 import ServicesHeaders from "../components/ServicesHeaders";
 import SingleFilter from "../components/SingleFilter";
 import { useNavigate } from "react-router-dom";
+import { FaXmark } from "react-icons/fa6";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
   const [sorting, setSorting] = useState("date");
   const [count, setCount] = useState(0);
+  const [searchWord, setSearchWord] = useState("");
   const scrollRef = useRef(null);
   const carImgRef = useRef(null);
   const carImgBackground = useRef();
@@ -126,9 +128,29 @@ export default function SingleCar() {
     return data;
   };
 
+  const searchServices = (data, filters) => {
+    console.log(filters);
+    if (filters !== undefined || filters > 0) {
+      data = data?.filter((element) => {
+        const titleSearch = element?.title
+          ?.toLowerCase()
+          .includes(filters.toLowerCase());
+        const descSearch = element?.desc
+          ?.toLowerCase()
+          .includes(filters.toLowerCase());
+        return titleSearch || descSearch;
+      });
+    }
+    return data;
+  };
+
   useEffect(() => {
     setFilteredData(filterFunction(filteredServices, filters));
   }, [filters, filteredServices]);
+
+  useEffect(() => {
+    setFilteredData(searchServices(filteredServices, searchWord));
+  }, [searchWord]);
 
   const handleInputChange = (e) => {
     if (e.target.tagName === "LABEL") {
@@ -277,6 +299,22 @@ export default function SingleCar() {
               onClick={handleResetFilters}>
               Resetuj
             </button>
+          </div>
+          <div className="searchbar_container">
+            <div className="input_container">
+              <input
+                type="text"
+                placeholder="szukaj"
+                value={searchWord}
+                onChange={(e) => setSearchWord(e.target.value)}
+              />
+              {searchWord?.length > 0 && (
+                <FaXmark
+                  className="react-icon searchbar-icon danger"
+                  onClick={(e) => setSearchWord("")}
+                />
+              )}
+            </div>
           </div>
           {filteredServices <= 0 ? (
             <div className="noservice">

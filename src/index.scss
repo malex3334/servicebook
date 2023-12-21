@@ -679,6 +679,28 @@ form {
   background-repeat: no-repeat;
 }
 
+.searchbar_container {
+  display: flex;
+  justify-content: center;
+}
+
+.input_container {
+  position: relative;
+  width: 50rem;
+
+  input {
+    width: 100%;
+  }
+}
+
+.searchbar-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  cursor: pointer;
+}
+
 .newservice_container {
   position: relative;
   width: 90%;
@@ -736,6 +758,10 @@ form {
   thead {
     position: sticky;
     top: 0;
+  }
+
+  #myTable {
+    min-width: 90%;
   }
 
   .table_content {
