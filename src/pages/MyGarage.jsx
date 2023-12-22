@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { NavLink } from "react-router-dom";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaInfo } from "react-icons/fa";
 import { contentObj } from "../language";
 import { scrollToElement } from "../helpers/Helpers";
 import PleaseLogin from "../components/PleaseLogin";
@@ -35,6 +35,8 @@ export default function MyGarage() {
       );
     }
   };
+
+  console.log(cars);
 
   if (!user) {
     return <PleaseLogin />;
@@ -95,6 +97,12 @@ export default function MyGarage() {
                         className="btn"
                         title="edytuj">
                         <FaEdit />
+                      </button>
+                      <button
+                        onClick={() => alert("funkcja w trakcie dodawania")}
+                        className="btn"
+                        title="więcej informacji">
+                        <FaInfo />
                       </button>
                     </div>
                   </div>
