@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import { NavLink } from "react-router-dom";
-import { FaEdit, FaTrashAlt, FaInfo } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaInfo, FaSearch } from "react-icons/fa";
 import { contentObj } from "../language";
 import { scrollToElement } from "../helpers/Helpers";
 import PleaseLogin from "../components/PleaseLogin";

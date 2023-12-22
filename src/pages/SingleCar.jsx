@@ -15,6 +15,7 @@ import ServicesHeaders from "../components/ServicesHeaders";
 import SingleFilter from "../components/SingleFilter";
 import { useNavigate } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
@@ -308,11 +309,13 @@ export default function SingleCar() {
                 value={searchWord}
                 onChange={(e) => setSearchWord(e.target.value)}
               />
-              {searchWord?.length > 0 && (
+              {searchWord?.length > 0 ? (
                 <FaXmark
                   className="react-icon searchbar-icon danger"
                   onClick={(e) => setSearchWord("")}
                 />
+              ) : (
+                <FaSearch className="react-icon searchbar-icon" />
               )}
             </div>
           </div>
