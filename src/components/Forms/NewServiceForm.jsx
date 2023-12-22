@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { DataContext } from "../context/DataContext";
+import { DataContext } from "../../context/DataContext";
 import { useParams } from "react-router-dom";
-import { getCurrentDate } from "../helpers/Helpers";
+import { getCurrentDate } from "../../helpers/Helpers";
 import { v4 as uuidv4 } from "uuid";
-import { cash } from "../helpers/Helpers";
-import { contentObj } from "../language";
-import Input from "./Input";
+import { cash } from "../../helpers/Helpers";
+import { contentObj } from "../../language";
+import Input from "../Input";
 
 export default function NewServiceForm({ editedService, setEditedService }) {
   const { addService, cars, language, editedServiceData } =

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { DataContext } from "../context/DataContext";
+import { DataContext } from "../../context/DataContext.jsx";
 import { v4 as uuidv4 } from "uuid";
-import { getCurrentDate, imgWarning, noImg } from "../helpers/Helpers.jsx";
-import { contentObj } from "../language";
+import { getCurrentDate, imgWarning, noImg } from "../../helpers/Helpers.jsx";
+import { contentObj } from "../../language.js";
 import { useEffect } from "react";
-import Input from "./Input";
+import Input from "../Input.jsx";
 
 export default function NewCarForm({ editedCar, setNewCarTab, setEditedCar }) {
   const [brand, setBrand] = useState();

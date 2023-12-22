@@ -756,7 +756,7 @@ form {
   width: 90%;
   overflow-y: scroll;
   max-height: 60rem;
-
+  min-height: 50rem;
   thead {
     position: sticky;
     top: 0;

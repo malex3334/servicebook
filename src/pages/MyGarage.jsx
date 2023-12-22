@@ -6,7 +6,7 @@ import { contentObj } from "../language";
 import { scrollToElement } from "../helpers/Helpers";
 import PleaseLogin from "../components/PleaseLogin";
 import CarDetails from "../components/CarDetails";
-import NewCarForm from "../components/NewCarForm";
+import NewCarForm from "../components/Forms/NewCarForm";
 import Loading from "../components/Loading";
 import ConfirmEmail from "../components/Login/ConfirmEmail";
 

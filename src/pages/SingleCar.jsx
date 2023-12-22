@@ -8,7 +8,7 @@ import { contentObj } from "../language";
 import { useRef } from "react";
 import { exportToXLS } from "../helpers/Helpers";
 import PleaseLogin from "../components/PleaseLogin";
-import NewServiceForm from "../components/NewServiceForm";
+import NewServiceForm from "../components/Forms/NewServiceForm";
 import Loading from "../components/Loading";
 import ServicesTable from "../components/ServicesTable";
 import ServicesHeaders from "../components/ServicesHeaders";
