@@ -16,6 +16,7 @@ import SingleFilter from "../components/SingleFilter";
 import { useNavigate } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
+import exportToPdf from "../helpers/ExportToPDF";
 
 export default function SingleCar() {
   const [editedService, setEditedService] = useState();
@@ -454,6 +455,9 @@ export default function SingleCar() {
             style={{ marginTop: "1rem" }}
             onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}>
             Pobierz jako plik Excel
+          </button>
+          <button style={{ marginTop: "1rem" }} onClick={exportToPdf}>
+            Pobierz jako plik PDF
           </button>
         </div>
       );
