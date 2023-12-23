@@ -452,11 +452,11 @@ export default function SingleCar() {
             </>
           )}
           <button
-            style={{ marginTop: "1rem" }}
+            style={{ margin: "1rem" }}
             onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}>
             Pobierz jako plik Excel
           </button>
-          <button style={{ marginTop: "1rem" }} onClick={exportToPdf}>
+          <button style={{ margin: "1rem" }} onClick={exportToPdf}>
             Pobierz jako plik PDF
           </button>
         </div>
