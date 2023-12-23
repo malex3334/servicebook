@@ -456,7 +456,14 @@ export default function SingleCar() {
             onClick={() => exportToXLS(cars?.find((car) => car.id === carID))}>
             Pobierz jako plik Excel
           </button>
-          <button style={{ margin: "1rem" }} onClick={exportToPdf}>
+          <button
+            style={{ margin: "1rem" }}
+            onClick={() =>
+              exportToPdf(
+                cars?.find((car) => car.id === carID),
+                cash(sum)
+              )
+            }>
             Pobierz jako plik PDF
           </button>
         </div>
