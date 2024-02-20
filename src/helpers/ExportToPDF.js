@@ -54,7 +54,7 @@ const exportToPdf = async (car, sum) => {
         : null,
 
       {
-        text: "Historia serwisowa", // Add your title here
+        text: "Książka serwisowa", // Add your title here
         fontSize: 36,
         bold: true,
         margin: [0, 10, 0, 10], // Adjust margin as needed
