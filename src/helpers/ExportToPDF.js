@@ -85,7 +85,19 @@ const exportToPdf = async (car, sum) => {
           headerRows: 1,
           // widths: widths, // Ensure widths match the number of columns
           widths: [25, 175, 75, 200, 60, 55, 60],
-          body: tableData,
+          body: tableData.map((column, rowIndex) => {
+            return rowIndex % 2 === 0
+              ? [
+                  { text: column[0], fillColor: "lightgray" },
+                  { text: column[1], fillColor: "lightgray" },
+                  { text: column[2], fillColor: "lightgray" },
+                  { text: column[3], fillColor: "lightgray" },
+                  { text: column[4], fillColor: "lightgray" },
+                  { text: column[5], fillColor: "lightgray" },
+                  { text: column[6], fillColor: "lightgray" },
+                ]
+              : column;
+          }),
           alignment: "center",
         },
       },

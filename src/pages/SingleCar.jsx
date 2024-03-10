@@ -131,7 +131,6 @@ export default function SingleCar() {
   };
 
   const searchServices = (data, filters) => {
-    console.log(filters);
     if (filters !== undefined || filters > 0) {
       data = data?.filter((element) => {
         const titleSearch = element?.title

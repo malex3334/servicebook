@@ -305,14 +305,17 @@ export function DataProvider({ children }) {
 
     if (servicesIDs && servicesIDs.length > 0) {
       const servicesCollectionRef = collection(db, "services");
-      const q = query(servicesCollectionRef, where("id", "in", servicesIDs));
+      // const q = query(servicesCollectionRef, where("id", "in", servicesIDs));
+      const q = query(servicesCollectionRef);
 
       unsubscribe = onSnapshot(q, (querySnapshot) => {
         let result = [];
 
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
-          result.push(docData);
+          if (servicesIDs.includes(docData.id)) {
+            result.push(docData);
+          }
         });
 
         setFilteredServices(result);
